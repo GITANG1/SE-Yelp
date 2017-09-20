@@ -1,3 +1,24 @@
-<p>
-  home works!
-</p>
+
+
+
+<div fxLayoutAlign="center center">
+  <form >
+    
+      <input type="text" style="width: 350px; height:30px" placeholder="hungry? what do you wanna eat" aria-label="Number" mdInput [formControl]="restaurant" [mdAutocomplete]="auto">
+      <input type="text" style="width: 350px; height:30px" placeholder="where?" aria-label="Number" mdInput [formControl]="location" [mdAutocomplete]="auto1">
+      
+      <md-autocomplete #auto="mdAutocomplete">
+        <md-option *ngFor="let option of options" [value]="option">
+          {{ option }}
+        </md-option>
+      </md-autocomplete>
+      <md-autocomplete #auto1="mdAutocomplete">
+        <md-option *ngFor="let location of locations" [value]="location">
+          {{ location }}
+        </md-option>
+      </md-autocomplete>
+      <button md-raised-button>search</button>
+    
+  </form>
+
+</div>

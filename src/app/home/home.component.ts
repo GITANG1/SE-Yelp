@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {FormControl} from '@angular/forms';
+
 
 @Component({
   selector: 'app-home',
@@ -7,9 +9,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
+  restaurant: FormControl = new FormControl();
+  
+    options = [
+      'burgers',
+      'tacos',
+      'Pizza'
+     ];
+
+     location: FormControl = new FormControl();
+
+     locations=[
+      'Gainesville',
+      'Mumnai',
+      'columbus'
+     ];
+
+
   constructor() { }
 
   ngOnInit() {
   }
 
 }
+
