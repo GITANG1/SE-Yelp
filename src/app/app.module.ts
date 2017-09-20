@@ -9,12 +9,22 @@ import {FlexLayoutModule} from '@angular/flex-layout';
 import 'hammerjs';
 
 import { AppComponent } from './app.component';
-import { MenuComponent } from './menu/menu.component';
+import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
+import { SignupComponent } from './signup/signup.component';
+
+
+import { AppRoutingModule } from './app-routing/app-routing.module';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    MenuComponent
+    HeaderComponent,
+    FooterComponent,
+    SignupComponent,
+    HomeComponent,
+   
   ],
   imports: [
     BrowserModule,
@@ -22,7 +32,8 @@ import { MenuComponent } from './menu/menu.component';
     FormsModule,
     HttpModule,
     MaterialModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
