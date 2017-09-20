@@ -24,7 +24,6 @@ import 'hammerjs';
     FooterComponent,
     SignupComponent,
     HomeComponent,
-   
   ],
   imports: [
     BrowserModule,
