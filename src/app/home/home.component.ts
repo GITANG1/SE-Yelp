@@ -21,7 +21,7 @@ export class HomeComponent implements OnInit {
 
      locations=[
       'Gainesville',
-      'Mumnai',
+      'Mumbai',
       'columbus'
      ];
 

@@ -15,13 +15,7 @@ import { FooterComponent } from './footer/footer.component';
 import { SignupComponent } from './signup/signup.component';
 import { HomeComponent } from './home/home.component';
 
-
-
 import 'hammerjs';
-
-
-
-
 
 @NgModule({
   declarations: [
