@@ -8,6 +8,8 @@ import {FlexLayoutModule} from '@angular/flex-layout';
 import { AppRoutingModule } from './app-routing/app-routing.module';
 import {MdAutocompleteModule} from '@angular/material';
 import{MdSelectModule} from '@angular/material';
+import { Http, Response, Headers } from '@angular/http';
+import 'rxjs/add/operator/map';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -33,7 +35,7 @@ import 'hammerjs';
     HttpModule,
     MaterialModule,
     FlexLayoutModule,
-    AppRoutingModule
+    AppRoutingModule  
   ],
   providers: [],
   bootstrap: [AppComponent]
