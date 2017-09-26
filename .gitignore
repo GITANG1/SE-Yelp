@@ -8,6 +8,8 @@
 # dependencies
 node_modules/
 
+data/
+
 # IDEs and editors
 /.idea
 .project
