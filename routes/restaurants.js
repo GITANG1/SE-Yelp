@@ -17,8 +17,6 @@ restaurantRouter.use('/restID',restIDRouter);
 
 var mongoose = require('mongoose');
 
-var textSearch = require('mongoose-text-search');
-
 assert = require('assert');
 var Restaurants = require('../models/restaurantSchema');
 var url = 'mongodb://localhost:27017/Gulp';

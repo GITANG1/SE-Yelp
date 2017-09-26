@@ -1,13 +1,5 @@
 var mongoose = require('mongoose');
-var textSearch = require('mongoose-text-search');
 var Schema = mongoose.Schema;
-
-
-//dishes_schema.plugin(textSearch);
-
-// add a text index to the tags array
-//dishes_schema.index({ name: 'text' });
-
 
 var dishes_schema=new Schema({
     name:{
@@ -68,7 +60,6 @@ var restaurant_schema=new Schema({
     menu:[dishes_schema]
 });
 
-//restaurant_schema.plugin(textSearch);
 restaurant_schema.index({
     name :"text"
 }, {
@@ -77,8 +68,6 @@ restaurant_schema.index({
         name : 5
     }
 });
-
-//restaurant_schema.index({ name: 'text' });
 
 //make a model of this schema to be used
 var Restaurant = mongoose.model('restaurants', restaurant_schema);
