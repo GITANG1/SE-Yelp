@@ -15,11 +15,12 @@ restaurantRouter.use('/list',listRouter);
 restaurantRouter.use('/search',searchRouter);
 restaurantRouter.use('/restID',restIDRouter);
 
+const config = require('./config/database');
 var mongoose = require('mongoose');
 
 assert = require('assert');
 var Restaurants = require('../models/restaurantSchema');
-var url = 'mongodb://localhost:27017/Gulp';
+
 
 //when nothing is specified, send an error message
 restaurantRouter.route('/')
@@ -33,7 +34,7 @@ listRouter.route('/')
     .get(function(req,res){
         console.log("User requested LISTING of all restaurants for suggestions purpose");
         //make connection to the database
-        mongoose.connect(url, 
+        mongoose.connect(config.database, 
             { server: { 
                 // sets how many times to try reconnecting
                 reconnectTries: Number.MAX_VALUE,
@@ -42,7 +43,6 @@ listRouter.route('/')
                 } 
             }
         );
-        //mongoose.connect(url);
         var db = mongoose.connection;
         //if error occurs on connection
         db.on('error', console.error.bind(console, 'connection error:'));
@@ -71,7 +71,7 @@ searchRouter.route('/')
 .get(function(req,res){
     console.log("User requested LISTING of all restaurants for suggestions purpose");
     //make connection to the database
-    mongoose.connect(url, 
+    mongoose.connect(config.database, 
         { server: { 
             // sets how many times to try reconnecting
             reconnectTries: Number.MAX_VALUE,
@@ -109,7 +109,7 @@ searchRouter.route('/')
     var searchString=req.body.search;
     console.log("User requested LISTING of restaurants : "+searchString);
     //make connection to the database
-    mongoose.connect(url, 
+    mongoose.connect(config.database, 
         { server: { 
             // sets how many times to try reconnecting
             reconnectTries: Number.MAX_VALUE,

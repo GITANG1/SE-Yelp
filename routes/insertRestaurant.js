@@ -3,13 +3,11 @@ assert = require('assert');
 
 var express = require('express');
 var router = express.Router();
-
+var config = require('../config/database');
 var Restaurants = require('../models/restaurantSchema');
-// Connection URL
-var url = 'mongodb://localhost:27017/Gulp';
 
 router.get('/', function(req, res, next){
-    mongoose.connect(url,
+    mongoose.connect(config.database,
         { server: { 
             // sets how many times to try reconnecting
             reconnectTries: Number.MAX_VALUE,
