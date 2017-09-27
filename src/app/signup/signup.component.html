@@ -3,3 +3,4 @@
  <a *ngIf='!authService.loggedIn()' md-button routerLink="/register"><span class="fa fa-plus-square"></span> Register</a>
  <a *ngIf='authService.loggedIn()' md-button href="#" (click)="onLogoutClick()"><span class="fa fa-plus-square"></span> Logout</a>
 </md-toolbar>
+
