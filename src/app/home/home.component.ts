@@ -1,8 +1,9 @@
 import {Component,OnInit} from '@angular/core';
 import {FormControl} from '@angular/forms';
 import {Observable} from 'rxjs/Observable';
-import 'rxjs/add/operator/startWith';
+import { Http, Response, Headers } from '@angular/http';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/startWith';
 
 @Component({
   selector: 'app-home',
@@ -13,28 +14,46 @@ export class HomeComponent implements OnInit {
 
   restaurant: FormControl = new FormControl();
   
-    options = [
-      'burgers',
-      'tacos',
-      'Pizza' 
-     ];
+    options = [];
 
      filteredRestaurants: Observable<string[]>;
      
      location: FormControl = new FormControl();
 
-     locations=[
-      'Gainesville',
-      'Mumbai',
-      'columbus'
-     ];
+     locations=[];
 
      filteredLocations: Observable<string[]>;
 
+     data: any;
 
-  constructor() { }
+     SearchRestaurants(restaurantname,area) {
+      console.log(restaurantname);
+      console.log(area);
 
-  ngOnInit() {
+      this._http.post('http://192.168.0.11:3000/restaurants/search',{"search":restaurantname}
+      ).subscribe(res => {
+        this.data = res.json();
+        console.log(this.data);
+  });
+    }
+
+       constructor(private _http: Http) {
+         
+       }
+
+  ngOnInit(){
+
+    this._http.get('http://192.168.0.11:3000/restaurants/list').subscribe(res => {
+    this.data = res.json();
+    this.data.forEach(element => {
+    this.options.push(element.name);
+        
+    this.locations.push(element.city);
+        
+      });
+      console.log(this.data);
+});
+
     this. filteredRestaurants = this.restaurant.valueChanges.startWith(null)
     .map(val => val ? this.filter(val) : this.options.slice());
     

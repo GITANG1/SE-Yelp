@@ -6,10 +6,12 @@ import { HttpModule } from '@angular/http';
 import { MaterialModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { AppRoutingModule } from './app-routing/app-routing.module';
+
 import { MdAutocompleteModule } from '@angular/material';
 import { MdSelectModule } from '@angular/material';
-
 import { RouterModule, Routes } from '@angular/router';
+import { Http, Response, Headers } from '@angular/http';
+import 'rxjs/add/operator/map';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
