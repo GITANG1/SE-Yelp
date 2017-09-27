@@ -1,0 +1,23 @@
+<div style="background-color: white; width:20%;">
+  <h2>Register</h2>
+
+  <form (submit)="onRegisterSubmit()">
+    <div>
+      <label>Name</label>
+      <input type="text" [(ngModel)]="name" name="name">
+    </div>
+    <div>
+      <label>Username</label>
+      <input type="text" [(ngModel)]="username" name="username">
+    </div>
+    <div>
+      <label>Email</label>
+      <input type="text" [(ngModel)]="email" name="email">
+    </div>
+    <div>
+      <label>Password</label>
+      <input type="password" [(ngModel)]="password" name="password">
+    </div>
+    <input type="submit" class="md-raised md-primary" value="Submit"> 
+  </form>
+</div>
