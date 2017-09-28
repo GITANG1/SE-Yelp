@@ -18,16 +18,17 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { SignupComponent } from './signup/signup.component';
 import { HomeComponent } from './home/home.component';
-import { FlashMessagesModule } from 'angular2-flash-messages';
-import { AuthService } from './services/auth.service';
-
-import { ValidateService } from './services/validate.service';
 
 import 'hammerjs';
+
+import { FlashMessagesModule } from 'angular2-flash-messages';
+import { AuthService } from './services/auth.service';
+import { ValidateService } from './services/validate.service';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AuthGuard } from './guards/auth.guard';
+
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent},
