@@ -13,10 +13,10 @@ var morgan=require('morgan');
  * Get port from environment and store in Express.
  */
 
-var hostname='192.168.0.11';
-var port = normalizePort(process.env.PORT || '3000');
+var hostname='localhost';
+// var port = normalizePort(process.env.PORT || '3000');
+var port = 3000;
 app.set('port', port);
-
 
 /**
  * Create HTTP server.

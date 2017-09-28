@@ -15,7 +15,7 @@ restaurantRouter.use('/list',listRouter);
 restaurantRouter.use('/search',searchRouter);
 restaurantRouter.use('/restID',restIDRouter);
 
-const config = require('./config/database');
+const config = require('../config/database');
 var mongoose = require('mongoose');
 
 assert = require('assert');
