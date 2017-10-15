@@ -3,12 +3,16 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { MaterialModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { AppRoutingModule } from './app-routing/app-routing.module';
 
-import { MdAutocompleteModule } from '@angular/material';
-import { MdSelectModule } from '@angular/material';
+
+import {MatAutocompleteModule} from '@angular/material';
+import {MatToolbarModule} from '@angular/material';
+import {MatFormFieldModule} from '@angular/material';
+import {MatCardModule} from '@angular/material';
+import {MatButtonModule} from '@angular/material';
+import {MatSelectModule} from '@angular/material';
 import { RouterModule, Routes } from '@angular/router';
 import { Http, Response, Headers } from '@angular/http';
 import 'rxjs/add/operator/map';
@@ -54,9 +58,14 @@ const appRoutes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
-    MaterialModule,
     FlexLayoutModule,
     AppRoutingModule,
+    MatAutocompleteModule,
+    MatToolbarModule,
+    MatFormFieldModule,
+    MatCardModule,
+    MatSelectModule,
+    MatButtonModule,
     FlashMessagesModule,
     RouterModule.forRoot(appRoutes)
   ],
