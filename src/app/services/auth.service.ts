@@ -49,11 +49,9 @@ export class AuthService {
     this.authToken = null;
     this.user = null;
     localStorage.clear();
-    console.log('Hello ==> Inside logout');
   }
 
   loggedIn() {
-      console.log('**tokenNotExpired => ', tokenNotExpired('id_token'));
     return tokenNotExpired('id_token');
   }
 }

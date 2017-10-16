@@ -24,37 +24,40 @@ router.get('/', function(req, res, next){
         console.log("Connected correctly to server");
         // create a new dish
         Restaurants.create({
-            name: 'Monty da Dhabba',
-            address:'3800 SW 34th St',
-            city:'Tampa',
-            state:'Florida',
+            name: "Taco House",
+            address: "4295 W Navy Blvd, Pensacola, FL 32507",
+            city: "Pensacola",
+            state: "FL",
             timing:[{
-                open:800,
-                close: 2200
+                open:800,close: 2200
             }],
-            phone:3695556789,
-            expense_level:1,
-            rating:5,
+            phone: 8509124430,
+            expense_level: 3,
+            rating: 3,
             menu:[{
-                name:'Paneer Kadhai',
-                description:'Zindagi ka Pyaar'
-            },
-            {
-                name:'Achari Bhindi Masala',
-                description:'Khushiyon ki Bahaar'
-            },
-            {
-                name:'Lassi',
-                description:'Gale ko rahat'
-            },
-            {
-                name:'Masala Papad',
-                description:'Lassi ke saath aa jaye mazaa'
-            },
-            {
-                name:'Chicken Tikka',
-                description:'Kyun de rhe ho bechare chicken ko sazaa'
-            }]        
+                 name:'Burrito',
+                 description:'Stuffed with meat, cheese, rice, beans and sauce. Then smothered with extra sauce and cheese.'
+             },
+             {
+                 name:'Taco',
+                 description:'Filled with meat, cheese, lettuce and pico de gallo. Served with cilantro lime rice and choice of beans'
+             },
+             {
+                 name:'Nachos',
+                 description:'Loaded with meat, queso, beans, sour cream, pico de gallo and guacamole.'
+             },
+             {
+                 name:'Salads',
+                 description:'Loaded with meat, rice, beans, lettuce, pico de gallo, guacamole, tortilla strips, cotija cheese and dressing. DRESSINGS: Tomatillo Ranch, Cilantro Lime Vinaigrette, Sweet Mango'
+             },
+             {
+                 name:'Quesadillas',
+                 description:'Filled with meat and cheese. Served with cilantro lime rice and choice of beans.'
+             },
+             {
+                 name:'Enchiladas',
+                 description:'Stuffed with meat, cheese and sauce. Served with cilantro lime rice, and choice of beans. SAUCES: Roasted Green Chile, Tomatillo Cilantro, Red Enchilada'
+             }]
         }, function (err, restaurant) {
             if (err) throw err;
             console.log('Restaurant created!');

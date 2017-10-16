@@ -47,14 +47,22 @@ module.exports.getUserByUsername = function(username, callback){
  * Calls functions defined by Moongoose
  */
 module.exports.addUser = function(newUser, callback){
-  console.log('****In add User***');
-  bcrypt.genSalt(10, (err, salt) => {
-    bcrypt.hash(newUser.password, salt, (err, hash) => {
-      if(err) throw err;
-      newUser.password = hash;
-      console.log('****saving user***');
-      newUser.save(callback);
-    });
+  User.findOne({username: newUser.username}, (err, res) => {
+    console.log('----- res = ' + res);
+    if (res != null && res.username == newUser.username) {
+      callback(new Error("User already exists!"));
+    }
+    else {
+      console.log('****In add User***');
+      bcrypt.genSalt(10, (err, salt) => {
+        bcrypt.hash(newUser.password, salt, (err, hash) => {
+          if(err) throw err;
+          newUser.password = hash;
+          console.log('****saving user***');
+          newUser.save(callback);
+        });
+      });
+    }
   });
 }
 

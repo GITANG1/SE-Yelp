@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {ValidateService} from '../services/validate.service';
-import {AuthService} from '../services/auth.service';
+import { ValidateService } from '../services/validate.service';
+import { AuthService } from '../services/auth.service';
 import { FlashMessagesService } from 'angular2-flash-messages';
-import {Router} from '@angular/router';
+import { Router } from '@angular/router';
+import { MatToolbarModule, MatFormFieldModule, MatCardModule } from '@angular/material';
+import { FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-register',
@@ -36,24 +38,25 @@ export class RegisterComponent implements OnInit {
 
     // Required Fields
     if (!this.validateService.validateRegister(user)) {
-      this.flashMessage.show('Please fill in all fields', {cssClass: 'alert-danger', timeout: 5000});
+      document.getElementById('flashMessage').classList.remove('hide');
+      this.flashMessage.show('Please fill in all fields', {timeout: 3000});
       return false;
     }
 
     // Validate Email
     if ( !this.validateService.validateEmail(user.email) ) {
-      this.flashMessage.show('Please use a valid email', {cssClass: 'alert-danger', timeout: 5000});
+      this.flashMessage.show('Please use a valid email', {timeout: 3000});
       return false;
     }
 
     // Register user
     this.authService.registerUser(user).subscribe(data => {
       if (data.success) {
-        this.flashMessage.show('You are now registered and can log in', {cssClass: 'alert-success', timeout: 5000});
+        this.flashMessage.show('Registration Successful!', {timeout: 3000});
+         // TO-DO: Handle this message display in a better way in next iteration
         this.router.navigate(['/login']);
       } else {
-        this.flashMessage.show('Something went wrong', {cssClass: 'alert-danger', timeout: 5000});
-        this.router.navigate(['/register']);
+        this.flashMessage.show('Username Already Exists!', {timeout: 3000});
       }
     });
   }

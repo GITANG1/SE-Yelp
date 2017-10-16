@@ -1,12 +1,20 @@
-
-  <md-toolbar >
+<div 
+ fxFlexAlign="center center"
+ fxLayout.sm="column" 
+ fxLayout.xs="column" 
+ fxLayoutAlign.xs="center center" 
+ fxLayoutAlign.sm="center center"
+ fxLayoutAlign.gt-sm="center center"
+ >
+  <mat-toolbar color="primary" >
     <span><img src="/assets/logoyelp.png" height=30 width=41></span>
-    <a md-button routerLink="/home"><span class="fa fa-home fa-lg"></span> Home</a>
-    <a *ngIf="authService.loggedIn()" md-button><span class="fa fa-info fa-lg"></span> Write a Review</a>
-    <a *ngIf="authService.loggedIn()" md-button routerLink="/profile"><span class="fa fa-info fa-lg"></span> Profile</a>
+    <a mat-button routerLink="/home"><span class="fa fa-home fa-lg"></span> Home</a>
+    <a *ngIf="authService.loggedIn()" mat-button><span class="fa fa-info fa-lg"></span> Write a Review</a>
+    <a *ngIf="authService.loggedIn()" mat-button routerLink="/profile"><span class="fa fa-info fa-lg"></span> Profile</a>
 
     <app-signup ></app-signup>
 
-  </md-toolbar>
-  
+  </mat-toolbar>
+</div>
+
 
