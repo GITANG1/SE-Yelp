@@ -43,13 +43,9 @@ export class HomeComponent implements OnInit {
 
     DisplayRests=[];
 
-
-
     //restvalue:string;
     //areavalue:string;
-     
   
-
      SearchRestaurants(restaurantname,area) {
       console.log(restaurantname);
       console.log(area);

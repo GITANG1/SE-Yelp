@@ -12,8 +12,8 @@
 
  <h1> {{title}}</h1>
   <form >
-      <input type="text" #restaurantbox="ngForm"  name="rest"  style="width: 25em; height:2.5em" placeholder="hungry? what do you wanna eat" aria-label="Number" matInput [formControl]="restaurant" [matAutocomplete]="restau">
-      <input type="text" #locationbox="ngForm"  name="area" style="width: 25em; height:2.5em" placeholder="where?" aria-label="Number" matInput [formControl]="location" [matAutocomplete]="loc">
+      <input type="text" #restaurantbox="ngForm"  name="rest"  style="width: 25em; height:2.5em" placeholder="hungry? what do you wanna eat" aria-label="Restaurant Name" matInput [formControl]="restaurant" [matAutocomplete]="restau">
+      <input type="text" #locationbox="ngForm"  name="area" style="width: 25em; height:2.5em" placeholder="where?" aria-label="Location Name" matInput [formControl]="location" [matAutocomplete]="loc">
       
       <mat-autocomplete #restau="matAutocomplete">
         <mat-option *ngFor="let option of  filteredRestaurants | async" [value]="option">
@@ -36,21 +36,17 @@
       <mat-card style="width:45em;height:9em">      
       <mat-grid-list cols="2" mat-row-height="1:1" >
         <mat-grid-tile style="float:left;padding:1em">  
-        <img height="115em" width="115em" src="/assets/PizzaHut.png">
+        <img height="115em" width="115em" src="/assets/frenchfries.jpg">
         </mat-grid-tile> 
       <mat-grid-tile>  
          <a href="https://www.pizzahut.com/#/home" style="color:red;text-decoration:none"><b>{{d.name}}</b></a>
-    <p>Gainesville<br>3515 SW Archer Rd, Gainesville 32608</p>
+    <p>{{d.city}}<br>{{d.address}}</p>
       </mat-grid-tile> 
     </mat-grid-list>
      </mat-card> 
   
   </div>
 
-
-
-
-  
 <!-- <div *ngFor="let d of DisplayRests" fxLayout="row" fxLayoutAlign="center center">
     
       <br>
@@ -70,12 +66,4 @@
   </mat-card> 
   
   </div> -->
-
-
-
-
-
-
-
-
-
+  

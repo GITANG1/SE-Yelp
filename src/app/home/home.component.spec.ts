@@ -7,45 +7,24 @@ import { DebugElement }    from '@angular/core';
 
 import { HomeComponent } from './home.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import {MatAutocompleteModule} from '@angular/material';
-import {MatToolbarModule} from '@angular/material';
-import {MatFormFieldModule} from '@angular/material';
-import {MatCardModule} from '@angular/material';
-import {MatButtonModule} from '@angular/material';
-import {MatSelectModule} from '@angular/material';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {
+  MatAutocompleteModule,
+  MatToolbarModule,
+  MatFormFieldModule,
+  MatCardModule,
+  MatButtonModule,
+  MatSelectModule
+} from '@angular/material';
+import { 
+  FormsModule, 
+  ReactiveFormsModule 
+} from '@angular/forms';
 import {Observable} from 'rxjs/Observable';
-import { Http, Response, Headers } from '@angular/http';
-import { HttpModule} from '@angular/http';
-
-
-
-// class page{
-
-
-//   searchBtn:      DebugElement;
-
-
-//   addPageElements() {
-   
-//       // have a hero so these elements are now in the DOM
-//       const buttons    = fixture.debugElement.queryAll(By.css('button'));
-//       this.searchBtn     = buttons[0];
-    
-//   }
-// }
-
-
-// function createComponent() {
-//   fixture = TestBed.createComponent(HomeComponent);
-//   // 1st change detection triggers ngOnInit which gets a hero
-//   fixture.detectChanges();
-//   return fixture.whenStable().then(() => {
-//     // 2nd change detection displays the async-fetched hero
-//     fixture.detectChanges();
-//     page.addPageElements();
-//   });
-// }
+import { Http,
+    Response,
+    Headers,
+    HttpModule 
+  } from '@angular/http';
 
 describe('HomeComponent', () => {
     
