@@ -1,6 +1,6 @@
-<md-toolbar >
- <a *ngIf='!authService.loggedIn()' md-button routerLink="/login"><span class="fa fa-sign-in"></span> Login</a>
- <a *ngIf='!authService.loggedIn()' md-button routerLink="/register"><span class="fa fa-plus-square"></span> Register</a>
- <a *ngIf='authService.loggedIn()' md-button href="#" (click)="onLogoutClick()"><span class="fa fa-plus-square"></span> Logout</a>
-</md-toolbar>
+<mat-toolbar color="primary" >
+ <a *ngIf='!authService.loggedIn()' mat-button routerLink="/login"><span class="fa fa-sign-in"></span> Login</a>
+ <a *ngIf='!authService.loggedIn()' mat-button routerLink="/register"><span class="fa fa-plus-square"></span> Register</a>
+ <a *ngIf='authService.loggedIn()' mat-button href="#" (click)="onLogoutClick()"><span class="fa fa-plus-square"></span> Logout</a>
+</mat-toolbar>
 
