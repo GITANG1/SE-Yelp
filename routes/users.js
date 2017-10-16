@@ -31,9 +31,12 @@ router.post('/register', (req, res, next) => {
     * Method is exported from model/user.js
     */
     User.addUser(newUser, (err, user) => {
+      console.log('**** IN ADDUSER() *****');
       if(err){
+        console.log('**** IN ADDUSER().err *****');
         res.json({success: false, msg:'Failed to register user'}); 
       } else {
+        console.log('**** IN ADDUSER().success *****');
         res.json({success: true, msg:'User registered'});
       }
       console.log('**** CLOSING DB***');
