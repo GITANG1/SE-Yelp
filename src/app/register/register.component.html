@@ -1,23 +1,48 @@
-<div style="background-color: white; width:20%;">
-  <h2>Register</h2>
+<mat-card class="jumbotron">
+    <mat-toolbar color="primary" layout="column" layout-align="center end">
+        <span style="margin:0 auto;">REGISTER</span>
+    </mat-toolbar>
 
-  <form (submit)="onRegisterSubmit()">
-    <div>
-      <label>Name</label>
-      <input type="text" [(ngModel)]="name" name="name">
+    <div id="flashMessage" class="alert-danger">
+        <flash-messages></flash-messages>
     </div>
-    <div>
-      <label>Username</label>
-      <input type="text" [(ngModel)]="username" name="username">
+
+    <div class="container">
+        <div class="col-sm-8 col-sm-offset-2">
+          <div class="col-md-6 col-md-offset-3">
+            <form name="form" (ngSubmit)="f.form.valid" #f="ngForm" novalidate>
+                <mat-card-content>
+              <div>
+                <mat-form-field>
+                  <input matInput placeholder="Name" name="name" [(ngModel)]="name" required>
+                </mat-form-field>
+              </div>
+
+              <div>
+                <mat-form-field>
+                  <input matInput placeholder="Username" name="username" [(ngModel)]="username" required>
+                </mat-form-field>
+              </div>
+
+              <div>
+              <mat-form-field>
+                <input matInput placeholder="Email" name="email" type="email" [(ngModel)]="email" required>
+              </mat-form-field>
+            </div>
+
+              <div>
+                <mat-form-field>
+                    <input matInput type="password" placeholder="Password" [(ngModel)]="password" name="password" required>
+                </mat-form-field>
+              </div>
+            </mat-card-content>
+            
+          </form>
+        </div>
+      </div>
     </div>
-    <div>
-      <label>Email</label>
-      <input type="text" [(ngModel)]="email" name="email">
+    <div style="display:flex;justify-content:space-around;">
+        <button mat-raised-button color="accent" (click)="onRegisterSubmit()">REGISTER</button>
     </div>
-    <div>
-      <label>Password</label>
-      <input type="password" [(ngModel)]="password" name="password">
-    </div>
-    <input type="submit" class="md-raised md-primary" value="Submit"> 
-  </form>
-</div>
+</mat-card>
+
