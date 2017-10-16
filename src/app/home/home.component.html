@@ -1,21 +1,69 @@
-<div fxLayoutAlign="center center">
-  <form >
-    
-      <input type="text" #restaurantbox="ngForm" style="width: 350px; height:30px" placeholder="hungry? what do you wanna eat" aria-label="Number" mdInput [formControl]="restaurant" [mdAutocomplete]="restau">
-      <input type="text" #locationbox="ngForm" style="width: 350px; height:30px" placeholder="where?" aria-label="Number" mdInput [formControl]="location" [mdAutocomplete]="loc">
-      
-      <md-autocomplete #restau="mdAutocomplete">
-        <md-option *ngFor="let option of  filteredRestaurants | async" [value]="option">
-          {{ option}}
-        </md-option>
-      </md-autocomplete>
-      <md-autocomplete #loc="mdAutocomplete" >
-        <md-option *ngFor="let location of filteredLocations | async" [value]="location">
-          {{ location }}
-        </md-option>
-      </md-autocomplete>
-      <button md-raised-button (click)="SearchRestaurants(restaurantbox.value,locationbox.value)" >search</button>
-    
-  </form>
 
+
+<div class = "container" 
+ fxLayout="column" fxLayoutAlign="center center"
+ fxLayout.sm="row" 
+ fxLayout.xs="row" 
+ fxLayoutAlign.xs="center center" 
+ fxLayoutAlign.sm="center center"
+ fxLayoutAlign.gt-sm="center center"
+ fxFlexAlign="center center"
+ style="margin-top:10em">
+
+ <h1> {{title}}</h1>
+  <form >
+      <input type="text" #restaurantbox="ngForm"  name="rest"  style="width: 25em; height:2.5em" placeholder="hungry? what do you wanna eat" aria-label="Restaurant Name" matInput [formControl]="restaurant" [matAutocomplete]="restau">
+      <input type="text" #locationbox="ngForm"  name="area" style="width: 25em; height:2.5em" placeholder="where?" aria-label="Location Name" matInput [formControl]="location" [matAutocomplete]="loc">
+      
+      <mat-autocomplete #restau="matAutocomplete">
+        <mat-option *ngFor="let option of  filteredRestaurants | async" [value]="option">
+          {{ option}}
+        </mat-option>
+      </mat-autocomplete>
+      <mat-autocomplete #loc="matAutocomplete" >
+        <mat-option *ngFor="let location of filteredLocations | async" [value]="location">
+          {{ location }}
+        </mat-option>
+      </mat-autocomplete>
+      <button  color="accent" mat-raised-button (click)="SearchRestaurants(restaurantbox.value,locationbox.value)" >search</button>
+  </form>
+<br>
 </div>
+
+<div *ngFor="let d of DisplayRests" fxLayout="row" fxLayoutAlign="center center">
+    
+      <br>
+      <mat-card style="width:45em;height:9em">      
+      <mat-grid-list cols="2" mat-row-height="1:1" >
+        <mat-grid-tile style="float:left;padding:1em">  
+        <img height="115em" width="115em" src="/assets/frenchfries.jpg">
+        </mat-grid-tile> 
+      <mat-grid-tile>  
+         <a href="https://www.pizzahut.com/#/home" style="color:red;text-decoration:none"><b>{{d.name}}</b></a>
+    <p>{{d.city}}<br>{{d.address}}</p>
+      </mat-grid-tile> 
+    </mat-grid-list>
+     </mat-card> 
+  
+  </div>
+
+<!-- <div *ngFor="let d of DisplayRests" fxLayout="row" fxLayoutAlign="center center">
+    
+      <br>
+      <mat-card >      
+      <mat-list fxFlex>
+        <mat-list-item style="float:left">  
+        <img mat-list-avatar  height="50em" width="50em" src="/assets/PizzaHut.png">
+        <a href="https://www.pizzahut.com/#/home" mat-button ><h1 mat-line> {{d.name}} </h1></a>
+        <h3 mat-line>Gainesville</h3>
+          <p mat-line><span>3515 SW Archer Rd, Gainesville 32608</span></p>
+        </mat-list-item> 
+      
+    
+    </mat-list>
+    
+    
+  </mat-card> 
+  
+  </div> -->
+  
