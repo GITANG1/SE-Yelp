@@ -1,12 +1,14 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {  MatButtonModule, } from '@angular/material';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { LoginComponent } from './login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {Observable} from 'rxjs/Observable';
 import { HttpModule } from '@angular/http';
 import {AuthService} from '../services/auth.service';
-import {Router} from '@angular/router';
 import { FlashMessagesModule} from 'angular2-flash-messages';
 import { RouterTestingModule } from '@angular/router/testing';
+
 
 
 describe('LoginComponent', () => {
@@ -15,15 +17,16 @@ describe('LoginComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LoginComponent ],
       imports: [
-        HttpModule, 
+        MatButtonModule,
+        FlexLayoutModule,
+        HttpModule,
         FormsModule,
         FlashMessagesModule,
-        ReactiveFormsModule,
-        RouterTestingModule,
+        RouterTestingModule.withRoutes([{ path: 'home', component: LoginComponent }])
       ],
-      providers: [AuthService],
+      declarations: [ LoginComponent ],
+      providers: [AuthService]
     })
     .compileComponents();
   }));
