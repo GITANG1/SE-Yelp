@@ -68,25 +68,16 @@ describe('HomeComponent', () => {
           fixture=TestBed.createComponent(HomeComponent);
           comp = fixture.componentInstance;   
           fixture.detectChanges();
-          title_debug = fixture.debugElement.query(By.css('h1'));
+         
           const input = fixture.debugElement.queryAll(By.css('input'));
           search_debug = fixture.debugElement.query(By.css('button'));
           search_html= search_debug.nativeElement;
-          title_html = title_debug.nativeElement;
+         
           restaurant_html = input[0].nativeElement;
           area_htlml = input[1].nativeElement;
     });
 
-    it('should display original title', () => {
-    
-      expect(title_html.textContent).toContain(comp.title);
-    });
-    
-    it('should display a different test title', () => {
-      comp.title = 'Test Title';
-      fixture.detectChanges();
-      expect(title_html.textContent).toContain('Test Title');
-    });
+
 
     it('checks home input ', () => {
       expect(restaurant_html.textContent).toEqual('');

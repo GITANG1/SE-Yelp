@@ -22,7 +22,7 @@ import { FormsModule } from '@angular/forms';
 import {Observable} from 'rxjs/Observable';
 import { Http, Response, Headers, HttpModule } from '@angular/http';
 
-fdescribe('RegisterComponent', () => {
+describe('RegisterComponent', () => {
   let regSpy: jasmine.Spy;
   let component: RegisterComponent;
   let fixture: ComponentFixture<RegisterComponent>;
