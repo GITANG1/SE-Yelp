@@ -54,6 +54,7 @@ export class HomeComponent implements OnInit {
     this._http.post('http://localhost:3000/restaurants/search', { "search": restaurantname }
     ).subscribe(res => {
       this.data = res.json();
+      this.DisplayRests = [];
       this.data.forEach(element => {
         this.DisplayRests.push(element);
       });
