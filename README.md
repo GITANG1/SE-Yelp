@@ -21,71 +21,71 @@
  ## Backend API
 
  ### Restaurant API
-1. Restaurants Listing API
-  List of all restaurants for predictions before searching.
-  * URL:
-    restaurants/List
-  * Method: 
-    GET
-  * URL Params:
-    None
-  * Data Params:
-    None
+1. #### Restaurants Listing API
+    List of all restaurants.
+    * ##### URL:
+      restaurants/List
+    * ##### Method: 
+      GET
+    * ##### URL Params:
+      None
+    * ##### Data Params:
+      None
 
-2. Restaurant Searching API
-  Query for restaurants
-  * URL:
-    restaurants/Search/
-  * Method:
-    POST
-  * URL Params:
-    None
-  * Data Params:
-    {
-      Search: ’Search keyword’ 
-    }
+2. #### Restaurant Searching API
+    Query for restaurants
+    * ##### URL:
+      restaurants/Search/
+    * ##### Method:
+      POST
+    * ##### URL Params:
+      None
+    * ##### Data Params:
+      {
+        Search: ’Search keyword’ 
+      }
 
-3. Restaurant Details API
-  Data for restaurant with particular restaurantID
-  * URL:
-    restaurants/restID/:restID
-  * Method: 
-    GET
-  * URL Params: 
-    restID
-  * Data Params:
-    None
+3. #### Restaurant Details API
+    Data for restaurant with particular restaurantID
+    * ##### URL:
+      restaurants/restID/:restID
+    * ##### Method: 
+      GET
+    * ##### URL Params: 
+      restID
+    * ##### Data Params:
+      None
 
 ### User API
-1. User Register API
-  Used to register new user
-  * URL:
-    User/register
-  * Method: 
-    POST
-  * URL Params:
-    None
-  * Data Params:
-    {
-      Name: ‘User name’
-      Email: ‘User email’
-      Username: ‘username to be used to login’
-      Password: ‘password to authenticate user’
-    }
+1. #### User Register API
+    Used to register new user
+    * ##### URL:
+      User/register
+    * ##### Method: 
+      POST
+    * ##### URL Params:
+      None
+    * ##### Data Params:
+      {
+        Name: ‘User name’
+        Email: ‘User email’
+        Username: ‘username to be used to login’
+        Password: ‘password to authenticate user’
+      }
   
-2. User Authenticate API
-  Used to authenticate user
-  * URL:
-    User/authenticate
-  * Method: 
-    POST
-  * URL Params:
-    None
-  * Data Params:
-    {
-      Username: ‘Username corresponding to user’
-      Password: ‘Password to authenticate the user’
-    }
+2. #### User Authenticate API
+    Used to authenticate user
+    * ##### URL:
+      User/authenticate
+    * ##### Method: 
+      POST
+    * ##### URL Params:
+      None
+    * ##### Data Params:
+      {
+        Username: ‘Username corresponding to user’
+        Password: ‘Password to authenticate the user’
+      }
 
  
  ## Team Members:
