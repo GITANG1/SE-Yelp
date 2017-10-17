@@ -3,6 +3,10 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { SignupComponent } from '../signup/signup.component';
 import { HeaderComponent } from './header.component';
+import { MatToolbarModule, MatButtonModule, } from '@angular/material';
+import { HttpModule } from '@angular/http';
+import { AuthService } from '../services/auth.service';
+import { FlashMessagesModule } from 'angular2-flash-messages';
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
@@ -10,13 +14,18 @@ describe('HeaderComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ 
+      declarations: [HeaderComponent, SignupComponent],
+      imports: [
+        MatToolbarModule,
+        MatButtonModule,
         FlexLayoutModule,
+        HttpModule,
+        FlashMessagesModule,
         RouterTestingModule.withRoutes([{ path: 'home', component: HeaderComponent }])
       ],
-      declarations: [ HeaderComponent, SignupComponent ]
+      providers: [AuthService],
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
