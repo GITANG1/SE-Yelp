@@ -27,7 +27,7 @@ router.get('/', function(req, res, next){
         // we're connected!
         console.log("Connected correctly to server");
         // create a new dish
-        Restaurants.create(jsonArray[0]
+        Restaurants.create(jsonArray
         , function (err, restaurant) {
             if (err) throw err;
             console.log('Restaurant created!');
@@ -40,7 +40,6 @@ router.get('/', function(req, res, next){
 });
 
 function addData(){
-    //first
     jsonArray[0]={
         name: 'Taco House',
         address:'4295 W Navy Blvd, Pensacola, FL 32507',
@@ -64,7 +63,6 @@ function addData(){
         cuisine:'Mexican'
     };
 
-    //second
     jsonArray[1]={
         name: 'Hot Dog Shoppe',
         address:'1308 N Ferdon Blvd, Crestview, FL 32536-1714',
@@ -84,7 +82,6 @@ function addData(){
         cuisine:'Fast Food'
     };
 
-    //third
     jsonArray[2]={
         name: 'Hungry Howie\'s Pizza',
         address:'610 N Navy Blvd, Pensacola, FL 32507-1208',
@@ -112,7 +109,6 @@ function addData(){
         cuisine:'Pizza'
     };
 
-    //fourth
     jsonArray[3]={
         name: 'Burger King',
         address:'8480 N Century Blvd, Century, FL 32535',
@@ -140,7 +136,6 @@ function addData(){
         cuisine:'American'
     };
 
-    //fifth
     jsonArray[4]={
         name: 'Subway',
         address:'1090 N Ferdon Blvd, Ste C, Crestview, FL 32536',
@@ -168,7 +163,6 @@ function addData(){
         cuisine:'American'
     };
 
-    //sizth
     jsonArray[5]={
         name: 'Scrap\'s Suds & Grub Sports Bar',
         address:'148 E Woodruff Ave, Suite C, Crestview, FL 32536-3502',
@@ -196,7 +190,6 @@ function addData(){
         cuisine:'American'
     };
 
-    //seventh
     jsonArray[6]={
         name: 'Wings Of Fire',
         address:'397 E James Lee Blvd, Crestview, FL',
@@ -224,7 +217,6 @@ function addData(){
         cuisine:'American'
     };
 
-    //eigth
     jsonArray[7]={
         name: 'Sully\'s Place',
         address:'4895 Lillian Hwy, Pensacola, FL 32506-6441',
@@ -248,7 +240,6 @@ function addData(){
         cuisine:'Pub'
     };
 
-    //ninth
     jsonArray[8]={
         name: 'China Star',
         address:'1334 N Ferdon Blvd, Crestview, FL 32536',
@@ -272,7 +263,6 @@ function addData(){
         cuisine:'Chinese'
     };
 
-    //tenth
     jsonArray[9]={
         name: 'D & W Cafe',
         address:'584 N Ferdon Blvd, Crestview, FL',
@@ -296,7 +286,6 @@ function addData(){
         cuisine:'American'
     };
 
-    //eleventh
     jsonArray[10]={
         name: 'Chic-Fil-A',
         address:'Hwy 90 West, Pace, FL',
@@ -320,7 +309,6 @@ function addData(){
         cuisine:'American'
     };
 
-    //twelveth
     jsonArray[11]={
         name: 'Emerald Isle Seafood Restaurant & Market',
         address:'1260 S Ferdon Blvd, Crestview, FL 32536',
@@ -348,7 +336,6 @@ function addData(){
         cuisine:'Seafood'
     };
 
-    //thirteenth
     jsonArray[12]={
         name: 'Lil Della\'s New Mexican Restaurant',
         address:'424 N Highway 29, Cantonment, FL 32533',
