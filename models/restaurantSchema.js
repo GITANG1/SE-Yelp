@@ -48,7 +48,7 @@ var restaurant_schema=new Schema({
     expense_level:{
         type: Number,
         min: 1,
-        max: 3,
+        max: 5,
         required: true
     },
     rating:{

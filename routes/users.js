@@ -31,9 +31,12 @@ router.post('/register', (req, res, next) => {
     * Method is exported from model/user.js
     */
     User.addUser(newUser, (err, user) => {
+      console.log('**** IN ADDUSER() *****');
       if(err){
+        console.log('**** IN ADDUSER().err *****');
         res.json({success: false, msg:'Failed to register user'}); 
       } else {
+        console.log('**** IN ADDUSER().success *****');
         res.json({success: true, msg:'User registered'});
       }
       console.log('**** CLOSING DB***');
@@ -69,7 +72,7 @@ router.post('/authenticate', (req, res, next) => {
       console.log('*** getUserByUsername');
       if(err) throw err;
       if(!user){
-        return res.json({success: false, msg: 'User not found'});
+         res.json({success: false, msg: 'User not found'});
       }
 
       User.comparePassword(password, user.password, (err, isMatch) => {
@@ -89,7 +92,7 @@ router.post('/authenticate', (req, res, next) => {
             }
           });
         } else {
-          return res.json({success: false, msg: 'Wrong password'}); 
+           res.json({success: false, msg: 'Wrong password'}); 
         }
         console.log('*** diconnecting... ');
         mongoose.disconnect();

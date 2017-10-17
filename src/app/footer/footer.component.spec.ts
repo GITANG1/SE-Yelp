@@ -13,9 +13,9 @@ describe('FooterComponent', () => {
         FlexLayoutModule,
         RouterTestingModule.withRoutes([{ path: 'home', component: FooterComponent }])
       ],
-      declarations: [ FooterComponent ]
+      declarations: [FooterComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

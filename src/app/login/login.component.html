@@ -1,15 +1,29 @@
-<div style="background-color: white; width:20%;">
-    <h2 class="page-header">Login</h2>
-    
-    <form (submit)="onLoginSubmit()">
-      <div class="form-group">
-        <label>Username</label>
-        <input type="text" class="form-control" [(ngModel)]="username" name="username">
-      </div>
-      <div class="form-group">
-        <label>Password</label>
-        <input type="password" class="form-control" [(ngModel)]="password" name="password">
-      </div>
-      <input type="submit" class="btn btn-primary" value="Login">
+
+<div fxLayout = "row" fxLayoutAlign="center center" fxFlexAlign="center center" >
+<div  fxLayout ="column" fxLayoutAlign=" center" fxFlexAlign="center center" style="margin-top:2em; background-color: white; height:12em; width:30%; border: .1em solid; border-radius:1em"> 
+  <div  style="background-color:#3f51b5 ;width:100%; height:3em; text-align:center; border-top-left-radius:.8em; border-top-right-radius:.8em">
+   <p style="color:white">Login</p>
+  </div>
+  <div>  
+  <form style="margin-top:2em">
+    <table >
+      <tr>
+        <td>Username:</td>
+        <td><input matInput type="text" class="form-control" [(ngModel)]="username" name="username"></td> 
+        
+      </tr>
+      <tr>
+        <td>Password:</td>
+        <td><input matInput type="password" class="form-control" [(ngModel)]="password" name="password"></td>
+        
+      </tr>
+
+      <tr>
+        <td><button mat-raised-button color="accent" (click)="onLoginSubmit()">Login</button></td>
+      </tr>
+     
+    </table>      
     </form>
+  </div>
+</div>
 </div>

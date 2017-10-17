@@ -1,12 +1,15 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import {AuthService} from '../services/auth.service';
-import { RouterTestingModule } from '@angular/router/testing';
-import {FlashMessagesModule} from 'angular2-flash-messages';
-import { LoginComponent } from './login.component';
 import {  MatButtonModule, } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { LoginComponent } from './login.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {Observable} from 'rxjs/Observable';
 import { HttpModule } from '@angular/http';
-import { FormsModule } from '@angular/forms';
+import {AuthService} from '../services/auth.service';
+import { FlashMessagesModule} from 'angular2-flash-messages';
+import { RouterTestingModule } from '@angular/router/testing';
+
+
 
 describe('LoginComponent', () => {
   let component: LoginComponent;

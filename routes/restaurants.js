@@ -68,42 +68,6 @@ listRouter.route('/')
 
 
 searchRouter.route('/')
-.get(function(req,res){
-    console.log("User requested LISTING of all restaurants for suggestions purpose");
-    //make connection to the database
-    mongoose.connect(config.database, 
-        { server: { 
-            // sets how many times to try reconnecting
-            reconnectTries: Number.MAX_VALUE,
-            // sets the delay between every retry (milliseconds)
-            reconnectInterval: 1000 
-            } 
-        }
-    );
-
-    var db = mongoose.connection;
-    //if error occurs on connection
-    db.on('error', console.error.bind(console, 'connection error:'));
-    //if error doesnt occur and database opens succesfully
-    db.once('open', function () {
-        console.log("Connected correctly to server");
-
-        //query the database for list of all restaurants
-        var query=Restaurants.find({$text : { $search : "Pizza Hut" }},{ score : { $meta: "textScore" } });
-        query.sort({ score : { $meta : 'textScore' } });
-        query.select('name city');
-        query.exec(function (err, rest) {
-            //callback
-            if (err) throw err;
-            console.log("List of Restaurants that is sent to client : ");
-            console.log(rest);
-            res.json(rest);
-            db.close();
-            //mongoose.disconnect();
-          });            
-    });
-
-})
 .post(function(req,res){
     console.log("\n\nRequest body :\n"+req.body+"\n\n");
     var searchString=req.body.search;
@@ -129,7 +93,7 @@ searchRouter.route('/')
         //query the database for list of all restaurants
         var query=Restaurants.find({$text : { $search : searchString }},{ score : { $meta: "textScore" } });
         query.sort({ score : { $meta : 'textScore' } });
-        query.select('name city');
+        query.select('name city address');
         query.exec(function (err, rest) {
             //callback
             if (err) throw err;
