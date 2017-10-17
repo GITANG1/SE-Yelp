@@ -6,6 +6,10 @@ var router = express.Router();
 var config = require('../config/database');
 var Restaurants = require('../models/restaurantSchema');
 
+jsonArray=[];
+addData();
+
+
 router.get('/', function(req, res, next){
     mongoose.connect(config.database,
         { server: { 
@@ -23,42 +27,8 @@ router.get('/', function(req, res, next){
         // we're connected!
         console.log("Connected correctly to server");
         // create a new dish
-        Restaurants.create({
-            name: "Taco House",
-            address: "4295 W Navy Blvd, Pensacola, FL 32507",
-            city: "Pensacola",
-            state: "FL",
-            timing:[{
-                open:800,close: 2200
-            }],
-            phone: 8509124430,
-            expense_level: 3,
-            rating: 3,
-            menu:[{
-                 name:'Burrito',
-                 description:'Stuffed with meat, cheese, rice, beans and sauce. Then smothered with extra sauce and cheese.'
-             },
-             {
-                 name:'Taco',
-                 description:'Filled with meat, cheese, lettuce and pico de gallo. Served with cilantro lime rice and choice of beans'
-             },
-             {
-                 name:'Nachos',
-                 description:'Loaded with meat, queso, beans, sour cream, pico de gallo and guacamole.'
-             },
-             {
-                 name:'Salads',
-                 description:'Loaded with meat, rice, beans, lettuce, pico de gallo, guacamole, tortilla strips, cotija cheese and dressing. DRESSINGS: Tomatillo Ranch, Cilantro Lime Vinaigrette, Sweet Mango'
-             },
-             {
-                 name:'Quesadillas',
-                 description:'Filled with meat and cheese. Served with cilantro lime rice and choice of beans.'
-             },
-             {
-                 name:'Enchiladas',
-                 description:'Stuffed with meat, cheese and sauce. Served with cilantro lime rice, and choice of beans. SAUCES: Roasted Green Chile, Tomatillo Cilantro, Red Enchilada'
-             }]
-        }, function (err, restaurant) {
+        Restaurants.create(jsonArray[0]
+        , function (err, restaurant) {
             if (err) throw err;
             console.log('Restaurant created!');
             console.log(restaurant);
@@ -68,5 +38,371 @@ router.get('/', function(req, res, next){
         });
     });
 });
+
+function addData(){
+    //first
+    jsonArray[0]={
+        name: 'Taco House',
+        address:'4295 W Navy Blvd, Pensacola, FL 32507',
+        city:'Pensacola',
+        state:'Florida',
+        timing:[{
+            open:800,
+            close: 2200
+        }],
+        phone:8509124430,
+        expense_level:3,
+        rating:3,
+        menu:[{
+            name:'veggie burrito',
+            description:''
+        },
+        {
+            name:'chicken burrito',
+            description:''
+        }],
+        cuisine:'Mexican'
+    };
+
+    //second
+    jsonArray[1]={
+        name: 'Hot Dog Shoppe',
+        address:'1308 N Ferdon Blvd, Crestview, FL 32536-1714',
+        city:'Crestview',
+        state:'Florida',
+        timing:[{
+            open:800,
+            close: 2200
+        }],
+        phone:8509124430,
+        expense_level:3,
+        rating:3,
+        menu:[{
+            name:'hot dog',
+            description:''
+        }],
+        cuisine:'Fast Food'
+    };
+
+    //third
+    jsonArray[2]={
+        name: 'Hungry Howie\'s Pizza',
+        address:'610 N Navy Blvd, Pensacola, FL 32507-1208',
+        city:'Pensacola',
+        state:'Florida',
+        timing:[{
+            open:800,
+            close: 2200
+        }],
+        phone:8503062272,
+        expense_level:2,
+        rating:2,
+        menu:[{
+            name:'veggie Pizza',
+            description:''
+        },
+        {
+        name:'chicken Pizza',
+        description:'' 
+        },
+        {
+            name:'Margarita Pizza',
+            description:'cheese'
+        }],
+        cuisine:'Pizza'
+    };
+
+    //fourth
+    jsonArray[3]={
+        name: 'Burger King',
+        address:'8480 N Century Blvd, Century, FL 32535',
+        city:'Century',
+        state:'Florida',
+        timing:[{
+            open:800,
+            close: 2200
+        }],
+        phone:8502563555,
+        expense_level:2,
+        rating:2,
+        menu:[{
+            name:'veggie Burger',
+            description:''
+        },
+        {
+        name:'chicken Burger',
+        description:'' 
+        },
+        {
+            name:'Margarita Burger',
+            description:'cheese'
+        }],
+        cuisine:'American'
+    };
+
+    //fifth
+    jsonArray[4]={
+        name: 'Subway',
+        address:'1090 N Ferdon Blvd, Ste C, Crestview, FL 32536',
+        city:'Crestview',
+        state:'Florida',
+        timing:[{
+            open:800,
+            close: 2200
+        }],
+        phone:8503986162,
+        expense_level:3,
+        rating:3,
+        menu:[{
+            name:'veggie subway sandwich',
+            description:''
+        },
+        {
+        name:'chicken subway sandwich',
+        description:'' 
+        },
+        {
+            name:'cheese subway sandwich',
+            description:'cheese'
+        }],
+        cuisine:'American'
+    };
+
+    //sizth
+    jsonArray[5]={
+        name: 'Scrap\'s Suds & Grub Sports Bar',
+        address:'148 E Woodruff Ave, Suite C, Crestview, FL 32536-3502',
+        city:'Crestview',
+        state:'Florida',
+        timing:[{
+            open:800,
+            close: 2200
+        }],
+        phone:8503062272,
+        expense_level:3,
+        rating:3,
+        menu:[{
+            name:'veggie sandwich',
+            description:''
+        },
+        {
+        name:'chicken sandwich',
+        description:'' 
+        },
+        {
+            name:'cheese sandwich',
+            description:'cheese'
+        }],
+        cuisine:'American'
+    };
+
+    //seventh
+    jsonArray[6]={
+        name: 'Wings Of Fire',
+        address:'397 E James Lee Blvd, Crestview, FL',
+        city:'Crestview',
+        state:'Florida',
+        timing:[{
+            open:800,
+            close: 2200
+        }],
+        phone:8503062272,
+        expense_level:2,
+        rating:2,
+        menu:[{
+            name:'chicken wings',
+            description:''
+        },
+        {
+        name:'chicken nuggests',
+        description:'' 
+        },
+        {
+            name:'steak',
+            description:''
+        }],
+        cuisine:'American'
+    };
+
+    //eigth
+    jsonArray[7]={
+        name: 'Sully\'s Place',
+        address:'4895 Lillian Hwy, Pensacola, FL 32506-6441',
+        city:'Pensacola',
+        state:'Florida',
+        timing:[{
+            open:800,
+            close: 2200
+        }],
+        phone:8503062272,
+        expense_level:4,
+        rating:4,
+        menu:[{
+            name:'french fries',
+            description:''
+        },
+        {
+        name:'nacho chips',
+        description:'' 
+        }],
+        cuisine:'Pub'
+    };
+
+    //ninth
+    jsonArray[8]={
+        name: 'China Star',
+        address:'1334 N Ferdon Blvd, Crestview, FL 32536',
+        city:'Crestview',
+        state:'Florida',
+        timing:[{
+            open:800,
+            close: 2200
+        }],
+        phone:8503062272,
+        expense_level:2,
+        rating:2,
+        menu:[{
+            name:'dumplings momos',
+            description:''
+        },
+        {
+        name:'fried rice',
+        description:'' 
+        }],
+        cuisine:'Chinese'
+    };
+
+    //tenth
+    jsonArray[9]={
+        name: 'D & W Cafe',
+        address:'584 N Ferdon Blvd, Crestview, FL',
+        city:'Crestview',
+        state:'Florida',
+        timing:[{
+            open:800,
+            close: 2200
+        }],
+        phone:8509685525,
+        expense_level:5,
+        rating:5,
+        menu:[{
+            name:'latte',
+            description:''
+        },
+        {
+        name:'mocha',
+        description:'' 
+        }],
+        cuisine:'American'
+    };
+
+    //eleventh
+    jsonArray[10]={
+        name: 'Chic-Fil-A',
+        address:'Hwy 90 West, Pace, FL',
+        city:'Pace',
+        state:'Florida',
+        timing:[{
+            open:800,
+            close: 2200
+        }],
+        phone:8509685556,
+        expense_level:4,
+        rating:4,
+        menu:[{
+            name:'chicken nuggets',
+            description:''
+        },
+        {
+        name:'chicken burger',
+        description:'' 
+        }],
+        cuisine:'American'
+    };
+
+    //twelveth
+    jsonArray[11]={
+        name: 'Emerald Isle Seafood Restaurant & Market',
+        address:'1260 S Ferdon Blvd, Crestview, FL 32536',
+        city:'Crestview',
+        state:'Florida',
+        timing:[{
+            open:800,
+            close: 2200
+        }],
+        phone:8509685556,
+        expense_level:3,
+        rating:3,
+        menu:[{
+            name:'shrimp',
+            description:''
+        },
+        {
+        name:'fish curry',
+        description:'' 
+        },
+        {
+            name:'prawns',
+            description:''
+        }],
+        cuisine:'Seafood'
+    };
+
+    //thirteenth
+    jsonArray[12]={
+        name: 'Lil Della\'s New Mexican Restaurant',
+        address:'424 N Highway 29, Cantonment, FL 32533',
+        city:'Cantonment',
+        state:'Florida',
+        timing:[{
+            open:800,
+            close: 2200
+        }],
+        phone:8509685556,
+        expense_level:5,
+        rating:5,
+        menu:[{
+            name:'burrito',
+            description:''
+        },
+        {
+        name:'enchilada',
+        description:'' 
+        },
+        {
+            name:'quesadilla',
+            description:''
+        }],
+        cuisine:'Mexican'
+    };
+
+    //fourteenth
+    jsonArray[13]={
+        name: 'Subway',
+        address:'4600 Mobile Hwy, Ste 110, Pensacola, FL 32506',
+        city:'Pensacola',
+        state:'Florida',
+        timing:[{
+            open:800,
+            close: 2200
+        }],
+        phone:8509685556,
+        expense_level:2,
+        rating:2,
+        menu:[{
+            name:'veggie subway sandwich',
+            description:''
+        },
+        {
+        name:'chicken subway sandwich',
+        description:'' 
+        },
+        {
+            name:'cheese subway sandwich',
+            description:'cheese'
+        }],
+        cuisine:'American'
+    };
+}
 
 module.exports=router;
