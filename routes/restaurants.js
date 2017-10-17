@@ -93,7 +93,7 @@ searchRouter.route('/')
         //query the database for list of all restaurants
         var query=Restaurants.find({$text : { $search : searchString }},{ score : { $meta: "textScore" } });
         query.sort({ score : { $meta : 'textScore' } });
-        query.select('name city');
+        query.select('name city address');
         query.exec(function (err, rest) {
             //callback
             if (err) throw err;
