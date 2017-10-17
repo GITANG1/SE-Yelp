@@ -168,16 +168,7 @@ it('should return 200 status for main page', function(done) {
                 expect(res.body.success).to.equal(false);
               });
     }); 
-    
-    
-
     });
-
-   
-    
-    
-    
-    
     
       describe('Create user', function () {
         it('should create a new user in database', function (done) {
@@ -200,11 +191,4 @@ it('should return 200 status for main page', function(done) {
           });
         });
       });
-    
-    
-    
-    
  });
-
-
-
