@@ -5,11 +5,16 @@ chai.use(require('chai-http'));
 
 var request = require('request');
 
+var utils = require('./utils.js');
+var should = require('should');
+// import our User mongoose model
+const User = require('../models/user');
+
 describe('Main Page', function() {
     this.timeout(5000); // How long to wait for a response (ms)
   
 
-it('Main page body', function(done) {
+it('should return main page body message', function(done) {
    
     request('http://localhost:3000' , function(error, response, body) {
         expect(body).to.equal('Please use appropriate route');
@@ -18,7 +23,7 @@ it('Main page body', function(done) {
         
 });
 
-it('Main page status', function(done) {
+it('should return 200 status for main page', function(done) {
     
      request('http://localhost:3000' , function(error, response, body) {
          expect(response.statusCode).to.equal(200);
@@ -28,8 +33,8 @@ it('Main page status', function(done) {
  });
 });
 
- describe('post',function(){
-    it('should send a post request when valid parameters are passed', function() {
+ describe('Post API for user registration',function(){
+    it('should register user when new user with valid parameters is passed', function() {
         return chai
             .request('http://localhost:3000')
             .post('/users/register')
@@ -38,7 +43,7 @@ it('Main page status', function(done) {
             .send( {
                 "name":"john smith",
                 "email":"johnsmith@test.com",
-                "username":"johnny",
+                "username":"johnnysm",
                 "password":"abc123"
             })
             .then(function(res) {
@@ -47,7 +52,25 @@ it('Main page status', function(done) {
               });
     });
 
-    it('should throw an error when one parameter is missing in post request', function() {
+    it('should send a post request when new user with valid parameters is passed', function() {
+        return chai
+            .request('http://localhost:3000')
+            .post('/users/register')
+            // .field('myparam' , 'test')
+            //.set('content-type', 'application/x-www-form-urlencoded')
+            .send( {
+                "name":"jon snow",
+                "email":"jonsnow@test.com",
+                "username":"johnnysm",
+                "password":"abc123s"
+            })
+            .then(function(res) {
+                expect(res).to.have.status(200);
+                expect(res.body.success).to.equal(false);
+              });
+    });
+
+    it('should not register user when username is missing in user registration request', function() {
         return chai
             .request('http://localhost:3000')
             .post('/users/register')
@@ -64,7 +87,7 @@ it('Main page status', function(done) {
               });
     });
 
-    it('should throw an error when one parameter is missing in post request', function() {
+    it('should not register user when one email is missing in user registration request', function() {
         return chai
             .request('http://localhost:3000')
             .post('/users/register')
@@ -80,8 +103,10 @@ it('Main page status', function(done) {
                 expect(res.body.success).to.equal(false);
               });
     });
-    describe('User Profile',function(){
-    it('User profile access should be unauthorized', function(done) {
+
+
+    describe('User Profile Access',function(){
+    it('should not authorize User profile access', function(done) {
         
          request('http://localhost:3000/users/profile' , function(error, response, body) {
              expect(body).to.equal('Unauthorized');
@@ -92,7 +117,7 @@ it('Main page status', function(done) {
     });
 
     describe('User authentication',function(){
-    it('password invalid',function() {
+    it('should not return wrong passwrod user if password is invalid',function() {
         return chai
             .request('http://localhost:3000')
             .post('/users/authenticate')
@@ -109,7 +134,7 @@ it('Main page status', function(done) {
               });
     });  
     
-    it('Username and password valid',function() {
+    it('should validate user if password is invalid',function() {
         return chai
             .request('http://localhost:3000')
             .post('/users/authenticate')
@@ -127,7 +152,7 @@ it('Main page status', function(done) {
               });
     });  
     
-    it('username invalid',function() {
+    it('should return invalid username if username invalid',function() {
         return chai
             .request('http://localhost:3000')
             .post('/users/authenticate')
@@ -142,9 +167,42 @@ it('Main page status', function(done) {
                 expect(res).to.have.status(200);
                 expect(res.body.success).to.equal(false);
               });
-    });  
+    }); 
+    
+    
 
     });
+
+   
+    
+    
+    
+    
+    
+      describe('Create user', function () {
+        it('should create a new user in database', function (done) {
+          // Create a User object to pass to User.create()
+          var u = {
+            name: 'abc',
+            email: 'ddd',
+            username: 'v',
+            password: 'c'
+             
+          };
+          User.create(u, function (err, createdUser) {
+            // Confirm that that an error does not exist
+            should.not.exist(err);
+            // verify that the returned user is what we expect
+            createdUser.name.should.equal('abc');
+            createdUser.password.should.equal('c');
+            // Call done to tell mocha that we are done with this test
+            done();
+          });
+        });
+      });
+    
+    
+    
     
  });
 

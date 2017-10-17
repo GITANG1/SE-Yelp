@@ -70,9 +70,13 @@ router.post('/authenticate', (req, res, next) => {
 
     User.getUserByUsername(username, (err, user) => {
       console.log('*** getUserByUsername');
-      if(err) throw err;
+      if(err) 
+        throw err;
       if(!user){
          res.json({success: false, msg: 'User not found'});
+         console.log('*** diconnecting... ');
+         mongoose.disconnect();
+         return;
       }
 
       User.comparePassword(password, user.password, (err, isMatch) => {
@@ -94,6 +98,7 @@ router.post('/authenticate', (req, res, next) => {
         } else {
            res.json({success: false, msg: 'Wrong password'}); 
         }
+        
         console.log('*** diconnecting... ');
         mongoose.disconnect();
       });    
