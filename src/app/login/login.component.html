@@ -1,29 +1,31 @@
 
-<div fxLayout = "row" fxLayoutAlign="center center" fxFlexAlign="center center" >
-<div  fxLayout ="column" fxLayoutAlign=" center" fxFlexAlign="center center" style="margin-top:2em; background-color: white; height:12em; width:30%; border: .1em solid; border-radius:1em"> 
-  <div  style="background-color:#3f51b5 ;width:100%; height:3em; text-align:center; border-top-left-radius:.8em; border-top-right-radius:.8em">
-   <p style="color:white">Login</p>
+ <mat-card class="jumbotron">
+    <mat-toolbar color="primary" layout="column" layout-align="center end">
+        <span style="margin:0 auto;">LOGIN</span>
+    </mat-toolbar>
+ 
+    <div class="container">
+      <div class="col-sm-8 col-sm-offset-2">
+        <div class="col-md-6 col-md-offset-3">
+          <form name="form" matInput (ngSubmit)="f.form.valid" #f="ngForm" novalidate>
+              <mat-card-content>
+            <div>
+              <mat-form-field>
+                <input  placeholder="Username" name="username" matInput [(ngModel)]="username" required>
+              </mat-form-field>
+            </div>
+            <div>
+              <mat-form-field>
+                  <input matInput type="password" placeholder="Password" [(ngModel)]="password" name="password" required>
+              </mat-form-field>
+            </div>
+          </mat-card-content>
+          
+        </form>
+      </div>
+    </div>
   </div>
-  <div>  
-  <form style="margin-top:2em">
-    <table >
-      <tr>
-        <td>Username:</td>
-        <td><input matInput type="text" class="form-control" [(ngModel)]="username" name="username"></td> 
-        
-      </tr>
-      <tr>
-        <td>Password:</td>
-        <td><input matInput type="password" class="form-control" [(ngModel)]="password" name="password"></td>
-        
-      </tr>
-
-      <tr>
-        <td><button mat-raised-button color="accent" (click)="onLoginSubmit()">Login</button></td>
-      </tr>
-     
-    </table>      
-    </form>
-  </div>
+  <div style="display:flex;justify-content:space-around;">
+    <button mat-raised-button color="accent" id="loginBtn" (click)="onLoginSubmit()">LOGIN</button>
 </div>
-</div>
+</mat-card>

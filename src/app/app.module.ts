@@ -12,7 +12,8 @@ import {
   MatFormFieldModule,
   MatCardModule,
   MatButtonModule,
-  MatSelectModule
+  MatSelectModule,
+  MatInputModule
 } from '@angular/material';
 
 import { 
@@ -43,7 +44,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { AuthGuard } from './guards/auth.guard';
 
 
-const appRoutes: Routes = [
+export const routes: Routes = [
   { path: '', component: HomeComponent},
   { path: 'register', component: RegisterComponent},
   { path: 'login', component: LoginComponent},
@@ -76,7 +77,8 @@ const appRoutes: Routes = [
     MatSelectModule,
     MatButtonModule,
     FlashMessagesModule,
-    RouterModule.forRoot(appRoutes)
+    MatInputModule,
+    RouterModule.forRoot(routes)
   ],
   providers: [ ValidateService, AuthService, AuthGuard],
   bootstrap: [AppComponent]
