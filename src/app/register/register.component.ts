@@ -3,8 +3,19 @@ import { ValidateService } from '../services/validate.service';
 import { AuthService } from '../services/auth.service';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { Router } from '@angular/router';
-import { MatToolbarModule, MatFormFieldModule, MatCardModule } from '@angular/material';
+import { MatToolbarModule, MatFormFieldModule, MatCardModule,MatInputModule } from '@angular/material';
 import { FormControl, Validators } from '@angular/forms';
+import { NgModule } from '@angular/core';
+
+
+@NgModule({
+  imports: [
+    MatToolbarModule, MatFormFieldModule, MatCardModule,MatInputModule ,
+    FormControl      //<----------make sure you have added this.
+  ],
+})
+
+
 
 @Component({
   selector: 'app-register',

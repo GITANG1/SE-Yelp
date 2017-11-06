@@ -43,15 +43,13 @@ export class HomeComponent implements OnInit {
 
   DisplayRests = [];
 
-  //restvalue:string;
-  //areavalue:string;
 
   SearchRestaurants(restaurantname, area) {
     console.log(restaurantname);
     console.log(area);
     console.log(this.DisplayRests);
 
-    this._http.post('http://localhost:3000/restaurants/search', { "search": restaurantname }
+    this._http.post('http://localhost:3000/restaurants/search', { "search": restaurantname, "city":area}
     ).subscribe(res => {
       this.data = res.json();
       this.DisplayRests = [];
@@ -60,6 +58,23 @@ export class HomeComponent implements OnInit {
       });
     });
   }
+
+SearchByTags(TagName,area)
+{
+
+  console.log(TagName);
+  console.log(area);
+
+
+  this._http.post('http://localhost:3000/restaurants/searchByTag', { "tag": TagName, "city":area}
+).subscribe(res => {
+  this.data = res.json();
+  this.DisplayRests = [];
+  this.data.forEach(element => {
+    this.DisplayRests.push(element);
+  });
+});
+}
   constructor(private _http: Http) {
 
   }
@@ -72,9 +87,9 @@ export class HomeComponent implements OnInit {
 
       this.data = res.json();
       this.data.forEach(element => {
-        this.options.push(element.name);
+        this.options.push(element._source.name);
 
-        this.locations.push(element.city);
+        this.locations.push(element._source.city);
 
       });
       console.log(this.data);

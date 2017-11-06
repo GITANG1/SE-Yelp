@@ -1,20 +1,19 @@
 
 
 <div class = "container" 
- fxLayout="column" fxLayoutAlign="center center"
- fxLayout.sm="row" 
- fxLayout.xs="row" 
+ fxLayout="row" fxLayoutAlign="center center"
+ fxLayout.sm="column" 
+ fxLayout.xs="column" 
  fxLayoutAlign.xs="center center" 
  fxLayoutAlign.sm="center center"
  fxLayoutAlign.gt-sm="center center"
  fxFlexAlign="center center"
- style="margin-top:10em">
+ style="height:20em;margin-left:-0.02em;margin-top:-0.1em">
 
-
-  <form >
-      <input type="text" #restaurantbox="ngForm"  name="rest"  style="width: 25em; height:2.5em" placeholder="hungry? what do you wanna eat" aria-label="Restaurant Name" matInput [formControl]="restaurant" [matAutocomplete]="restau">
-      <input type="text" #locationbox="ngForm"  name="area" style="width: 25em; height:2.5em" placeholder="where?" aria-label="Location Name" matInput [formControl]="location" [matAutocomplete]="loc">
-      
+  
+      <input type="text"  #restaurantbox="ngForm" style="height:2.5em;width:25em;"  name="rest"  placeholder="hungry? what do you wanna eat" aria-label="Restaurant Name"  [formControl]="restaurant" [matAutocomplete]="restau">
+      <input type="text"  #locationbox="ngForm"   style="height:2.5em;width:15em;" name="area"  placeholder="where?" aria-label="Location Name" [formControl]="location" [matAutocomplete]="loc">
+   
       <mat-autocomplete #restau="matAutocomplete">
         <mat-option *ngFor="let option of  filteredRestaurants | async" [value]="option">
           {{ option}}
@@ -25,22 +24,89 @@
           {{ location }}
         </mat-option>
       </mat-autocomplete>
-      <button  color="accent" mat-raised-button (click)="SearchRestaurants(restaurantbox.value,locationbox.value)" >search</button>
-  </form>
+      <button  color="accent" style="height:3em;border-radius:0.38em" mat-raised-button (click)="SearchRestaurants(restaurantbox.value,locationbox.value)" >search</button>
+  
 <br>
 </div>
 
-<div *ngFor="let d of DisplayRests" fxLayout="row" fxLayoutAlign="center center">
-    
+
+
+ <div  fxLayoutAlign="center center" fxFlexAlign="center center"  fxLayout.sm="row" fxLayout.xs="column" >  
+<div  fxLayout="row"  fxLayout.sm="row" fxLayout.xs="column" style="background-color:white">
+
+<button  name="breakfast" (click)="SearchByTags('breakfast',locationbox.value)"   mat-button>
+<mat-grid-tile fxLayout="column" fxLayoutAlign="center center" style="padding:1.1em">
+    <img height="55em" width="55em" src="/assets/Images/breakfast.png">
+    <p style="font-size:0.85em">
+      Breakfast
+    </p>
+</mat-grid-tile>
+</button>
+
+
+<button name="lunch" (click)="SearchByTags('lunch',locationbox.value)" mat-button>
+<mat-grid-tile fxLayout="column" fxLayoutAlign="center center" style="padding:1.1em">
+    <img height="55em" width="55em" src="/assets/Images/lunch.png">
+    <p style="font-size:0.85em">
+      Lunch
+    </p>
+</mat-grid-tile>
+</button>
+
+<button name="dinner" (click)="SearchByTags('dinner'.locationbox.value)" mat-button>
+<mat-grid-tile fxLayout="column" fxLayoutAlign="center center" style="padding:1.1em">
+    <img height="55em" width="55em" src="/assets/Images/dinner.png">
+    <p style="font-size:0.85em">
+      Dinner
+    </p>
+</mat-grid-tile>
+</button>
+
+<button name="delivery" (click)="SearchByTags('delivery',locationbox.value)" mat-button>  
+<mat-grid-tile fxLayout="column" fxLayoutAlign="center center" style="padding:1.1em">
+    <img height="55em" width="55em" src="/assets/Images/Delivery.png">
+    <p style="font-size:0.85em">
+      Delivery
+    </p>
+</mat-grid-tile>
+</button>
+
+<button name="DrinksNightLife" (click)="SearchByTags('nightlife',locationbox.value)" mat-button> 
+<mat-grid-tile fxLayout="column" fxLayoutAlign="center center" style="padding:1.1em">
+    <img height="55em" width="55em" src="/assets/Images/Drinks&NightLife.png">
+    <p style="font-size:0.85em">
+      Drinks & 
+    </p>
+    <p style="font-size:0.85em;margin-top:-2.7em">
+        NightLife
+      </p>
+</mat-grid-tile>
+</button>
+
+
+<button id="TakeOut" (click)="SearchByTags('take out',locationbox.value)" mat-button>
+<mat-grid-tile fxLayout="column" fxLayoutAlign="center center" style="padding:1.1em" >
+    <img height="55em" width="55em" src="/assets/Images/TakeOut.png">
+    <p style="font-size:0.85em">
+      Take Out
+    </p>
+</mat-grid-tile>
+</button>
+
+
+</div>
+</div>
+
+<div  fxLayout="column" fxLayoutAlign="center center" style="padding:2em">   
       <br>
-      <mat-card style="width:45em;height:9em">      
+      <mat-card *ngFor="let d of DisplayRests" style="width:45em;height:9em">      
       <mat-grid-list cols="2" mat-row-height="1:1" >
         <mat-grid-tile style="float:left;padding:1em">  
-        <img height="115em" width="115em" src="/assets/image.png">
+        <img height="115em" width="115em" src="/assets/Images/image.png">
         </mat-grid-tile> 
       <mat-grid-tile>  
-         <a href="https://www.pizzahut.com/#/home" style="color:red;text-decoration:none"><b>{{d.name}}</b></a>
-    <p>{{d.city}}<br>{{d.address}}</p>
+         <a href="https://www.pizzahut.com/#/home" style="color:red;text-decoration:none"><b>{{d._source.name}}</b></a>
+    <p>{{d._source.city}}<br>{{d._source.address}}</p>
       </mat-grid-tile> 
     </mat-grid-list>
      </mat-card> 
