@@ -62,28 +62,34 @@ var mapping = {
     }
   }
 };
-
 request({ url: "http://localhost:9200/gulp", method: 'DELETE' }, function (error, response, body) {
     console.log("in delete phase");
-    
-      if (!error) {
+    try {
+      if (error || response.error) {
         console.log("-------------------------");
         console.log(body);
         console.log('Previous index gulp was deleted');
       }
       else {
-        console.log('error' + error);
+        throw new Error();
       }
       //if succesfully deleted, add new mapping
-      request({ url: "http://localhost:9200/gulp", method: 'PUT', json: mapping }, function (error, response, body) {
-        if (!error) {
-          console.log("-------------------------");
-          console.log(body);
-          console.log('new Index gulp with new mapping added');
-        }
-        else {
-          console.log('error: ' + error);
-        }
-      });
-    });
-    
+      addNew();
+    }
+    catch (e) {
+      addNew();
+    }
+});
+
+function addNew(){
+  request({ url: "http://localhost:9200/gulp", method: 'PUT', json: mapping }, function (error, response, body) {
+    if (!error) {
+      console.log("-------------------------");
+      console.log(body);
+      console.log('new Index gulp with new mapping added');
+    }
+    else {
+      console.log('error: ' + error);
+    }
+  });
+}    
