@@ -11,7 +11,6 @@ const mongoose = require('mongoose');
 const config = require('./config/database');
 
 var index = require('./routes/index');
-var insertRestaurant = require('./routes/insertRestaurant');
 var restaurants = require('./routes/restaurants');
 const users = require('./routes/users');
 
@@ -35,7 +34,6 @@ app.all('*', function(req, res, next) {
 });
 
 app.use('/', index);
-app.use('/insert', insertRestaurant);
 app.use('/restaurants',restaurants);
 
 // Passport Middleware
@@ -60,7 +58,7 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.send('error');
 });
 
 
