@@ -11,7 +11,7 @@ import { NgModule } from '@angular/core';
 @NgModule({
   imports: [
     MatToolbarModule, MatFormFieldModule, MatCardModule,MatInputModule ,
-    FormControl      //<----------make sure you have added this.
+    FormControl    
   ],
 })
 
