@@ -77,10 +77,6 @@ describe('AppComponent and Router', () => {
       ],
       providers: [ValidateService, AuthService, AuthGuard,{provide: APP_BASE_HREF, useValue : '/' }]
     });
-
-
-
-
     router = TestBed.get(Router); 
     location = TestBed.get(Location); 
 
