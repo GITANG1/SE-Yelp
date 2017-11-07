@@ -103,8 +103,9 @@ SearchByTags(TagName,area)
            
             console.log( this.data.results[0].address_components[2].long_name);
 
-            this.cityname=this.data.results[0].address_components[2].long_name;
+            this.cityname=this.data.results[0].address_components[2].long_name.toLowerCase();;
           });
+
     }, geo_error, geo_options);
 
     this._http.get('http://localhost:3000/restaurants/list').subscribe(res => {
