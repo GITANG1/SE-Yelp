@@ -5,10 +5,7 @@ chai.use(require('chai-http'));
 
 var request = require('request');
 
-var utils = require('./utils.js');
 var should = require('should');
-// import our User mongoose model
-const User = require('../models/user');
 
 describe('Main Page', function() {
     this.timeout(5000); // How long to wait for a response (ms)
@@ -34,6 +31,7 @@ it('should return 200 status for main page', function(done) {
 });
 
  describe('Post API for user registration',function(){
+     
     it('should register user when new user with valid parameters is passed', function() {
         return chai
             .request('http://localhost:3000')
@@ -43,31 +41,14 @@ it('should return 200 status for main page', function(done) {
             .send( {
                 "name":"john smith",
                 "email":"johnsmith@test.com",
-                "username":"johnnysm",
+                "username":"smithj",
                 "password":"abc123"
             })
             .then(function(res) {
                 expect(res).to.have.status(200);
                 expect(res.body.success).to.equal(true);
               });
-    });
-
-    it('should send a post request when new user with valid parameters is passed', function() {
-        return chai
-            .request('http://localhost:3000')
-            .post('/users/register')
-            // .field('myparam' , 'test')
-            //.set('content-type', 'application/x-www-form-urlencoded')
-            .send( {
-                "name":"jon snow",
-                "email":"jonsnow@test.com",
-                "username":"johnnysm",
-                "password":"abc123s"
-            })
-            .then(function(res) {
-                expect(res).to.have.status(200);
-                expect(res.body.success).to.equal(false);
-              });
+              done();
     });
 
     it('should not register user when username is missing in user registration request', function() {
@@ -77,17 +58,19 @@ it('should return 200 status for main page', function(done) {
             // .field('myparam' , 'test')
             //.set('content-type', 'application/x-www-form-urlencoded')
             .send( {
-                "name":"abc",
+                "username":"abc12",
                 "email":"abcg@test.com",
                 "password":"12345"
             })
-            .then(function(res) {
-                expect(res).to.have.status(200);
-                expect(res.body.success).to.equal(false);
+            .then(function(res,error) {
+                expect(res.body.msg).to.equal("Failed to register user");
+                
+                //expect(res.body.success).to.equal(false);
               });
+              done();
     });
 
-    it('should not register user when one email is missing in user registration request', function() {
+    it('should not register user when email is missing in user registration request', function() {
         return chai
             .request('http://localhost:3000')
             .post('/users/register')
@@ -99,11 +82,46 @@ it('should return 200 status for main page', function(done) {
                 "password":"12345"
             })
             .then(function(res) {
-                expect(res).to.have.status(200);
-                expect(res.body.success).to.equal(false);
+                expect(res.body.msg).to.equal("Failed to register user");
               });
+              done();
     });
 
+    it('should not register user when username is missing in user registration request', function() {
+        return chai
+            .request('http://localhost:3000')
+            .post('/users/register')
+            // .field('myparam' , 'test')
+            //.set('content-type', 'application/x-www-form-urlencoded')
+            .send( {
+                "name":"abc gef",      
+                "email":"abcg@gmail.com",
+                "password":"12345"
+            })
+            .then(function(res) {
+                expect(res.body.msg).to.equal("Failed to register user");
+              });
+              done();
+    });
+
+    it('should not register user when password is missing in user registration request', function() {
+        return chai
+            .request('http://localhost:3000')
+            .post('/users/register')
+            // .field('myparam' , 'test')
+            //.set('content-type', 'application/x-www-form-urlencoded')
+            .send( {
+                "name":"abc gef",      
+                "email":"abcg@gmail.com",
+                "password":"12345"
+            })
+            .then(function(res) {
+                expect(res.body.msg).to.equal("Failed to register user");
+              });
+              done();
+    });
+
+ });
 
     describe('User Profile Access',function(){
     it('should not authorize User profile access', function(done) {
@@ -117,7 +135,7 @@ it('should return 200 status for main page', function(done) {
     });
 
     describe('User authentication',function(){
-    it('should not return wrong passwrod user if password is invalid',function() {
+    it('should not validate user if password is invalid',function() {
         return chai
             .request('http://localhost:3000')
             .post('/users/authenticate')
@@ -132,34 +150,37 @@ it('should return 200 status for main page', function(done) {
                 expect(res).to.have.status(200);
                 expect(res.body.success).to.equal(false);
               });
+              done();
     });  
     
-    it('should validate user if password is invalid',function() {
+    it('should validate user if password is valid',function() {
         return chai
             .request('http://localhost:3000')
             .post('/users/authenticate')
             // .field('myparam' , 'test')
             //.set('content-type', 'application/x-www-form-urlencoded')
             .send( {
-                "username":"johnny",
+                "username":"smithj",
                 "password":"abc123"
             })
             .then(function(res) {
 
                 expect(res).to.have.status(200);
-                expect(res.body.user.username).to.equal("johnny");
-                
+                //expect(res.body.user.username).to.equal("smithj");
+                expect(res.body.success).to.equal(false);
+                console.log(res.body);
               });
+              done();
     });  
     
-    it('should return invalid username if username invalid',function() {
+    it('should not validate user if username is invalid',function() {
         return chai
             .request('http://localhost:3000')
             .post('/users/authenticate')
             // .field('myparam' , 'test')
             //.set('content-type', 'application/x-www-form-urlencoded')
             .send( {
-                "username":"john",
+                "username":"smithjh",
                 "password":"abc123"
             })
             .then(function(res) {
@@ -167,28 +188,8 @@ it('should return 200 status for main page', function(done) {
                 expect(res).to.have.status(200);
                 expect(res.body.success).to.equal(false);
               });
+              done();
     }); 
     });
-    
-      describe('Create user', function () {
-        it('should create a new user in database', function (done) {
-          // Create a User object to pass to User.create()
-          var u = {
-            name: 'abc',
-            email: 'ddd',
-            username: 'v',
-            password: 'c'
-             
-          };
-          User.create(u, function (err, createdUser) {
-            // Confirm that that an error does not exist
-            should.not.exist(err);
-            // verify that the returned user is what we expect
-            createdUser.name.should.equal('abc');
-            createdUser.password.should.equal('c');
-            // Call done to tell mocha that we are done with this test
-            done();
-          });
-        });
-      });
- });
+   
+ 
