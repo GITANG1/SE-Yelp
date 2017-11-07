@@ -46,10 +46,10 @@ var mapping = {
     },
     "users":{
       "properties":{
-        "user_name":{
+        "name":{
           type:"text"
         },
-        "user_email":{
+        "email":{
           type:"keyword"
         },
         "username":{
@@ -74,6 +74,7 @@ request({ url: "http://localhost:9200/gulp", method: 'DELETE' }, function (error
       else {
         console.log('error' + error);
       }
+      
       //if succesfully deleted, add new mapping
       request({ url: "http://localhost:9200/gulp", method: 'PUT', json: mapping }, function (error, response, body) {
         if (!error) {
@@ -86,4 +87,4 @@ request({ url: "http://localhost:9200/gulp", method: 'DELETE' }, function (error
         }
       });
     });
-    
+

@@ -11,13 +11,13 @@ const client = new elasticsearch.Client({
 });
 
 router.post('/register', (req, res, next) => {
-
+    console.log(config.DB);
     console.log("register user");
     if(!(req.body.name && req.body.email && req.body.username && req.body.password))
-        return res.send('400', { error: 'User details expected. Expected : name, email, username, password' });
+        return res.json({ msg:'Failed to register user'});
     
     if(typeof req.body.name != "string" || typeof req.body.email!="string" || typeof req.body.username!="string" || typeof req.body.password!="string")
-        return res.send('400', { error: 'User details expected. Expected : name, email, username, password' });
+        return res.json({ msg:'Failed to register user'});
     
     var newUser = {
         "name": req.body.name,
@@ -104,8 +104,9 @@ function getUserByUsername(username, callback) {
             }
         }
     };
+    
     client.search({
-        index: 'gulp',
+        index: config.DB,
         type: 'users',
         body: query
     }, function(error, response){
@@ -122,7 +123,7 @@ function addUser(newUser, callback) {
         }
     };
     client.search({
-        index: 'gulp',
+        index: config.DB,
         type: 'users',
         body: query
     }, (error, response) => {
@@ -138,13 +139,14 @@ function addUser(newUser, callback) {
         }
         else {
             console.log('****In add User***');
+           
             bcrypt.genSalt(10, (err, salt) => {
                 bcrypt.hash(newUser.password, salt, (err, hash) => {
                     if (err) throw err;
                     newUser.password = hash;
                     console.log('****saving user***');
                     client.index({
-                        index: 'gulp',
+                        index: config.DB,
                         type: 'users',
                         body: newUser
                       }, callback);
