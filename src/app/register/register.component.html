@@ -1,48 +1,47 @@
 <mat-card class="jumbotron">
-    <mat-toolbar color="primary" layout="column" layout-align="center end">
-        <span style="margin:0 auto;">REGISTER</span>
-    </mat-toolbar>
+  <mat-toolbar color="primary" layout="column" layout-align="center end">
+    <span style="margin:0 auto;">REGISTER</span>
+  </mat-toolbar>
 
-    <div id="flashMessage" class="alert-danger">
-        <flash-messages></flash-messages>
-    </div>
+  <div id="flashMessage" class="alert-danger">
+    <flash-messages></flash-messages>
+  </div>
 
-    <div class="container">
-        <div class="col-sm-8 col-sm-offset-2">
-          <div class="col-md-6 col-md-offset-3">
-            <form name="form" (ngSubmit)="f.form.valid" #f="ngForm" novalidate>
-                <mat-card-content>
-              <div>
-                <mat-form-field>
-                  <input matInput placeholder="Name" name="name" [(ngModel)]="name" required>
-                </mat-form-field>
-              </div>
+  <div class="container">
+    <div class="col-sm-8 col-sm-offset-2">
+      <div class="col-md-6 col-md-offset-3">
+        <form name="form" (ngSubmit)="f.form.valid" #f="ngForm" novalidate>
+          <mat-card-content>
+            <div>
+              <mat-form-field>
+                <input matInput placeholder="Name" name="name" [(ngModel)]="name" required>
+              </mat-form-field>
+            </div>
 
-              <div>
-                <mat-form-field>
-                  <input matInput placeholder="Username" name="username" [(ngModel)]="username" required>
-                </mat-form-field>
-              </div>
+            <div>
+              <mat-form-field>
+                <input matInput placeholder="Username" name="username" [(ngModel)]="username" required>
+              </mat-form-field>
+            </div>
 
-              <div>
+            <div>
               <mat-form-field>
                 <input matInput placeholder="Email" name="email" type="email" [(ngModel)]="email" required>
               </mat-form-field>
             </div>
 
-              <div>
-                <mat-form-field>
-                    <input matInput type="password" placeholder="Password" [(ngModel)]="password" name="password" required>
-                </mat-form-field>
-              </div>
-            </mat-card-content>
-            
-          </form>
-        </div>
+            <div>
+              <mat-form-field>
+                <input matInput type="password" placeholder="Password" [(ngModel)]="password" name="password" required>
+              </mat-form-field>
+            </div>
+          </mat-card-content>
+
+        </form>
       </div>
     </div>
-    <div style="display:flex;justify-content:space-around;">
-        <button mat-raised-button color="accent" (click)="onRegisterSubmit()">REGISTER</button>
-    </div>
+  </div>
+  <div style="display:flex;justify-content:space-around;">
+    <button mat-raised-button id="regBtn" color="accent" (click)="onRegisterSubmit()">REGISTER</button>
+  </div>
 </mat-card>
-

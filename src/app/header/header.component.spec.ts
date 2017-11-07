@@ -6,7 +6,7 @@ import { HeaderComponent } from './header.component';
 import { MatToolbarModule, MatButtonModule, } from '@angular/material';
 import { HttpModule } from '@angular/http';
 import { AuthService } from '../services/auth.service';
-import { FlashMessagesModule } from 'angular2-flash-messages';
+import { FlashMessagesModule } from 'angular2-flash-messages/module';
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;

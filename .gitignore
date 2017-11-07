@@ -8,6 +8,16 @@
 # dependencies
 node_modules/
 
+# Hidden Folders
+.*
+
+# Coverage Folders
+coverage/
+backend-test/coverage/
+
+# Package-lock
+package-lock.json
+
 data/
 
 # IDEs and editors
@@ -43,3 +53,5 @@ yarn-error.log
 # System Files
 .DS_Store
 Thumbs.db
+package-lock.json
+package-lock.json
