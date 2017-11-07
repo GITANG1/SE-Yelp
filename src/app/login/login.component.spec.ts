@@ -7,8 +7,17 @@ import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { FlashMessagesModule } from 'angular2-flash-messages';
 import { RouterTestingModule } from '@angular/router/testing';
+import {
+  MatToolbarModule,
+  MatButtonModule,
+  MatCardModule,
+  MatFormFieldModule,
+  MatInputModule
+} from '@angular/material';
 import { DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 describe('LoginComponent', () => {
 
@@ -27,11 +36,17 @@ describe('LoginComponent', () => {
     TestBed.configureTestingModule({
       declarations: [LoginComponent],
       imports: [
+        BrowserAnimationsModule,
         HttpModule,
         FormsModule,
         FlashMessagesModule,
         ReactiveFormsModule,
         RouterTestingModule,
+        MatToolbarModule,
+        MatButtonModule,
+        MatCardModule,
+        MatFormFieldModule,
+        MatInputModule
       ],
       providers: [AuthService],
     })

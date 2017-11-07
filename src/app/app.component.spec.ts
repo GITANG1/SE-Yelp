@@ -1,8 +1,9 @@
-import { TestBed, async } from '@angular/core/testing';
+import { TestBed, async, fakeAsync, tick} from '@angular/core/testing';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {Location} from "@angular/common";
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { AppRoutingModule } from './app-routing/app-routing.module';
 import {
@@ -11,7 +12,8 @@ import {
   MatFormFieldModule,
   MatCardModule,
   MatButtonModule,
-  MatSelectModule
+  MatSelectModule,
+  MatInputModule
 } from '@angular/material';
 import { HttpModule } from '@angular/http';
 import { RouterModule, Routes } from '@angular/router';
@@ -30,12 +32,19 @@ import { RegisterComponent } from './register/register.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AuthGuard } from './guards/auth.guard';
 import {APP_BASE_HREF} from '@angular/common';
+import {Router} from "@angular/router";
+import {RouterTestingModule} from "@angular/router/testing";
+import {routes} from './app.module';
 
 
+describe('AppComponent and Router', () => {
+
+  var location: Location;
+  var router: Router;
+  var fixture;
 
 
-describe('AppComponent', () => {
-  beforeEach(async(() => {
+  beforeEach(fakeAsync(() => {
     TestBed.configureTestingModule({
       declarations: [
         AppComponent,
@@ -45,8 +54,10 @@ describe('AppComponent', () => {
         HomeComponent,
         LoginComponent,
         RegisterComponent,
-        ProfileComponent      ],
+        ProfileComponent,
+      ],
       imports: [
+        RouterTestingModule.withRoutes(routes),
         BrowserModule,
         BrowserAnimationsModule,
         FormsModule,
@@ -60,16 +71,41 @@ describe('AppComponent', () => {
         MatCardModule,
         MatSelectModule,
         MatButtonModule,
+        MatInputModule,
         FlashMessagesModule,
         RouterModule
       ],
       providers: [ValidateService, AuthService, AuthGuard,{provide: APP_BASE_HREF, useValue : '/' }]
-    }).compileComponents();
+    });
+    router = TestBed.get(Router); 
+    location = TestBed.get(Location); 
+
+    fixture = TestBed.createComponent(AppComponent);
+   // router.initialNavigation();
   }));
 
-  it('should create the app', async(() => {
+
+  it('should create the app', fakeAsync(() => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
     expect(app).toBeTruthy();
   }));
+
+      it('navigates to "home" redirects you to /home', fakeAsync(() => { 
+       router.navigateByUrl('');
+        tick(50); 
+        expect(location.path()).toBe('/home'); 
+      }));
+
+      it('navigates to "login" redirects you to /login', fakeAsync(() => { 
+        router.navigate(['login']); 
+        tick(50); 
+        expect(location.path()).toBe('/login'); 
+      }));
+
+      it('navigates to "register" redirects you to /register', fakeAsync(() => { 
+        router.navigate(['register']); 
+        tick(50); 
+        expect(location.path()).toBe('/register'); 
+      }));
 });
