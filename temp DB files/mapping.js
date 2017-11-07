@@ -63,8 +63,6 @@ var mapping = {
   }
 };
 
-
-
 request({ url: "http://localhost:9200/gulp", method: 'DELETE' }, function (error, response, body) {
     console.log("in delete phase");
     
