@@ -28,6 +28,8 @@ var client = new elasticsearch.Client({
   log: 'trace'
 });
 
+const config = require('../config/database');
+
 restaurantRouter.route('/')
 .get(function (req, res) {
     res.status(200)
@@ -194,7 +196,7 @@ searchByTagRouter.route('/')
 
 function search(query, point, res) {
     client.search({
-        index: 'gulp',
+        index: config.DB,
         type: 'restaurants',
         body: query
     }, function (error, response) {

@@ -5,7 +5,6 @@ chai.use(require('chai-http'));
 
 var request = require('request');
 
-//var utils = require('./utils.js');
 var should = require('should');
 
 describe('Main Page', function() {

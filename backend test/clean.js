@@ -36,8 +36,38 @@ var usermapping = {
       }
     }
   };
+
+  var restaurantmapping = {
+    "mappings": {
+      "restaurants": {
+        "properties": {
+          "restaurant_name": {
+            "type": "text",
+          },
+          "city": {
+            "type": "keyword"
+          },
+          "menu": {
+            "type": "text"
+          },
+          "location": {
+            "type": "geo_point"
+          },
+          "tags": {
+            "type": "keyword"
+          },
+          "imageUrl": {
+            "type": "keyword"
+          },
+          "rating": {
+            "type": "float"
+          }
+        }
+      }
+    }
+  };
   
-    request({ url: "http://localhost:9200/gulpusertest", method: 'DELETE' }, function (error, response, body) {
+    request({ url: "http://localhost:9200/gulptest", method: 'DELETE' }, function (error, response, body) {
       console.log("in delete phase");
       
         if (!error) {
@@ -50,7 +80,7 @@ var usermapping = {
         }
         
         //if succesfully deleted, add new mapping
-        request({ url: "http://localhost:9200/gulpusertest", method: 'PUT', json: usermapping }, function (error, response, body) {
+        request({ url: "http://localhost:9200/gulptest", method: 'PUT', json: usermapping }, function (error, response, body) {
           if (!error) {
             console.log("-------------------------");
             console.log(body);
@@ -61,3 +91,28 @@ var usermapping = {
           }
         });
       });
+
+      request({ url: "http://localhost:9200/gulptest", method: 'DELETE' }, function (error, response, body) {
+        console.log("in delete phase");
+        
+          if (!error) {
+            console.log("-------------------------");
+            console.log(body);
+            console.log('Previous index gulp test was deleted');
+          }
+          else {
+            console.log('error' + error);
+          }
+          
+          //if succesfully deleted, add new mapping
+          request({ url: "http://localhost:9200/gulptest", method: 'PUT', json: restaurantmapping }, function (error, response, body) {
+            if (!error) {
+              console.log("-------------------------");
+              console.log(body);
+              console.log('new Index gulp test with new mapping added');
+            }
+            else {
+              console.log('error: ' + error);
+            }
+          });
+        });
