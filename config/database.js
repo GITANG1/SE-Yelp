@@ -1,4 +1,4 @@
 module.exports = {
-  database: 'mongodb://localhost:27017/Gulp',
+  DB: 'gulpusertest',
   secret: 'yoursecret'
 }
