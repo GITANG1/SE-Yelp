@@ -26,6 +26,7 @@ export class HomeComponent implements OnInit {
 
   title = 'this is homeComponent';
 
+  cityname="";
 
   restaurant: FormControl = new FormControl();
 
@@ -79,9 +80,32 @@ SearchByTags(TagName,area)
 
   }
 
-  ngOnInit() {
-    // this.restvalue = "gitang";
-    // this.areavalue = "hello";
+  ngOnInit() {  
+    function geo_error() {
+      alert("Sorry, no position available.");
+    }
+    
+    var geo_options = {
+      enableHighAccuracy: true, 
+      maximumAge        : 30000, 
+      timeout           : 27000
+    };
+    
+    var wpid = navigator.geolocation.watchPosition((position)=>{
+     console.log(position.coords.latitude);
+     console.log(position.coords.longitude);
+    var url = "http://maps.googleapis.com/maps/api/geocode/json?latlng="+position.coords.latitude+","+position.coords.longitude+"&sensor=false"
+    console.log(url);
+      
+    this._http.get(url).subscribe(res => {
+      
+            this.data = res.json();
+           
+            console.log( this.data.results[0].address_components[2].long_name);
+
+            this.cityname=this.data.results[0].address_components[2].long_name;
+          });
+    }, geo_error, geo_options);
 
     this._http.get('http://localhost:3000/restaurants/list').subscribe(res => {
 
