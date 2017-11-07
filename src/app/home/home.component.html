@@ -12,7 +12,7 @@
 
   
       <input type="text"  #restaurantbox="ngForm" style="height:2.5em;width:25em;"  name="rest"  placeholder="hungry? what do you wanna eat" aria-label="Restaurant Name"  [formControl]="restaurant" [matAutocomplete]="restau">
-      <input type="text"  #locationbox="ngForm"   style="height:2.5em;width:15em;" name="area"  placeholder="where?" aria-label="Location Name" [formControl]="location" [matAutocomplete]="loc">
+      <input type="text"  #locationbox="ngForm"  [(ngModel)]="cityname" style="height:2.5em;width:15em;" name="area"  placeholder="where?" aria-label="Location Name" [formControl]="location" [matAutocomplete]="loc">
    
       <mat-autocomplete #restau="matAutocomplete">
         <mat-option *ngFor="let option of  filteredRestaurants | async" [value]="option">
