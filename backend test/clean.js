@@ -79,7 +79,7 @@ var usermapping = {
           console.log('error' + error);
         }
         
-        //if succesfully deleted, add new mapping
+        
         request({ url: "http://localhost:9200/gulptest", method: 'PUT', json: usermapping }, function (error, response, body) {
           if (!error) {
             console.log("-------------------------");
@@ -104,7 +104,7 @@ var usermapping = {
             console.log('error' + error);
           }
           
-          //if succesfully deleted, add new mapping
+          
           request({ url: "http://localhost:9200/gulptest", method: 'PUT', json: restaurantmapping }, function (error, response, body) {
             if (!error) {
               console.log("-------------------------");
