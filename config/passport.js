@@ -38,7 +38,7 @@ function getUserbyId(id, callback) {
   };
 
   client.search({
-    index: 'gulp',
+    index: config.DB,
     type: 'restaurants',
     body: query
   }, function (error, response) {
