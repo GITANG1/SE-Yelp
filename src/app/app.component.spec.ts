@@ -91,19 +91,19 @@ describe('AppComponent and Router', () => {
     expect(app).toBeTruthy();
   }));
 
-      it('navigate to "home" redirects you to /home', fakeAsync(() => { 
+      it('navigates to "home" redirects you to /home', fakeAsync(() => { 
        router.navigateByUrl('');
         tick(50); 
         expect(location.path()).toBe('/home'); 
       }));
 
-      it('navigate to "login" redirects you to /login', fakeAsync(() => { 
+      it('navigates to "login" redirects you to /login', fakeAsync(() => { 
         router.navigate(['login']); 
         tick(50); 
         expect(location.path()).toBe('/login'); 
       }));
 
-      it('navigate to "register" redirects you to /register', fakeAsync(() => { 
+      it('navigates to "register" redirects you to /register', fakeAsync(() => { 
         router.navigate(['register']); 
         tick(50); 
         expect(location.path()).toBe('/register'); 
