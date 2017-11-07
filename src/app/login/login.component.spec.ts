@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import { HttpModule } from '@angular/http';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
-import { FlashMessagesModule } from 'angular2-flash-messages';
+import { FlashMessagesModule } from 'angular2-flash-messages/module';
 import { RouterTestingModule } from '@angular/router/testing';
 import {
   MatToolbarModule,

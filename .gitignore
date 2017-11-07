@@ -8,6 +8,16 @@
 # dependencies
 node_modules/
 
+# Hidden Folders
+.*
+
+# Coverage Folders
+coverage/
+backend-test/coverage/
+
+# Package-lock
+package-lock.json
+
 data/
 
 # IDEs and editors

@@ -16,11 +16,11 @@ import {
   MatInputModule
 } from '@angular/material';
 
-import { 
-  Http, 
-  Response, 
+import {
+  Http,
+  Response,
   Headers,
-  HttpModule 
+  HttpModule
 } from '@angular/http';
 
 import { RouterModule, Routes } from '@angular/router';
@@ -35,7 +35,7 @@ import { HomeComponent } from './home/home.component';
 
 import 'hammerjs';
 
-import { FlashMessagesModule } from 'angular2-flash-messages';
+import { FlashMessagesModule } from 'angular2-flash-messages/module';
 import { AuthService } from './services/auth.service';
 import { ValidateService } from './services/validate.service';
 import { LoginComponent } from './login/login.component';
@@ -45,10 +45,10 @@ import { AuthGuard } from './guards/auth.guard';
 
 
 export const routes: Routes = [
-  { path: '', component: HomeComponent},
-  { path: 'register', component: RegisterComponent},
-  { path: 'login', component: LoginComponent},
-  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]}
+  { path: '', component: HomeComponent },
+  { path: 'register', component: RegisterComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({
@@ -80,7 +80,7 @@ export const routes: Routes = [
     MatInputModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [ ValidateService, AuthService, AuthGuard],
+  providers: [ValidateService, AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

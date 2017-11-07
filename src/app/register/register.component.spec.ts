@@ -2,13 +2,14 @@ import {
   async,
   ComponentFixture,
   ComponentFixtureAutoDetect,
-  TestBed } from '@angular/core/testing';
+  TestBed
+} from '@angular/core/testing';
 import { RegisterComponent } from './register.component';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 import { ValidateService } from '../services/validate.service';
 import { AuthService } from '../services/auth.service';
-import { FlashMessagesModule } from 'angular2-flash-messages';
+import { FlashMessagesModule } from 'angular2-flash-messages/module';
 import { RouterTestingModule } from '@angular/router/testing';
 import {
   MatToolbarModule,
@@ -19,7 +20,7 @@ import {
 } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
-import {Observable} from 'rxjs/Observable';
+import { Observable } from 'rxjs/Observable';
 import { Http, Response, Headers, HttpModule } from '@angular/http';
 
 describe('RegisterComponent', () => {
@@ -39,7 +40,7 @@ describe('RegisterComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ RegisterComponent ],
+      declarations: [RegisterComponent],
       imports: [
         BrowserAnimationsModule,
         HttpModule,
@@ -58,7 +59,7 @@ describe('RegisterComponent', () => {
         ValidateService, AuthService
       ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
 
@@ -86,19 +87,19 @@ describe('RegisterComponent', () => {
 
   describe('On page load', () => {
 
-    it('should display a blank name input field' , () => {
+    it('should display a blank name input field', () => {
       expect(name_HtmlElement.textContent).toEqual('');
     });
 
-    it('should display a blank username input field' , () => {
+    it('should display a blank username input field', () => {
       expect(username_HtmlElement.textContent).toEqual('');
     });
 
-    it('should display a blank email input field' , () => {
+    it('should display a blank email input field', () => {
       expect(email_HtmlElement.textContent).toEqual('');
     });
 
-    it('should display a blank password input field' , () => {
+    it('should display a blank password input field', () => {
       expect(password_HtmlElement.textContent).toEqual('');
     });
   });
@@ -106,7 +107,7 @@ describe('RegisterComponent', () => {
   describe('when the user submits the registration form', () => {
 
     beforeEach(() => {
-      regSpy  = spyOn(component, 'onRegisterSubmit');
+      regSpy = spyOn(component, 'onRegisterSubmit');
       const reg_button = fixture.debugElement.nativeElement.querySelector('button');
       reg_button.click();
     });
