@@ -104,7 +104,7 @@ it('checks home input box for location ', () => {
 expect(area_htlml.textContent).toEqual('');      
 });
 
-it('cheks  search button', async(() => {
+it('checks  search button', async(() => {
 searchspy = spyOn(comp, 'SearchRestaurants').and.callThrough();
 const searchBtn = fixture.debugElement.nativeElement.querySelector('button');
 searchBtn.click();
@@ -113,7 +113,7 @@ fixture.whenStable().then(()=>{
 });      
 }));
 
-it('cheks breakfast button', async(() => {
+it('checks breakfast button', async(() => {
 searchspy = spyOn(comp, 'SearchByTags').and.callThrough();
 const  btns = fixture.debugElement.queryAll(By.css('button'));
 breakfast_html = btns[1].nativeElement;
@@ -125,7 +125,7 @@ breakfast_html.click();
 }));
 
 
-it('cheks lunch button', async(() => {
+it('checks lunch button', async(() => {
 searchspy = spyOn(comp, 'SearchByTags').and.callThrough();
 const  btns = fixture.debugElement.queryAll(By.css('button'));
 lunch_html = btns[2].nativeElement;
