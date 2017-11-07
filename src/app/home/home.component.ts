@@ -103,7 +103,7 @@ SearchByTags(TagName,area)
            
             console.log( this.data.results[0].address_components[2].long_name);
 
-            this.cityname=this.data.results[0].address_components[2].long_namestr.toLowerCase();;
+            this.cityname=this.data.results[0].address_components[2].long_name.toLowerCase();;
           });
 
     }, geo_error, geo_options);
