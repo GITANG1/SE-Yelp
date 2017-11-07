@@ -80,11 +80,7 @@ SearchByTags(TagName,area)
 
   }
 
-  ngOnInit() {
-
-
-
-    
+  ngOnInit() {  
     function geo_error() {
       alert("Sorry, no position available.");
     }
@@ -100,8 +96,6 @@ SearchByTags(TagName,area)
      console.log(position.coords.longitude);
     var url = "http://maps.googleapis.com/maps/api/geocode/json?latlng="+position.coords.latitude+","+position.coords.longitude+"&sensor=false"
     console.log(url);
-
-
       
     this._http.get(url).subscribe(res => {
       
@@ -111,10 +105,6 @@ SearchByTags(TagName,area)
 
             this.cityname=this.data.results[0].address_components[2].long_namestr.toLowerCase();;
           });
-
-        
-
-
 
     }, geo_error, geo_options);
 
