@@ -10,26 +10,65 @@ var should = require('should');
 describe('search By Tag',function(){
 
     it('should return restaurant which contain breakfast menus and are located in gainesville', function() {
+        var tag = "breakfast";
+        var city = "gainesville";
         return chai
             .request('http://localhost:3000/restaurants')
             .post('/searchByTag')
             // .field('myparam' , 'test')
             //.set('content-type', 'application/x-www-form-urlencoded')
             .send( {
-                "tag":"breakfast",
-                "city":"gainesville",
+                "tag":tag,
+                "city":city,
             })
             .then(function(res) {
                 var i;
+                var prevRating = 1000;
                 for(i = 0; i < res.body.length; i = i + 1){
-                    expect(res.body[i]._source.city).to.equal("gainesville");
+                    expect(res.body[i]._source.city).to.equal(city);
                     var j;
                     var status = false;
                     for(j = 0; j < res.body[i]._source.tags.length; j++){
-                        if(res.body[i]._source.tags[j] == "breakfast")
+                        if(res.body[i]._source.tags[j] == tag)
                             status = true;
                     }
                     expect(status).to.equal(true);
+                    var rating = parseFloat(res.body[i]._source.rating)
+                    expect(rating).to.not.be.above(prevRating);
+                    prevRating = rating;
+                }
+
+              });
+              done();
+    });
+
+    it('should return restaurant which contain lunch menus sorted raating wise and are located in gainesville', function() {
+        var tag = "lunch";
+        var city = "gainesville";
+        return chai
+            .request('http://localhost:3000/restaurants')
+            .post('/searchByTag')
+            // .field('myparam' , 'test')
+            //.set('content-type', 'application/x-www-form-urlencoded')
+            .send( {
+                "tag":tag,
+                "city":city,
+            })
+            .then(function(res) {
+                var i;
+                var prevRating = 1000;
+                for(i = 0; i < res.body.length; i = i + 1){
+                    expect(res.body[i]._source.city).to.equal(city);
+                    var j;
+                    var status = false;
+                    for(j = 0; j < res.body[i]._source.tags.length; j++){
+                        if(res.body[i]._source.tags[j] == tag)
+                            status = true;
+                    }
+                    expect(status).to.equal(true);
+                    var rating = parseFloat(res.body[i]._source.rating)
+                    expect(rating).to.not.be.above(prevRating);
+                    prevRating = rating;
                 }
 
               });
@@ -37,26 +76,32 @@ describe('search By Tag',function(){
     });
 
     it('should return restaurant which satisfy nightlife constraint and are located in gainesville', function() {
+        var tag = "nightlife";
+        var city = "gainesville";
         return chai
             .request('http://localhost:3000/restaurants')
             .post('/searchByTag')
             // .field('myparam' , 'test')
             //.set('content-type', 'application/x-www-form-urlencoded')
             .send( {
-                "tag":"nightlife",
-                "city":"gainesville",
+                "tag":tag,
+                "city":city,
             })
             .then(function(res) {
                 var i;
+                var prevRating = 1000;
                 for(i = 0; i < res.body.length; i = i + 1){
-                    expect(res.body[i]._source.city).to.equal("gainesville");
+                    expect(res.body[i]._source.city).to.equal(city);
                     var j;
                     var status = false;
                     for(j = 0; j < res.body[i]._source.tags.length; j++){
-                        if(res.body[i]._source.tags[j] == "nightlife")
+                        if(res.body[i]._source.tags[j] == tag)
                             status = true;
                     }
                     expect(status).to.equal(true);
+                    var rating = parseFloat(res.body[i]._source.rating)
+                    expect(rating).to.not.be.above(prevRating);
+                    prevRating = rating;
                 }
 
               });
@@ -65,7 +110,8 @@ describe('search By Tag',function(){
 });
 describe('Search Router test',function(){
     it('should return restaurants whose name or menu partialy/completely matches the search query blaze pizza', function() {
-        var searchString = "blaze pizza"
+        var searchString = "blaze pizza";
+        var city = "gainesville";
         return chai
             .request('http://localhost:3000/restaurants')
             .post('/search')
@@ -73,13 +119,13 @@ describe('Search Router test',function(){
             //.set('content-type', 'application/x-www-form-urlencoded')
             .send( {
                 "search":searchString,
-                "city":"gainesville",
+                "city":city,
             })
             .then(function(res) {
                 var i;
                 var status = false;
                 for(i = 0; i < res.body.length; i = i + 1){
-                    expect(res.body[i]._source.city).to.equal("gainesville");
+                    expect(res.body[i]._source.city).to.equal(city);
                     var j;
                     status = testRestaurantName(res.body[i]._source,searchString);
                     if(status != true){
@@ -96,7 +142,8 @@ describe('Search Router test',function(){
     });
 
     it('should return restaurants whose name or menu partialy/completely matches the search query pizza', function() {
-        var searchString = "pizza"
+        var searchString = "pizza";
+        var city = "gainesville";
         return chai
             .request('http://localhost:3000/restaurants')
             .post('/search')
@@ -104,13 +151,13 @@ describe('Search Router test',function(){
             //.set('content-type', 'application/x-www-form-urlencoded')
             .send( {
                 "search":searchString,
-                "city":"gainesville",
+                "city":city,
             })
             .then(function(res) {
                 var i;
                 var status = false;
                 for(i = 0; i < res.body.length; i = i + 1){
-                    expect(res.body[i]._source.city).to.equal("gainesville");
+                    expect(res.body[i]._source.city).to.equal(city);
                     var j;
                     status = testRestaurantName(res.body[i]._source,searchString);
                     if(status != true){
@@ -126,7 +173,8 @@ describe('Search Router test',function(){
     });
 
     it('should return restaurants whose name or menu partialy/completely matches the search query pizza house', function() {
-        var searchString = "pizza"
+        var searchString = "pizza";
+        var city = "gainesville";
         return chai
             .request('http://localhost:3000/restaurants')
             .post('/search')
@@ -134,13 +182,13 @@ describe('Search Router test',function(){
             //.set('content-type', 'application/x-www-form-urlencoded')
             .send( {
                 "search":searchString,
-                "city":"gainesville",
+                "city":city,
             })
             .then(function(res) {
                 var i;
                 var status = false;
                 for(i = 0; i < res.body.length; i = i + 1){
-                    expect(res.body[i]._source.city).to.equal("gainesville");
+                    expect(res.body[i]._source.city).to.equal(city);
                     var j;
                     status = testRestaurantName(res.body[i]._source,searchString);
                     if(status != true){
@@ -156,7 +204,8 @@ describe('Search Router test',function(){
     });
 
     it('should first return restaurants whose name partialy/completely matches and then the restaurants whose menu matches but not the name for search query blaze pizza', function() {
-        var searchString = "blaze pizza"
+        var searchString = "blaze pizza";
+        var city = "gainesville";
         return chai
             .request('http://localhost:3000/restaurants')
             .post('/search')
@@ -164,14 +213,14 @@ describe('Search Router test',function(){
             //.set('content-type', 'application/x-www-form-urlencoded')
             .send( {
                 "search":searchString,
-                "city":"gainesville",
+                "city":city,
             })
             .then(function(res) {
                 var i;
                 var status = false;
                 var isMenuStart = false;
                 for(i = 0; i < res.body.length; i = i + 1){
-                    expect(res.body[i]._source.city).to.equal("gainesville");
+                    expect(res.body[i]._source.city).to.equal(city);
                     var j;
                     if(!isMenuStart)
                     status = testRestaurantName(res.body[i]._source,searchString);
@@ -196,7 +245,8 @@ describe('Search Router test',function(){
     });
 
     it('should first return restaurants whose name partialy/completely matches and then the restaurants whose menu matches but not the name for search query pizza', function() {
-        var searchString = "pizza"
+        var searchString = "pizza";
+        var city = "gainesville";
         return chai
             .request('http://localhost:3000/restaurants')
             .post('/search')
@@ -204,14 +254,14 @@ describe('Search Router test',function(){
             //.set('content-type', 'application/x-www-form-urlencoded')
             .send( {
                 "search":searchString,
-                "city":"gainesville",
+                "city":city,
             })
             .then(function(res) {
                 var i;
                 var status = false;
                 var isMenuStart = false;
                 for(i = 0; i < res.body.length; i = i + 1){
-                    expect(res.body[i]._source.city).to.equal("gainesville");
+                    expect(res.body[i]._source.city).to.equal(city);
                     var j;
                     if(!isMenuStart)
                     status = testRestaurantName(res.body[i]._source,searchString);
