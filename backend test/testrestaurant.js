@@ -64,34 +64,206 @@ describe('search By Tag',function(){
     });
 });
 describe('Search Router test',function(){
-    it('should return restaurants whose name partialy/completely matches the search query', function() {
+    it('should return restaurants whose name or menu partialy/completely matches the search query blaze pizza', function() {
+        var searchString = "blaze pizza"
         return chai
             .request('http://localhost:3000/restaurants')
             .post('/search')
             // .field('myparam' , 'test')
             //.set('content-type', 'application/x-www-form-urlencoded')
             .send( {
-                "search":"blaze pizza",
+                "search":searchString,
                 "city":"gainesville",
             })
             .then(function(res) {
                 var i;
+                var status = false;
                 for(i = 0; i < res.body.length; i = i + 1){
                     expect(res.body[i]._source.city).to.equal("gainesville");
                     var j;
-                    testRestaurantName(res.body[i]._source,"pizza");
+                    status = testRestaurantName(res.body[i]._source,searchString);
+                    if(status != true){
+                        
+                        status = testRestaurantMenu(res.body[i]._source,searchString);
+                        expect(status).to.equal(true);
+                    }
+                    else
+                        expect(status).to.equal(true);    
                 }
 
               });
               done();
     });
 
+    it('should return restaurants whose name or menu partialy/completely matches the search query pizza', function() {
+        var searchString = "pizza"
+        return chai
+            .request('http://localhost:3000/restaurants')
+            .post('/search')
+            // .field('myparam' , 'test')
+            //.set('content-type', 'application/x-www-form-urlencoded')
+            .send( {
+                "search":searchString,
+                "city":"gainesville",
+            })
+            .then(function(res) {
+                var i;
+                var status = false;
+                for(i = 0; i < res.body.length; i = i + 1){
+                    expect(res.body[i]._source.city).to.equal("gainesville");
+                    var j;
+                    status = testRestaurantName(res.body[i]._source,searchString);
+                    if(status != true){
+                        status = testRestaurantMenu(res.body[i]._source,searchString);
+                        expect(status).to.equal(true);
+                    }
+                    else
+                        expect(status).to.equal(true);    
+                }
+
+              });
+              done();
+    });
+
+    it('should return restaurants whose name or menu partialy/completely matches the search query pizza house', function() {
+        var searchString = "pizza"
+        return chai
+            .request('http://localhost:3000/restaurants')
+            .post('/search')
+            // .field('myparam' , 'test')
+            //.set('content-type', 'application/x-www-form-urlencoded')
+            .send( {
+                "search":searchString,
+                "city":"gainesville",
+            })
+            .then(function(res) {
+                var i;
+                var status = false;
+                for(i = 0; i < res.body.length; i = i + 1){
+                    expect(res.body[i]._source.city).to.equal("gainesville");
+                    var j;
+                    status = testRestaurantName(res.body[i]._source,searchString);
+                    if(status != true){
+                        status = testRestaurantMenu(res.body[i]._source,searchString);
+                        expect(status).to.equal(true);
+                    }
+                    else
+                        expect(status).to.equal(true);    
+                }
+
+              });
+              done();
+    });
+
+    it('should first return restaurants whose name partialy/completely matches and then the restaurants whose menu matches but not the name for search query blaze pizza', function() {
+        var searchString = "blaze pizza"
+        return chai
+            .request('http://localhost:3000/restaurants')
+            .post('/search')
+            // .field('myparam' , 'test')
+            //.set('content-type', 'application/x-www-form-urlencoded')
+            .send( {
+                "search":searchString,
+                "city":"gainesville",
+            })
+            .then(function(res) {
+                var i;
+                var status = false;
+                var isMenuStart = false;
+                for(i = 0; i < res.body.length; i = i + 1){
+                    expect(res.body[i]._source.city).to.equal("gainesville");
+                    var j;
+                    if(!isMenuStart)
+                    status = testRestaurantName(res.body[i]._source,searchString);
+
+                    else{
+                        var tempStatus = testRestaurantName(res.body[i]._source,searchString);
+                        expect(tempStatus).to.equal(false);
+                    }
+
+                    if(status != true){
+                        status = testRestaurantMenu(res.body[i]._source,searchString);
+                        expect(status).to.equal(true);
+                        status = false;
+                        isMenuStart = true;
+                    }
+                    else
+                        expect(status).to.equal(true);    
+                }
+
+              });
+              done();
+    });
+
+    it('should first return restaurants whose name partialy/completely matches and then the restaurants whose menu matches but not the name for search query pizza', function() {
+        var searchString = "pizza"
+        return chai
+            .request('http://localhost:3000/restaurants')
+            .post('/search')
+            // .field('myparam' , 'test')
+            //.set('content-type', 'application/x-www-form-urlencoded')
+            .send( {
+                "search":searchString,
+                "city":"gainesville",
+            })
+            .then(function(res) {
+                var i;
+                var status = false;
+                var isMenuStart = false;
+                for(i = 0; i < res.body.length; i = i + 1){
+                    expect(res.body[i]._source.city).to.equal("gainesville");
+                    var j;
+                    if(!isMenuStart)
+                    status = testRestaurantName(res.body[i]._source,searchString);
+
+                    else{
+                        var tempStatus = testRestaurantName(res.body[i]._source,searchString);
+                        expect(tempStatus).to.equal(false);
+                    }
+
+                    if(status != true){
+                        status = testRestaurantMenu(res.body[i]._source,searchString);
+                        expect(status).to.equal(true);
+                        status = false;
+                        isMenuStart = true;
+                    }
+                    else
+                        expect(status).to.equal(true);    
+                }
+
+              });
+              done();
+    });
 
 });  
 
 function testRestaurantName(res,query){
     var queryA = query.split(" ");
-    expect(res.name.split(" ")).to.contain.members(queryA);
+    var targetA = res.name.toLowerCase();
+
+    //var status = false;
+    var i;
+    for(i = 0; i < queryA.length; i++){
+        if(targetA.indexOf(queryA[i]) > -1)
+           return true;
+    }
+    return false;
+}
+
+function testRestaurantMenu(res,query){
+    var queryA = query.split(" ");
+    var targetIntermediate = res.menu;
+    //var status = false;
+    var i,m;
+    for(m = 0; m < targetIntermediate.length; m++){
+        var targetA = targetIntermediate[m].toLowerCase();
+
+        for(i = 0; i < queryA.length; i++){
+            if(targetA.indexOf(queryA[i]) > -1)
+                return true;
+        }       
+    }
+    return false;
 }
 
 

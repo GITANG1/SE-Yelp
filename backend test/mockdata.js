@@ -61,10 +61,27 @@ bulkBody.push({
 bulkBody.push({
     name:"Burger King",
     city:"gainesville",
-    menu:["veggie burger", "chicken burger"],
+    menu:["veggie burger", "chicken burger", "cheese pizza"],
     location:"29.617976, -82.383637",
     tags: ["breakfast", "lunch", "dinner", "nightlife"],
     imageUrl:"img3",
+    rating:3.5
+});
+
+bulkBody.push({
+    index:{
+        _index:"gulptest",
+        _type:"restaurants",
+        _id:4
+    }
+});
+bulkBody.push({
+    name:"Pizza world",
+    city:"gainesville",
+    menu:["veggie delight", "chicken delight"],
+    location:"29.627976, -82.363637",
+    tags: ["breakfast", "lunch", "dinner", "nightlife"],
+    imageUrl:"img4",
     rating:3.5
 });
 
