@@ -203,7 +203,7 @@ describe('Search Router test',function(){
               done();
     });
 
-    it('should first return restaurants whose name partialy/completely matches and then the restaurants whose menu matches but not the name for search query blaze pizza', function() {
+    it('should first return restaurants whose name partialy/completely matches and then the restaurants whose menu matches but not the name, for search query blaze pizza', function() {
         var searchString = "blaze pizza";
         var city = "gainesville";
         return chai
@@ -244,7 +244,7 @@ describe('Search Router test',function(){
               done();
     });
 
-    it('should first return restaurants whose name partialy/completely matches and then the restaurants whose menu matches but not the name for search query pizza', function() {
+    it('should first return restaurants whose name partialy/completely matches and then the restaurants whose menu matches but not the name, for search query pizza', function() {
         var searchString = "pizza";
         var city = "gainesville";
         return chai
@@ -287,6 +287,49 @@ describe('Search Router test',function(){
 
 });  
 
+describe('Search by Location Router test',function(){
+    it('should first return restaurants whose name partialy/completely matches and then the restaurants whose menu matches but not the name and all the restaurants should be within 25km from the geo-location, for search query pizza', function() {
+        var searchString = "pizza";
+        var location = "29.617976, -82.383637";
+        return chai
+            .request('http://localhost:3000/restaurants')
+            .post('/searchByLocation')
+            // .field('myparam' , 'test')
+            //.set('content-type', 'application/x-www-form-urlencoded')
+            .send( {
+                "search":searchString,
+                "location":location,
+            })
+            .then(function(res) {
+                var i;
+                var status = false;
+                var isMenuStart = false;
+                for(i = 0; i < res.body.length; i = i + 1){
+                    expect(calculateDistance(res.body[i]._source.location,location)).to.not.be.above(25);
+                    var j;
+                    if(!isMenuStart)
+                    status = testRestaurantName(res.body[i]._source,searchString);
+
+                    else{
+                        var tempStatus = testRestaurantName(res.body[i]._source,searchString);
+                        expect(tempStatus).to.equal(false);
+                    }
+
+                    if(status != true){
+                        status = testRestaurantMenu(res.body[i]._source,searchString);
+                        expect(status).to.equal(true);
+                        status = false;
+                        isMenuStart = true;
+                    }
+                    else
+                        expect(status).to.equal(true);    
+                }
+
+              });
+              done();
+    });
+});
+
 function testRestaurantName(res,query){
     var queryA = query.split(" ");
     var targetA = res.name.toLowerCase();
@@ -315,5 +358,37 @@ function testRestaurantMenu(res,query){
     }
     return false;
 }
+
+function calculateDistance(a,b){
+    var ss1 = a.split(",");
+    var lat1 = parseFloat(ss1[0]);
+    var lon1 = parseFloat(ss1[1]);
+
+    var ss2 = b.split(",");
+    var lat2 = parseFloat(ss2[0]);
+    var lon2 = parseFloat(ss2[1]);
+ 
+    return getDistanceFromLatLonIn(lat1,lon1,lat2,lon2);
+}
+
+function getDistanceFromLatLonIn(lat1,lon1,lat2,lon2) {
+    var R = 6371; // Radius of the earth in km
+    var dLat = deg2rad(lat2-lat1);  // deg2rad below
+    var dLon = deg2rad(lon2-lon1); 
+    var a = 
+      Math.sin(dLat/2) * Math.sin(dLat/2) +
+      Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * 
+      Math.sin(dLon/2) * Math.sin(dLon/2)
+      ; 
+    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+    var d = R * c; // Distance in km
+    
+    return d;
+  }
+  
+  function deg2rad(deg) {
+    return deg * (Math.PI/180)
+  }
+  
 
 
