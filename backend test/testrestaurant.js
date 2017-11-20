@@ -7,16 +7,14 @@ var request = require('request');
 
 var should = require('should');
 
-describe('search By Tag',function(){
+describe('Search By Tag Router test',function(){
 
-    it('should return a list of restaurants which contain breakfast menus, are located in gainesville and are sorted in descending order according to rating', function() {
+    it('should return a list of restaurants which contain breakfast menus, are located in gainesville and are sorted rating wise in descending order', function() {
         var tag = "breakfast";
         var city = "gainesville";
         return chai
             .request('http://localhost:3000/restaurants')
             .post('/searchByTag')
-            // .field('myparam' , 'test')
-            //.set('content-type', 'application/x-www-form-urlencoded')
             .send( {
                 "tag":tag,
                 "city":city,
@@ -42,14 +40,12 @@ describe('search By Tag',function(){
               done();
     });
 
-    it('should return restaurant which contain lunch menus sorted raating wise and are located in gainesville', function() {
+    it('should return a list of restaurants which contain lunch menus,are located in gainesville and are sorted rating wise in descending order', function() {
         var tag = "lunch";
         var city = "gainesville";
         return chai
             .request('http://localhost:3000/restaurants')
             .post('/searchByTag')
-            // .field('myparam' , 'test')
-            //.set('content-type', 'application/x-www-form-urlencoded')
             .send( {
                 "tag":tag,
                 "city":city,
@@ -75,14 +71,12 @@ describe('search By Tag',function(){
               done();
     });
 
-    it('should return restaurant which satisfy nightlife constraint and are located in gainesville', function() {
+    it('should return a list of restaurants which have "nightlife" tag,are located in gainesville and are sorted rating wise in descending order', function() {
         var tag = "nightlife";
         var city = "gainesville";
         return chai
             .request('http://localhost:3000/restaurants')
             .post('/searchByTag')
-            // .field('myparam' , 'test')
-            //.set('content-type', 'application/x-www-form-urlencoded')
             .send( {
                 "tag":tag,
                 "city":city,
@@ -115,8 +109,6 @@ describe('Search Router test',function(){
         return chai
             .request('http://localhost:3000/restaurants')
             .post('/search')
-            // .field('myparam' , 'test')
-            //.set('content-type', 'application/x-www-form-urlencoded')
             .send( {
                 "search":searchString,
                 "city":city,
@@ -156,8 +148,6 @@ describe('Search Router test',function(){
         return chai
             .request('http://localhost:3000/restaurants')
             .post('/search')
-            // .field('myparam' , 'test')
-            //.set('content-type', 'application/x-www-form-urlencoded')
             .send( {
                 "search":searchString,
                 "city":city,
@@ -200,8 +190,6 @@ describe('Search by Location Router test',function(){
         return chai
             .request('http://localhost:3000/restaurants')
             .post('/searchByLocation')
-            // .field('myparam' , 'test')
-            //.set('content-type', 'application/x-www-form-urlencoded')
             .send( {
                 "search":searchString,
                 "location":location,
@@ -236,6 +224,7 @@ describe('Search by Location Router test',function(){
     });
 });
 
+//tests whether the restaurant name contains or matches with query 
 function testRestaurantName(res,query){
     var queryA = query.split(" ");
     var targetA = res.name.toLowerCase();
@@ -249,6 +238,8 @@ function testRestaurantName(res,query){
     return false;
 }
 
+
+//tests whether the restaurant menu contains or matches with query 
 function testRestaurantMenu(res,query){
     var queryA = query.split(" ");
     var targetIntermediate = res.menu;
@@ -265,6 +256,7 @@ function testRestaurantMenu(res,query){
     return false;
 }
 
+//calculates distance between 2 geo-locations a and b
 function calculateDistance(a,b){
     var ss1 = a.split(",");
     var lat1 = parseFloat(ss1[0]);
