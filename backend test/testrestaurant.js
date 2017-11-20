@@ -9,7 +9,7 @@ var should = require('should');
 
 describe('search By Tag',function(){
 
-    it('should return restaurant which contain breakfast menus and are located in gainesville', function() {
+    it('should return a list of restaurants which contain breakfast menus, are located in gainesville and are sorted in descending order according to rating', function() {
         var tag = "breakfast";
         var city = "gainesville";
         return chai
