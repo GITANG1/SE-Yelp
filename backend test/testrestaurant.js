@@ -71,6 +71,99 @@ describe('Search By Tag Router test',function(){
               done();
     });
 
+    it('should return a list of restaurants which contain dinner menus, are located in gainesville and are sorted rating wise in descending order', function() {
+        var tag = "dinner";
+        var city = "gainesville";
+        return chai
+            .request('http://localhost:3000/restaurants')
+            .post('/searchByTag')
+            .send( {
+                "tag":tag,
+                "city":city,
+            })
+            .then(function(res) {
+                var i;
+                var prevRating = 1000;
+                for(i = 0; i < res.body.length; i = i + 1){
+                    expect(res.body[i]._source.city).to.equal(city);
+                    var j;
+                    var status = false;
+                    for(j = 0; j < res.body[i]._source.tags.length; j++){
+                        if(res.body[i]._source.tags[j] == tag)
+                            status = true;
+                    }
+                    expect(status).to.equal(true);
+                    var rating = parseFloat(res.body[i]._source.rating)
+                    expect(rating).to.not.be.above(prevRating);
+                    prevRating = rating;
+                }
+
+              });
+              done();
+    });
+
+    it('should return a list of restaurants which have delivery service, are located in gainesville and are sorted rating wise in descending order', function() {
+        var tag = "delivery";
+        var city = "gainesville";
+        return chai
+            .request('http://localhost:3000/restaurants')
+            .post('/searchByTag')
+            .send( {
+                "tag":tag,
+                "city":city,
+            })
+            .then(function(res) {
+                var i;
+                var prevRating = 1000;
+                for(i = 0; i < res.body.length; i = i + 1){
+                    expect(res.body[i]._source.city).to.equal(city);
+                    var j;
+                    var status = false;
+                    for(j = 0; j < res.body[i]._source.tags.length; j++){
+                        if(res.body[i]._source.tags[j] == tag)
+                            status = true;
+                    }
+                    expect(status).to.equal(true);
+                    var rating = parseFloat(res.body[i]._source.rating)
+                    expect(rating).to.not.be.above(prevRating);
+                    prevRating = rating;
+                }
+
+              });
+              done();
+    });
+
+    it('should return a list of restaurants which have take out option, are located in orlando and are sorted rating wise in descending order', function() {
+        var tag = "take out";
+        var city = "orlando";
+        return chai
+            .request('http://localhost:3000/restaurants')
+            .post('/searchByTag')
+            .send( {
+                "tag":tag,
+                "city":city,
+            })
+            .then(function(res) {
+                var i;
+                var prevRating = 1000;
+                for(i = 0; i < res.body.length; i = i + 1){
+                    expect(res.body[i]._source.city).to.equal(city);
+                    var j;
+                    var status = false;
+                    for(j = 0; j < res.body[i]._source.tags.length; j++){
+                        if(res.body[i]._source.tags[j] == tag)
+                            status = true;
+                    }
+                    expect(status).to.equal(true);
+                    var rating = parseFloat(res.body[i]._source.rating)
+                    expect(rating).to.not.be.above(prevRating);
+                    prevRating = rating;
+                }
+
+              });
+              done();
+    });
+
     it('should return a list of restaurants which have "nightlife" tag,are located in gainesville and are sorted rating wise in descending order', function() {
         var tag = "nightlife";
         var city = "gainesville";
