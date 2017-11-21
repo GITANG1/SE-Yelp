@@ -8,7 +8,6 @@ var request = require('request');
 var should = require('should');
 
 describe('Search By Tag Router test',function(){
-
     it('should return a list of restaurants which contain breakfast menus, are located in gainesville and are sorted rating wise in descending order', function() {
         var tag = "breakfast";
         var city = "gainesville";
@@ -35,7 +34,7 @@ describe('Search By Tag Router test',function(){
                     expect(rating).to.not.be.above(prevRating);
                     prevRating = rating;
                 }
-
+            
               });
               done();
     });
@@ -294,7 +293,6 @@ describe('Search Router test',function(){
             });
               done();
     });
-
 });  
 
 describe('Search by Location Router test',function(){
