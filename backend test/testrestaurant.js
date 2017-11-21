@@ -274,6 +274,27 @@ describe('Search Router test',function(){
               done();
     });
 
+    it('should return all restaurants in gainesville sorted in descending order rating wise when the restaurant name search box is empty', function() {
+        var city = "gainesville";
+        return chai
+            .request('http://localhost:3000/restaurants')
+            .post('/search')
+            .send( {
+                "city":city,
+            })
+            .then(function(res) {
+                var i;
+                var prevRating = 1000;
+                for(i = 0; i < res.body.length; i = i + 1){
+                    expect(res.body[i]._source.city).to.equal(city);
+                    var rating = parseFloat(res.body[i]._source.rating)
+                    expect(rating).to.not.be.above(prevRating);
+                    prevRating = rating;   
+                }
+            });
+              done();
+    });
+
 });  
 
 describe('Search by Location Router test',function(){
@@ -313,6 +334,27 @@ describe('Search by Location Router test',function(){
                 }
 
               });
+              done();
+    });
+
+    it('should return all restaurants within 25km of geo-location sorted in descending order rating wise when the restaurant name search box is empty', function() {
+        var location = "29.617976, -82.383637";
+        return chai
+            .request('http://localhost:3000/restaurants')
+            .post('/searchByLocation')
+            .send( {
+                "location":location,
+            })
+            .then(function(res) {
+                var i;
+                var prevRating = 1000;
+                for(i = 0; i < res.body.length; i = i + 1){
+                    expect(calculateDistance(res.body[i]._source.location,location)).to.not.be.above(25);
+                    var rating = parseFloat(res.body[i]._source.rating)
+                    expect(rating).to.not.be.above(prevRating);
+                    prevRating = rating;   
+                }
+            });
               done();
     });
 });

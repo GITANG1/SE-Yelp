@@ -171,9 +171,8 @@ searchByLocationRouter.route('/')
             return res.send('400', { error: 'Location field not of expected type. Expected : /"number, number/"' });
         }
     
-        var searchByCityQuery = {
+        var searchByLocationQuery = {
             "query": {
-                "match_all": {},
                 "bool": {
                     "filter": {
                         "geo_distance": {
@@ -192,7 +191,7 @@ searchByLocationRouter.route('/')
                 }
             }
         };
-        search(searchByCityQuery, {}, res);
+        search(searchByLocationQuery, {}, res);
     }
     else {
         res.status(400);
