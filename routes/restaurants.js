@@ -88,9 +88,31 @@ searchRouter.route('/')
         };
         search(searchByCityQuery, {}, res);
     }
+    else if( req.body.hasOwnProperty("city")) {
+        var city = req.body.city;
+    
+        var searchByCityQuery = {
+            "query": {
+                "bool": {
+                    "must": [{
+                        "term": {
+                            "city": city
+                        }
+                    }
+                    ]
+                }
+            },
+            "sort": {
+                "rating": {
+                    "order": "desc"
+                }
+            }
+        };
+        search(searchByCityQuery, {}, res);
+    }
     else {
         res.status(400);
-        res.json({ error: "Expected variables not found. Expected variables : search, city" });
+        res.json({ error: "Expected variables not found. Expected variables : city" });
     }
 });
 
@@ -136,6 +158,40 @@ searchByLocationRouter.route('/')
             }
         };
         search(searchByLocationQuery, { "lat": lat, "lon": lon }, res);
+    }
+    else if( req.body.hasOwnProperty("location")) {
+        
+        var location = req.body.location;
+        try {
+            var ss = location.split(",");
+            var lat = parseFloat(ss[0]);
+            var lon = parseFloat(ss[1]);
+        }
+        catch (err) {
+            return res.send('400', { error: 'Location field not of expected type. Expected : /"number, number/"' });
+        }
+    
+        var searchByLocationQuery = {
+            "query": {
+                "bool": {
+                    "filter": {
+                        "geo_distance": {
+                            "distance": "20km",
+                            "location": {
+                                "lat": lat,
+                                "lon": lon
+                            }
+                        }
+                    }
+                }
+            },
+            "sort": {
+                "rating": {
+                    "order": "desc"
+                }
+            }
+        };
+        search(searchByLocationQuery, {}, res);
     }
     else {
         res.status(400);

@@ -8,9 +8,39 @@ var request = require('request');
 var should = require('should');
 
 describe('Search By Tag Router test',function(){
-
     it('should return a list of restaurants which contain breakfast menus, are located in gainesville and are sorted rating wise in descending order', function() {
         var tag = "breakfast";
+        var city = "gainesville";
+        return chai
+            .request('http://localhost:3000/restaurants')
+            .post('/searchByTag')
+            .send( {
+                "tag":tag,
+                "city":city,
+            })
+            .then(function(res) {
+                var i;
+                var prevRating = 1000;
+                for(i = 0; i < res.body.length; i = i + 1){
+                    expect(res.body[i]._source.city).to.equal(city);
+                    var j;
+                    var status = false;
+                    for(j = 0; j < res.body[i]._source.tags.length; j++){
+                        if(res.body[i]._source.tags[j] == tag)
+                            status = true;
+                    }
+                    expect(status).to.equal(true);
+                    var rating = parseFloat(res.body[i]._source.rating)
+                    expect(rating).to.not.be.above(prevRating);
+                    prevRating = rating;
+                }
+            
+              });
+              done();
+    });
+
+    it('should return a list of restaurants which contain lunch menus,are located in gainesville and are sorted rating wise in descending order', function() {
+        var tag = "lunch";
         var city = "gainesville";
         return chai
             .request('http://localhost:3000/restaurants')
@@ -40,9 +70,71 @@ describe('Search By Tag Router test',function(){
               done();
     });
 
-    it('should return a list of restaurants which contain lunch menus,are located in gainesville and are sorted rating wise in descending order', function() {
-        var tag = "lunch";
+    it('should return a list of restaurants which contain dinner menus, are located in gainesville and are sorted rating wise in descending order', function() {
+        var tag = "dinner";
         var city = "gainesville";
+        return chai
+            .request('http://localhost:3000/restaurants')
+            .post('/searchByTag')
+            .send( {
+                "tag":tag,
+                "city":city,
+            })
+            .then(function(res) {
+                var i;
+                var prevRating = 1000;
+                for(i = 0; i < res.body.length; i = i + 1){
+                    expect(res.body[i]._source.city).to.equal(city);
+                    var j;
+                    var status = false;
+                    for(j = 0; j < res.body[i]._source.tags.length; j++){
+                        if(res.body[i]._source.tags[j] == tag)
+                            status = true;
+                    }
+                    expect(status).to.equal(true);
+                    var rating = parseFloat(res.body[i]._source.rating)
+                    expect(rating).to.not.be.above(prevRating);
+                    prevRating = rating;
+                }
+
+              });
+              done();
+    });
+
+    it('should return a list of restaurants which have delivery service, are located in gainesville and are sorted rating wise in descending order', function() {
+        var tag = "delivery";
+        var city = "gainesville";
+        return chai
+            .request('http://localhost:3000/restaurants')
+            .post('/searchByTag')
+            .send( {
+                "tag":tag,
+                "city":city,
+            })
+            .then(function(res) {
+                var i;
+                var prevRating = 1000;
+                for(i = 0; i < res.body.length; i = i + 1){
+                    expect(res.body[i]._source.city).to.equal(city);
+                    var j;
+                    var status = false;
+                    for(j = 0; j < res.body[i]._source.tags.length; j++){
+                        if(res.body[i]._source.tags[j] == tag)
+                            status = true;
+                    }
+                    expect(status).to.equal(true);
+                    var rating = parseFloat(res.body[i]._source.rating)
+                    expect(rating).to.not.be.above(prevRating);
+                    prevRating = rating;
+                }
+
+              });
+              done();
+    });
+
+    it('should return a list of restaurants which have take out option, are located in orlando and are sorted rating wise in descending order', function() {
+        var tag = "take out";
+        var city = "orlando";
         return chai
             .request('http://localhost:3000/restaurants')
             .post('/searchByTag')
@@ -181,6 +273,26 @@ describe('Search Router test',function(){
               done();
     });
 
+    it('should return all restaurants in gainesville sorted in descending order rating wise when the restaurant name search box is empty', function() {
+        var city = "gainesville";
+        return chai
+            .request('http://localhost:3000/restaurants')
+            .post('/search')
+            .send( {
+                "city":city,
+            })
+            .then(function(res) {
+                var i;
+                var prevRating = 1000;
+                for(i = 0; i < res.body.length; i = i + 1){
+                    expect(res.body[i]._source.city).to.equal(city);
+                    var rating = parseFloat(res.body[i]._source.rating)
+                    expect(rating).to.not.be.above(prevRating);
+                    prevRating = rating;   
+                }
+            });
+              done();
+    });
 });  
 
 describe('Search by Location Router test',function(){
@@ -220,6 +332,27 @@ describe('Search by Location Router test',function(){
                 }
 
               });
+              done();
+    });
+
+    it('should return all restaurants within 25km of geo-location sorted in descending order rating wise when the restaurant name search box is empty', function() {
+        var location = "29.617976, -82.383637";
+        return chai
+            .request('http://localhost:3000/restaurants')
+            .post('/searchByLocation')
+            .send( {
+                "location":location,
+            })
+            .then(function(res) {
+                var i;
+                var prevRating = 1000;
+                for(i = 0; i < res.body.length; i = i + 1){
+                    expect(calculateDistance(res.body[i]._source.location,location)).to.not.be.above(25);
+                    var rating = parseFloat(res.body[i]._source.rating)
+                    expect(rating).to.not.be.above(prevRating);
+                    prevRating = rating;   
+                }
+            });
               done();
     });
 });
