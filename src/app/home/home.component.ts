@@ -17,7 +17,7 @@ import { NgModule } from '@angular/core';
 
 @NgModule({
   imports: [
-    FormsModule      //<----------make sure you have added this.
+    FormsModule
   ],
 })
 
@@ -26,7 +26,7 @@ export class HomeComponent implements OnInit {
 
   title = 'this is homeComponent';
 
-  cityname="";
+  cityname = '';
 
   restaurant: FormControl = new FormControl();
 
@@ -50,7 +50,7 @@ export class HomeComponent implements OnInit {
     console.log(area);
     console.log(this.DisplayRests);
 
-    this._http.post('http://localhost:3000/restaurants/search', { "search": restaurantname, "city":area}
+    this._http.post('http://localhost:3000/restaurants/search', { "search": restaurantname, "city": area }
     ).subscribe(res => {
       this.data = res.json();
       this.DisplayRests = [];
@@ -60,51 +60,50 @@ export class HomeComponent implements OnInit {
     });
   }
 
-SearchByTags(TagName,area)
-{
+  SearchByTags(TagName, area) {
 
-  console.log(TagName);
-  console.log(area);
+    console.log(TagName);
+    console.log(area);
 
 
-  this._http.post('http://localhost:3000/restaurants/searchByTag', { "tag": TagName, "city":area}
-).subscribe(res => {
-  this.data = res.json();
-  this.DisplayRests = [];
-  this.data.forEach(element => {
-    this.DisplayRests.push(element);
-  });
-});
-}
+    this._http.post('http://localhost:3000/restaurants/searchByTag', { "tag": TagName, "city": area }
+    ).subscribe(res => {
+      this.data = res.json();
+      this.DisplayRests = [];
+      this.data.forEach(element => {
+        this.DisplayRests.push(element);
+      });
+    });
+  }
   constructor(private _http: Http) {
 
   }
 
-  ngOnInit() {  
+  ngOnInit() {
     function geo_error() {
       alert("Sorry, no position available.");
     }
-    
-    var geo_options = {
-      enableHighAccuracy: true, 
-      maximumAge        : 30000, 
-      timeout           : 27000
-    };
-    
-    var wpid = navigator.geolocation.watchPosition((position)=>{
-     console.log(position.coords.latitude);
-     console.log(position.coords.longitude);
-    var url = "http://maps.googleapis.com/maps/api/geocode/json?latlng="+position.coords.latitude+","+position.coords.longitude+"&sensor=false"
-    console.log(url);
-      
-    this._http.get(url).subscribe(res => {
-      
-            this.data = res.json();
-           
-            console.log( this.data.results[0].address_components[2].long_name);
 
-            this.cityname=this.data.results[0].address_components[2].long_name.toLowerCase();;
-          });
+    var geo_options = {
+      enableHighAccuracy: true,
+      maximumAge: 30000,
+      timeout: 27000
+    };
+
+    var wpid = navigator.geolocation.watchPosition((position) => {
+      console.log(position.coords.latitude);
+      console.log(position.coords.longitude);
+      var url = "http://maps.googleapis.com/maps/api/geocode/json?latlng=" + position.coords.latitude + "," + position.coords.longitude + "&sensor=false"
+      console.log(url);
+
+      this._http.get(url).subscribe(res => {
+
+        this.data = res.json();
+
+        console.log(this.data.results[0].address_components[2].long_name);
+
+        this.cityname = this.data.results[0].address_components[2].long_name.toLowerCase();;
+      });
 
     }, geo_error, geo_options);
 
@@ -137,5 +136,3 @@ SearchByTags(TagName,area)
   }
 
 }
-
-

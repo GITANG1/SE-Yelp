@@ -2,14 +2,14 @@ import { browser, by, element, protractor } from 'protractor';
 
 let origFn = browser.driver.controlFlow().execute;
 
-browser.driver.controlFlow().execute = function() {
-  let args = arguments;
+browser.driver.controlFlow().execute = function () {
+    let args = arguments;
 
-  origFn.call(browser.driver.controlFlow(), function() {
-    return protractor.promise.delayed(10);
-  });
+    origFn.call(browser.driver.controlFlow(), function () {
+        return protractor.promise.delayed(10);
+    });
 
-  return origFn.apply(browser.driver.controlFlow(), args);
+    return origFn.apply(browser.driver.controlFlow(), args);
 };
 
 export class RegistrationPage {
@@ -46,6 +46,6 @@ export class RegistrationPage {
     }
 
     getRandomNumber(max, min) {
-        return Math.floor(Math.random() * ( - min + 1)) + min;
+        return Math.floor(Math.random() * (- min + 1)) + min;
     }
 }
