@@ -31,8 +31,19 @@ bulkBody.push({
     location:"29.62170, -82.37230",
     tags: ["breakfast", "lunch", "dinner"],
     imageUrl:"img1",
-    rating:4
+    menuUrl:"img01",
+    rating:{
+        "total": 25,
+        "number":  5,
+        "value": 5
+    },
+    address:"3800 sw 34th st, gainesville",
+    phoneNo:"98209",
+    costInfo: "2",
+    cuisine: "Fast food/ American",
+    website: "www.pizzahut.com"
 });
+
 
 bulkBody.push({
     index:{
@@ -48,8 +59,19 @@ bulkBody.push({
     location:"29.655272, -82.420424",
     tags: ["breakfast", "lunch", "dinner","take out", "delivery"],
     imageUrl:"img2",
-    rating:4.5
+    menuUrl:"img01",
+    rating:{
+        "total": 20,
+        "number":  5,
+        "value": 4
+    },
+    address:"3802 sw 34th st, gainesville",
+    phoneNo:"98209",
+    costInfo: "2",
+    cuisine: "Fast food/ American",
+    website: "www.pizzahut.com"
 });
+
 
 bulkBody.push({
     index:{
@@ -65,7 +87,17 @@ bulkBody.push({
     location:"29.617976, -82.383637",
     tags: ["breakfast", "lunch", "dinner", "nightlife"],
     imageUrl:"img3",
-    rating:3.5
+    menuUrl:"img01",
+    rating:{
+        "total": 15,
+        "number":  5,
+        "value": 3
+    },
+    address:"3803 sw 34th st, gainesville",
+    phoneNo:"98209",
+    costInfo: "2",
+    cuisine: "Fast food/ American",
+    website: "www.burgerking.com"
 });
 
 bulkBody.push({
@@ -82,7 +114,17 @@ bulkBody.push({
     location:"28.538336, -81.379234",
     tags: ["breakfast", "lunch", "dinner","take out", "delivery"],
     imageUrl:"img4",
-    rating:3
+    menuUrl:"img01",
+    rating:{
+        "total": 10,
+        "number":  5,
+        "value": 2
+    },
+    address:"3804 sw 34th st, gainesville",
+    phoneNo:"98209",
+    costInfo: "2",
+    cuisine: "Fast food/ American",
+    website: "www.pizzahut.com"
 });
 //insert array into elasticsearch database
 client.bulk({body:bulkBody}, function(error, response){

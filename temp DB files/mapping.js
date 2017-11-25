@@ -39,31 +39,83 @@ var mapping = {
         "imageUrl": {
           "type": "keyword"
         },
+        "menuUrl": {
+          "type": "keyword"
+        },
         "rating": {
-          "type": "float"
+          "properties": {
+            "total": { "type": "float" },
+            "number": { "type": "integer" },
+            "value": { "type": "float" }
+          }
+        },
+        "address": {
+          "type": "keyword"
+        },
+        "phoneNo": {
+          "type": "keyword"
+        },
+        "costInfo": {
+          "type": "keyword"
+        },
+        "cuisine": {
+          "type": "keyword"
+        },
+        "website": {
+          "type": "keyword"
         }
       }
     },
-    "users":{
-      "properties":{
-        "name":{
-          type:"text"
+    "users": {
+      "properties": {
+        "name": {
+          type: "text"
         },
-        "email":{
-          type:"keyword"
+        "email": {
+          type: "keyword"
         },
-        "username":{
-          type:"keyword"
+        "username": {
+          type: "keyword"
         },
-        "password":{
-          type:"keyword"
+        "password": {
+          type: "keyword"
+        },
+      }
+    },
+    "ratings": {
+      "properties": {
+        "restaurant": {
+          "properties": {
+            "id": { type: "text" },
+            "name": { type: "text" }
+          }
+        },
+        "user": {
+          "properties": {
+            "id": { type: "text" },
+            "name": { type: "text" }
+          }
+        },
+        "value": {
+          type: "float"
+        },
+        "review": {
+          type: "keyword"
+        }
+      }
+    },
+    "checkin": {
+      "properties": {
+        "restId": {
+          type: "keyword"
+        },
+        "userId": {
+          type: "keyword"
         }
       }
     }
   }
 };
-
-
 
 request({ url: "http://localhost:9200/gulp", method: 'DELETE' }, function (error, response, body) {
     console.log("in delete phase");
