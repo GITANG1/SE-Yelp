@@ -77,7 +77,6 @@ router.route('/byUser/:userId')
             type: 'ratings',
             body: query
         }, function (error, response) {
-            // ...
             if (error) {
                 console.log("ERROR IS: ----------------------------------------------");
                 console.log(error);
