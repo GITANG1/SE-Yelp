@@ -69,7 +69,7 @@ var mapping = {
     "users": {
       "properties": {
         "name": {
-          type: "text"
+          type: "keyword"
         },
         "email": {
           type: "keyword"
@@ -106,19 +106,19 @@ var mapping = {
     },
     "checkin": {
       "properties": {
-          "restaurant": {
-            "properties": {
-              "id": { type: "text" },
-              "name": { type: "text" }
-            }
-          },
-          "user": {
-            "properties": {
-              "id": { type: "text" },
-              "name": { type: "text" }
-            }
-          },
-          "date": {
+        "restaurant": {
+          "properties": {
+            "id": { type: "keyword" },
+            "name": { type: "keyword" }
+          }
+        },
+        "user": {
+          "properties": {
+            "id": { type: "keyword" },
+            "name": { type: "keyword" }
+          }
+        },
+        "date": {
           type: "keyword"
         }
       }
@@ -127,27 +127,27 @@ var mapping = {
 };
 
 request({ url: "http://localhost:9200/gulp", method: 'DELETE' }, function (error, response, body) {
-    console.log("in delete phase");
-    
-      if (!error) {
-        console.log("-------------------------");
-        console.log(body);
-        console.log('Previous index gulp was deleted');
-      }
-      else {
-        console.log('error' + error);
-      }
-      
-      //if succesfully deleted, add new mapping
-      request({ url: "http://localhost:9200/gulp", method: 'PUT', json: mapping }, function (error, response, body) {
-        if (!error) {
-          console.log("-------------------------");
-          console.log(body);
-          console.log('new Index gulp with new mapping added');
-        }
-        else {
-          console.log('error: ' + error);
-        }
-      });
-    });
+  console.log("in delete phase");
+
+  if (!error) {
+    console.log("-------------------------");
+    console.log(body);
+    console.log('Previous index gulp was deleted');
+  }
+  else {
+    console.log('error' + error);
+  }
+
+  //if succesfully deleted, add new mapping
+  request({ url: "http://localhost:9200/gulp", method: 'PUT', json: mapping }, function (error, response, body) {
+    if (!error) {
+      console.log("-------------------------");
+      console.log(body);
+      console.log('new Index gulp with new mapping added');
+    }
+    else {
+      console.log('error: ' + error);
+    }
+  });
+});
 
