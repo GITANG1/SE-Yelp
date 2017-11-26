@@ -42,6 +42,12 @@ var mapping = {
         "menuUrl": {
           "type": "keyword"
         },
+        "logoUrl":{
+          "type": "keyword"
+        },
+        "hours":{
+          "type": "keyword"
+        },
         "rating": {
           "properties": {
             "total": { "type": "float" },
