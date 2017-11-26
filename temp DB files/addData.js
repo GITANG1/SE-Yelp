@@ -38,8 +38,8 @@ bulkBody.push({
         "value": 5
     },
     address:"3800 sw 34th st, gainesville",
-    phoneNo:"98209",
-    costInfo: "2",
+    phoneNo:"(352) 834 5894",
+    costInfo: "$$",
     cuisine: "Fast food/ American",
     website: "www.pizzahut.com"
 });
@@ -66,8 +66,8 @@ bulkBody.push({
         "value": 4
     },
     address:"3802 sw 34th st, gainesville",
-    phoneNo:"98209",
-    costInfo: "2",
+    phoneNo:"(352) 834 5894",
+    costInfo: "$$",
     cuisine: "Fast food/ American",
     website: "www.pizzahut.com"
 });
@@ -94,8 +94,8 @@ bulkBody.push({
         "value": 3
     },
     address:"3803 sw 34th st, gainesville",
-    phoneNo:"98209",
-    costInfo: "2",
+    phoneNo:"(352) 834 5894",
+    costInfo: "$",
     cuisine: "Fast food/ American",
     website: "www.burgerking.com"
 });
@@ -121,8 +121,8 @@ bulkBody.push({
         "value": 2
     },
     address:"3804 sw 34th st, gainesville",
-    phoneNo:"98209",
-    costInfo: "2",
+    phoneNo:"(352) 834 5894",
+    costInfo: "$$$",
     cuisine: "Fast food/ American",
     website: "www.pizzahut.com"
 });

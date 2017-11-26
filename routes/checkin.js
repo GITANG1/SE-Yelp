@@ -12,6 +12,7 @@ var client = new elasticsearch.Client({
     log: 'trace'
 });
 
+
 router.route('/:restId/:userId')
     .get(function (req, res) {
 
@@ -22,8 +23,8 @@ router.route('/:restId/:userId')
             "query": {
                 "bool": {
                     "must": [
-                        { "match": { "restId": restId } },
-                        { "match": { "userId": userId } }
+                        { "match": { "restaurant.id": restId } },
+                        { "match": { "user.id": userId } }
                     ]
                 }
             }
@@ -59,7 +60,7 @@ router.route('/:restId/:userId')
 
     });
 
-    router.route('/:userId')
+router.route('/:userId')
     .get(function (req, res) {
 
         var userId = req.params.userId;
@@ -68,7 +69,7 @@ router.route('/:restId/:userId')
             "query": {
                 "bool": {
                     "must":
-                        { "match": { "userId": userId } }
+                        { "match": { "user.id": userId } }
                 }
             }
         };
@@ -104,21 +105,24 @@ router.route('/:restId/:userId')
 
     });
 
-router.route('/:restId/:userId')
+router.route('/')
     .post(function (req, res) {
 
-        var restId = req.params.restId;
-        var userId = req.params.userId;
+        if (!(req.body.hasOwnProperty("restaurant") && req.body.restaurant.hasOwnProperty("id") && req.body.restaurant.hasOwnProperty("name") &&
+            req.body.hasOwnProperty("user") && req.body.user.hasOwnProperty("id"))) {
+            res.status(400).send("Invalid checkin object in request body");
+            return;
+        }
 
-        var body = {
-            "restId": restId,
-            "userId": userId
-        };
-
+        var checkin = req.body;
+        var dt = new Date();
+        var date = ((dt.getDate() < 10) ? '0' : '') + dt.getDate() + '/' + (((dt.getMonth() + 1) < 10) ? '0' : '') + (dt.getMonth() + 1) + '/' + dt.getFullYear();
+        checkin["date"] = date;
+        console.log(checkin);
         client.index({
             index: config.DB,
             type: 'checkin',
-            body: body
+            body: checkin
         }, function (error, response) {
             if (error) {
                 res.status(500).send("Unkown error while inserting into database");
@@ -130,5 +134,5 @@ router.route('/:restId/:userId')
     });
 
 
-    
+
 module.exports = router;
