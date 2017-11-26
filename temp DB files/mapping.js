@@ -86,14 +86,14 @@ var mapping = {
       "properties": {
         "restaurant": {
           "properties": {
-            "id": { type: "text" },
-            "name": { type: "text" }
+            "id": { type: "keyword" },
+            "name": { type: "keyword" }
           }
         },
         "user": {
           "properties": {
-            "id": { type: "text" },
-            "name": { type: "text" }
+            "id": { type: "keyword" },
+            "name": { type: "keyword" }
           }
         },
         "value": {
@@ -106,10 +106,19 @@ var mapping = {
     },
     "checkin": {
       "properties": {
-        "restId": {
-          type: "keyword"
-        },
-        "userId": {
+          "restaurant": {
+            "properties": {
+              "id": { type: "text" },
+              "name": { type: "text" }
+            }
+          },
+          "user": {
+            "properties": {
+              "id": { type: "text" },
+              "name": { type: "text" }
+            }
+          },
+          "date": {
           type: "keyword"
         }
       }
