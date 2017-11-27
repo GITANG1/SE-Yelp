@@ -239,7 +239,7 @@ function updateUser(id, script, res) {
                 return;
             }
             res.status(201)
-                .send("user updates");
+                .send("User updated successfully!");
             return;
         });
     });

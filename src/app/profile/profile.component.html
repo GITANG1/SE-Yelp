@@ -1,7 +1,82 @@
-<div *ngIf=user>
-  <h2 class='page-header'>{{user.name}}</h2>
-  <ul class='list-group'>
-    <li class='list-group-item'>Username: {{user.username}}</li>
-    <li class='list-group-item'>Email: {{user.email}}</li>
-  </ul>
+<div fxLayoutAlign="center center" fxLayoutAlign.xs="center center" fxLayoutAlign.sm="center center" fxLayoutAlign.gt-sm="center center"
+  fxFlexAlign="center center" style="margin-top:1em">
+  <div style="height:15em;width:60%;background-color:white">
+    <div style="background-color:blue">
+      <img style="float:left" class="profileIconHolder" src="/assets/Images/profile-icon.png" alt="User Photo">
+    </div>
+
+    <div style="font-size: xx-large;margin-top: 10%;margin-left: 30%;">
+      <span>{{user.name}}</span>
+    </div>
+  </div>
+</div>
+
+<div fxLayoutAlign="center center" fxLayoutAlign.xs="center center" fxLayoutAlign.sm="center center" fxLayoutAlign.gt-sm="center center"
+  fxFlexAlign="center center" style="padding:0.2em;">
+
+  <div style="background-color: white;width:60%">
+    <mat-tab-group>
+      <mat-tab label="Reviews ({{reviews}})">
+        <div fxLayout="column" style="padding:1em" fxLayoutAlign=" center">
+          <mat-card *ngFor="let d of reviewResults" style="width:98%">
+            <mat-card-header>
+              <img mat-card-avatar src="http://localhost:3000/{{d._source.restaurant.logoUrl}}">
+              <mat-card-title>
+                <b>{{d._source.restaurant.name}}</b>
+                <span class="stars">
+                  <span [style.width]="getStars(d._source.value)"></span>
+                </span>
+              </mat-card-title>
+              <mat-card-subtitle>
+                {{d._source.review}}
+              </mat-card-subtitle>
+            </mat-card-header>
+
+          </mat-card>
+        </div>
+      </mat-tab>
+
+      <mat-tab label="Check-ins ({{checkins}})">
+        <div fxLayout="column" style="padding:1em" fxLayoutAlign=" center">
+          <mat-card *ngFor="let cr of checkinResults" style="width:98%">
+            <mat-card-header>
+              <img mat-card-avatar src="http://localhost:3000/{{cr._source.restaurant.logoUrl}}">
+              <mat-card-title>
+                <b>{{cr._source.restaurant.name}}</b>
+              </mat-card-title>
+              <mat-card-subtitle>
+                Visited on: {{cr._source.date}}
+              </mat-card-subtitle>
+            </mat-card-header>
+          </mat-card>
+        </div>
+      </mat-tab>
+
+      <mat-tab label="Update Profile">
+        <div id="flashMessage" class="alert-danger">
+          <flash-messages></flash-messages>
+        </div>
+
+        <div fxLayout="column" style="padding:4%">
+
+          <mat-form-field>
+            <input matInput #userName placeholder="Name" value="{{user.name}}">
+          </mat-form-field>
+
+          <mat-form-field>
+            <input matInput #userEmail placeholder="Email" value="{{user.email}}">
+          </mat-form-field>
+
+          <mat-form-field>
+            <input matInput #userPassword placeholder="Password" value="{{user.password}}">
+          </mat-form-field>
+
+          <div style="display:flex;justify-content:space-around;">
+            <button mat-raised-button id="updateUserInfo" color="accent" (click)="updateUserInfo(userName.value, userEmail.value, userPassword.value)">UPDATE</button>
+          </div>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+
 </div>

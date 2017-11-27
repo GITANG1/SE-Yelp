@@ -108,8 +108,9 @@ router.route('/:userId')
 router.route('/')
     .post(function (req, res) {
 
-        if (!(req.body.hasOwnProperty("restaurant") && req.body.restaurant.hasOwnProperty("id") && req.body.restaurant.hasOwnProperty("name") &&
-            req.body.hasOwnProperty("user") && req.body.user.hasOwnProperty("id"))) {
+        if (!(req.body.hasOwnProperty("restaurant") && req.body.restaurant.hasOwnProperty("id")
+            && req.body.restaurant.hasOwnProperty("name") && req.body.restaurant.hasOwnProperty("logoUrl")
+            && req.body.hasOwnProperty("user") && req.body.user.hasOwnProperty("id"))) {
             res.status(400).send("Invalid checkin object in request body");
             return;
         }
