@@ -100,11 +100,13 @@ router.route('/byUser/:userId')
 router.route('/')
     .post(function (req, res) {
 
-        if (req.body.hasOwnProperty("restaurant") && req.body.restaurant.hasOwnProperty("id") && req.body.restaurant.hasOwnProperty("name") &&
-            req.body.hasOwnProperty("user") && req.body.user.hasOwnProperty("id") && req.body.user.hasOwnProperty("name") && req.body.hasOwnProperty("value")) {
+        if (req.body.hasOwnProperty("restaurant") && req.body.restaurant.hasOwnProperty("id") 
+            && req.body.restaurant.hasOwnProperty("name") && req.body.restaurant.hasOwnProperty("logoUrl")
+            && req.body.hasOwnProperty("user") && req.body.user.hasOwnProperty("id") 
+            && req.body.user.hasOwnProperty("name") && req.body.hasOwnProperty("value")) {
 
-
-            var script = "ctx._source.rating.total +=" + req.body.value + "; ctx._source.rating.number++; ctx._source.rating.value=(ctx._source.rating.total*1.0/ctx._source.rating.number);";
+            var script = "ctx._source.rating.total +=" + req.body.value + 
+            "; ctx._source.rating.number++; ctx._source.rating.value=(ctx._source.rating.total*1.0/ctx._source.rating.number);";
             client.index({
                 index: config.DB,
                 type: 'ratings',

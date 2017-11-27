@@ -5,7 +5,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { AppRoutingModule } from './app-routing/app-routing.module';
 
-
 import {
   MatAutocompleteModule,
   MatToolbarModule,
@@ -13,7 +12,8 @@ import {
   MatCardModule,
   MatButtonModule,
   MatSelectModule,
-  MatInputModule
+  MatInputModule,
+  MatTabsModule
 } from '@angular/material';
 
 import {
@@ -42,7 +42,6 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AuthGuard } from './guards/auth.guard';
-
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -76,6 +75,7 @@ export const routes: Routes = [
     MatCardModule,
     MatSelectModule,
     MatButtonModule,
+    MatTabsModule,
     FlashMessagesModule,
     MatInputModule,
     RouterModule.forRoot(routes)

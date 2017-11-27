@@ -1,0 +1,26 @@
+.profileIconHolder {
+  height: 15em;
+  width: 15em;
+}
+
+span.stars, span.stars span {
+  display: block;
+  background: url('https://apppresser.com/wp-content/uploads/2015/11/stars.png') 0 -16px repeat-x;
+  width: 80px;
+  height: 16px;
+}
+
+span.stars span {
+  background-position: 0 0;
+}
+
+.alert-danger {
+  color: #a94442;
+  background-color: #f2dede;
+  border-color: #ebccd1;
+  margin-bottom: 1px;
+  border: 1px solid transparent;
+  border-radius: 1px;
+  width: 40%;
+  display: table-cell;
+}

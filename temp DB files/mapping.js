@@ -42,10 +42,10 @@ var mapping = {
         "menuUrl": {
           "type": "keyword"
         },
-        "logoUrl":{
+        "logoUrl": {
           "type": "keyword"
         },
-        "hours":{
+        "hours": {
           "type": "keyword"
         },
         "rating": {
@@ -93,7 +93,8 @@ var mapping = {
         "restaurant": {
           "properties": {
             "id": { type: "keyword" },
-            "name": { type: "keyword" }
+            "name": { type: "keyword" },
+            "logoUrl": { type: "keyword" }
           }
         },
         "user": {
@@ -115,7 +116,8 @@ var mapping = {
         "restaurant": {
           "properties": {
             "id": { type: "keyword" },
-            "name": { type: "keyword" }
+            "name": { type: "keyword" },
+            "logoUrl": { type: "keyword" }
           }
         },
         "user": {
@@ -156,4 +158,3 @@ request({ url: "http://localhost:9200/gulp", method: 'DELETE' }, function (error
     }
   });
 });
-
