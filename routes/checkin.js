@@ -48,12 +48,12 @@ router.route('/:restId/:userId')
                     console.log(JSON.stringify(response.hits.hits));
                     //checkin exists
                     res.status(200);
-                    res.send("1");
+                    res.json("1");
                 }
                 else {
                     //checkin does not exist
                     res.status(200);
-                    res.send("0");
+                    res.json("0");
                 }
             }
         });

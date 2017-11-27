@@ -16,6 +16,7 @@ var client = new elasticsearch.Client({
     }
   });
 
+  /*
 var usermapping = {
     "mappings": {
       "users":{
@@ -66,6 +67,139 @@ var usermapping = {
       }
     }
   };
+
+  var checkinmapping = {
+    "mappings": {
+      "checkin": {
+        "properties": {
+          "restaurant": {
+            "properties": {
+              "id": { type: "keyword" },
+              "name": { type: "keyword" }
+            }
+          },
+          "user": {
+            "properties": {
+              "id": { type: "keyword" },
+              "name": { type: "keyword" }
+            }
+          },
+          "date": {
+            type: "keyword"
+          }
+        }
+      }
+    }
+  };*/
+
+  var mapping = {
+    "mappings": {
+      "restaurants": {
+        "properties": {
+          "restaurant_name": {
+            "type": "text",
+          },
+          "city": {
+            "type": "keyword"
+          },
+          "menu": {
+            "type": "text"
+          },
+          "location": {
+            "type": "geo_point"
+          },
+          "tags": {
+            "type": "keyword"
+          },
+          "imageUrl": {
+            "type": "keyword"
+          },
+          "menuUrl": {
+            "type": "keyword"
+          },
+          "rating": {
+            "properties": {
+              "total": { "type": "float" },
+              "number": { "type": "integer" },
+              "value": { "type": "float" }
+            }
+          },
+          "address": {
+            "type": "keyword"
+          },
+          "phoneNo": {
+            "type": "keyword"
+          },
+          "costInfo": {
+            "type": "keyword"
+          },
+          "cuisine": {
+            "type": "keyword"
+          },
+          "website": {
+            "type": "keyword"
+          }
+        }
+      },
+      "users": {
+        "properties": {
+          "name": {
+            type: "keyword"
+          },
+          "email": {
+            type: "keyword"
+          },
+          "username": {
+            type: "keyword"
+          },
+          "password": {
+            type: "keyword"
+          },
+        }
+      },
+      "ratings": {
+        "properties": {
+          "restaurant": {
+            "properties": {
+              "id": { type: "keyword" },
+              "name": { type: "keyword" }
+            }
+          },
+          "user": {
+            "properties": {
+              "id": { type: "keyword" },
+              "name": { type: "keyword" }
+            }
+          },
+          "value": {
+            type: "float"
+          },
+          "review": {
+            type: "keyword"
+          }
+        }
+      },
+      "checkin": {
+        "properties": {
+          "restaurant": {
+            "properties": {
+              "id": { type: "keyword" },
+              "name": { type: "keyword" }
+            }
+          },
+          "user": {
+            "properties": {
+              "id": { type: "keyword" },
+              "name": { type: "keyword" }
+            }
+          },
+          "date": {
+            type: "keyword"
+          }
+        }
+      }
+    }
+  };
   
     request({ url: "http://localhost:9200/gulptest", method: 'DELETE' }, function (error, response, body) {
       console.log("in delete phase");
@@ -80,7 +214,7 @@ var usermapping = {
         }
         
         //if succesfully deleted, add new mapping
-        request({ url: "http://localhost:9200/gulptest", method: 'PUT', json: usermapping }, function (error, response, body) {
+        request({ url: "http://localhost:9200/gulptest", method: 'PUT', json: mapping }, function (error, response, body) {
           if (!error) {
             console.log("-------------------------");
             console.log(body);
@@ -92,6 +226,7 @@ var usermapping = {
         });
       });
 
+      /*
       request({ url: "http://localhost:9200/gulptest", method: 'DELETE' }, function (error, response, body) {
         console.log("in delete phase");
         
@@ -105,7 +240,7 @@ var usermapping = {
           }
           
           //if succesfully deleted, add new mapping
-          request({ url: "http://localhost:9200/gulptest", method: 'PUT', json: restaurantmapping }, function (error, response, body) {
+          request({ url: "http://localhost:9200/gulptest", method: 'PUT', json: checkinmapping }, function (error, response, body) {
             if (!error) {
               console.log("-------------------------");
               console.log(body);
@@ -116,3 +251,29 @@ var usermapping = {
             }
           });
         });
+
+        
+        request({ url: "http://localhost:9200/gulptest", method: 'DELETE' }, function (error, response, body) {
+          console.log("in delete phase");
+          
+            if (!error) {
+              console.log("-------------------------");
+              console.log(body);
+              console.log('Previous index gulp test was deleted');
+            }
+            else {
+              console.log('error' + error);
+            }
+            
+            //if succesfully deleted, add new mapping
+            request({ url: "http://localhost:9200/gulptest", method: 'PUT', json: restaurantmapping }, function (error, response, body) {
+              if (!error) {
+                console.log("-------------------------");
+                console.log(body);
+                console.log('new Index gulp test with new mapping added');
+              }
+              else {
+                console.log('error: ' + error);
+              }
+            });
+          });*/
