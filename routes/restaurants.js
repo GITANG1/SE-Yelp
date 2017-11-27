@@ -104,7 +104,7 @@ searchRouter.route('/')
                     }
                 },
                 "sort": {
-                    "rating": {
+                    "rating.value": {
                         "order": "desc"
                     }
                 }
@@ -187,7 +187,7 @@ searchByLocationRouter.route('/')
                     }
                 },
                 "sort": {
-                    "rating": {
+                    "rating.value": {
                         "order": "desc"
                     }
                 }
@@ -243,7 +243,7 @@ searchByTagRouter.route('/')
                 }
             },
             "sort": {
-                "rating": {
+                "rating.value": {
                     "order": "desc"
                 }
             }
