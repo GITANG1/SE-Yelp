@@ -117,6 +117,12 @@ var mapping = {
         "menuUrl": {
           "type": "keyword"
         },
+        "logoUrl": {
+          "type": "keyword"
+        },
+        "hours": {
+          "type": "keyword"
+        },
         "rating": {
           "properties": {
             "total": { "type": "float" },
@@ -162,7 +168,8 @@ var mapping = {
         "restaurant": {
           "properties": {
             "id": { type: "keyword" },
-            "name": { type: "keyword" }
+            "name": { type: "keyword" },
+            "logoUrl": { type: "keyword" }
           }
         },
         "user": {
@@ -184,7 +191,8 @@ var mapping = {
         "restaurant": {
           "properties": {
             "id": { type: "keyword" },
-            "name": { type: "keyword" }
+            "name": { type: "keyword" },
+            "logoUrl": { type: "keyword" }
           }
         },
         "user": {

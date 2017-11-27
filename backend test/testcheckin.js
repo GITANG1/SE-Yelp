@@ -11,7 +11,7 @@ describe('Checkin router tests', function () {
     before(function (done) {
 
         postRequest(function () {
-            console.log('last');
+            
             done();
 
         });
@@ -129,7 +129,8 @@ function postRequest(done) {
         .send({
             "restaurant": {
                 "id": 1,
-                "name": "pizza hut"
+                "name": "pizza hut",
+                "logoUrl":"images/13/logo.png"
             },
             "user": {
                 "id": "abc"
@@ -138,7 +139,7 @@ function postRequest(done) {
         })
         .end(function (error, response, body) {
             if (error) {
-                throw err;
+                throw error;
             } else {
 
                 chai
@@ -147,7 +148,8 @@ function postRequest(done) {
                     .send({
                         "restaurant": {
                             "id": 2,
-                            "name": "blaze pizza"
+                            "name": "blaze pizza",
+                            "logoUrl":"images/13/logo.png"
                         },
                         "user": {
                             "id": "abc"
@@ -156,7 +158,7 @@ function postRequest(done) {
                     })
                     .end(function (error, response, body) {
                         if (error) {
-                            throw err;
+                            throw error;
                         } else {
 
                             chai
@@ -165,7 +167,8 @@ function postRequest(done) {
                                 .send({
                                     "restaurant": {
                                         "id": 1,
-                                        "name": "pizza hut"
+                                        "name": "pizza hut",
+                                        "logoUrl":"images/13/logo.png"
                                     },
                                     "user": {
                                         "id": "abcd"

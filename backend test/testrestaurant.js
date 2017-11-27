@@ -30,7 +30,7 @@ describe('Search By Tag Router test',function(){
                             status = true;
                     }
                     expect(status).to.equal(true);
-                    var rating = parseFloat(res.body[i]._source.rating)
+                    var rating = parseFloat(res.body[i]._source.rating.value)
                     expect(rating).to.not.be.above(prevRating);
                     prevRating = rating;
                 }
@@ -61,7 +61,7 @@ describe('Search By Tag Router test',function(){
                             status = true;
                     }
                     expect(status).to.equal(true);
-                    var rating = parseFloat(res.body[i]._source.rating)
+                    var rating = parseFloat(res.body[i]._source.rating.value)
                     expect(rating).to.not.be.above(prevRating);
                     prevRating = rating;
                 }
@@ -92,7 +92,7 @@ describe('Search By Tag Router test',function(){
                             status = true;
                     }
                     expect(status).to.equal(true);
-                    var rating = parseFloat(res.body[i]._source.rating)
+                    var rating = parseFloat(res.body[i]._source.rating.value)
                     expect(rating).to.not.be.above(prevRating);
                     prevRating = rating;
                 }
@@ -123,7 +123,7 @@ describe('Search By Tag Router test',function(){
                             status = true;
                     }
                     expect(status).to.equal(true);
-                    var rating = parseFloat(res.body[i]._source.rating)
+                    var rating = parseFloat(res.body[i]._source.rating.value)
                     expect(rating).to.not.be.above(prevRating);
                     prevRating = rating;
                 }
@@ -154,7 +154,7 @@ describe('Search By Tag Router test',function(){
                             status = true;
                     }
                     expect(status).to.equal(true);
-                    var rating = parseFloat(res.body[i]._source.rating)
+                    var rating = parseFloat(res.body[i]._source.rating.value)
                     expect(rating).to.not.be.above(prevRating);
                     prevRating = rating;
                 }
@@ -185,7 +185,7 @@ describe('Search By Tag Router test',function(){
                             status = true;
                     }
                     expect(status).to.equal(true);
-                    var rating = parseFloat(res.body[i]._source.rating)
+                    var rating = parseFloat(res.body[i]._source.rating.value)
                     expect(rating).to.not.be.above(prevRating);
                     prevRating = rating;
                 }
@@ -286,7 +286,7 @@ describe('Search Router test',function(){
                 var prevRating = 1000;
                 for(i = 0; i < res.body.length; i = i + 1){
                     expect(res.body[i]._source.city).to.equal(city);
-                    var rating = parseFloat(res.body[i]._source.rating)
+                    var rating = parseFloat(res.body[i]._source.rating.value)
                     expect(rating).to.not.be.above(prevRating);
                     prevRating = rating;   
                 }
@@ -348,7 +348,7 @@ describe('Search by Location Router test',function(){
                 var prevRating = 1000;
                 for(i = 0; i < res.body.length; i = i + 1){
                     expect(calculateDistance(res.body[i]._source.location,location)).to.not.be.above(25);
-                    var rating = parseFloat(res.body[i]._source.rating)
+                    var rating = parseFloat(res.body[i]._source.rating.value)
                     expect(rating).to.not.be.above(prevRating);
                     prevRating = rating;   
                 }

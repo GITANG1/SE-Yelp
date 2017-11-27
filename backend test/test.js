@@ -4,12 +4,11 @@ var expect = require('chai').expect;
 chai.use(require('chai-http'));
 
 var request = require('request');
-
+var sleep = require('system-sleep');
 var should = require('should');
 
 describe('Main Page', function () {
     this.timeout(5000); // How long to wait for a response (ms)
-
 
     it('should return main page body message', function (done) {
 
@@ -53,8 +52,6 @@ describe('Post API for user registration', function () {
         return chai
             .request('http://localhost:3000')
             .post('/users/register')
-            // .field('myparam' , 'test')
-            //.set('content-type', 'application/x-www-form-urlencoded')
             .send({
                 "username": "abc12",
                 "email": "abcg@test.com",
@@ -63,7 +60,6 @@ describe('Post API for user registration', function () {
             .then(function (res, error) {
                 expect(res.body.msg).to.equal("Failed to register user");
 
-                //expect(res.body.success).to.equal(false);
             });
         done();
     });
@@ -72,8 +68,6 @@ describe('Post API for user registration', function () {
         return chai
             .request('http://localhost:3000')
             .post('/users/register')
-            // .field('myparam' , 'test')
-            //.set('content-type', 'application/x-www-form-urlencoded')
             .send({
                 "name": "abc gef",
                 "username": "abcg",
@@ -89,8 +83,6 @@ describe('Post API for user registration', function () {
         return chai
             .request('http://localhost:3000')
             .post('/users/register')
-            // .field('myparam' , 'test')
-            //.set('content-type', 'application/x-www-form-urlencoded')
             .send({
                 "name": "abc gef",
                 "email": "abcg@gmail.com",
@@ -106,8 +98,6 @@ describe('Post API for user registration', function () {
         return chai
             .request('http://localhost:3000')
             .post('/users/register')
-            // .field('myparam' , 'test')
-            //.set('content-type', 'application/x-www-form-urlencoded')
             .send({
                 "name": "abc gef",
                 "email": "abcg@gmail.com",
@@ -133,14 +123,20 @@ describe('User Profile Access', function () {
 });
 
 describe('User authentication', function () {
+    before(function (done) {        
+                registerUser(function () {
+                    
+                    done();
+        
+                });
+            });
+
     it('should not validate user if password is invalid', function () {
         return chai
             .request('http://localhost:3000')
             .post('/users/authenticate')
-            // .field('myparam' , 'test')
-            //.set('content-type', 'application/x-www-form-urlencoded')
             .send({
-                "username": "johnny",
+                "username": "admin",
                 "password": "abc123f"
             })
             .then(function (res) {
@@ -152,21 +148,19 @@ describe('User authentication', function () {
     });
 
     it('should validate user if password is valid', function () {
+        
         return chai
             .request('http://localhost:3000')
             .post('/users/authenticate')
-            // .field('myparam' , 'test')
-            //.set('content-type', 'application/x-www-form-urlencoded')
             .send({
-                "username": "smithj",
+                "username": "useradmin",
                 "password": "abc123"
             })
             .then(function (res) {
-
                 expect(res).to.have.status(200);
-                //expect(res.body.user.username).to.equal("smithj");
-                expect(res.body.success).to.equal(false);
-                console.log(res.body);
+                expect(res.body.user.username).to.equal("useradmin");
+                expect(res.body.success).to.equal(true);
+                
             });
         done();
     });
@@ -175,10 +169,8 @@ describe('User authentication', function () {
         return chai
             .request('http://localhost:3000')
             .post('/users/authenticate')
-            // .field('myparam' , 'test')
-            //.set('content-type', 'application/x-www-form-urlencoded')
             .send({
-                "username": "smithjh",
+                "username": "admin",
                 "password": "abc123"
             })
             .then(function (res) {
@@ -189,3 +181,24 @@ describe('User authentication', function () {
         done();
     });
 });
+
+function registerUser(done){
+    chai
+    .request('http://localhost:3000')
+    .post('/users/register')
+    .send({
+        "name": "admin admin",
+        "username": "useradmin",
+        "email": "admin@test.com",
+        "password": "abc123"
+
+    })
+    .end(function (error, response, body) {
+        if (error) {
+            throw error;
+        } else {
+            sleep(1000);
+            done();
+        }
+    });
+}
