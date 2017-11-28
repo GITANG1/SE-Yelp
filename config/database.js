@@ -1,4 +1,4 @@
 module.exports = {
-  DB: 'gulp',
+  DB: 'gulptest',
   secret: 'yoursecret'
 }
