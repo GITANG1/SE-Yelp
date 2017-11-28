@@ -64,15 +64,15 @@
         <div fxLayout="column" style="padding:4%">
 
           <mat-form-field>
-            <input matInput name="userName" placeholder="Name" value="{{user.name}}">
+            <input matInput #userName name="userName" placeholder="Name" value="{{user.name}}">
           </mat-form-field>
 
           <mat-form-field>
-            <input matInput name="userEmail" placeholder="Email" value="{{user.email}}">
+            <input matInput #userEmail name="userEmail" placeholder="Email" value="{{user.email}}">
           </mat-form-field>
 
           <mat-form-field>
-            <input matInput name="userPassword" placeholder="Password" type="password" value="{{user.password}}">
+            <input matInput #userPassword name="userPassword" placeholder="Password" value="{{user.password}}">
           </mat-form-field>
 
           <div style="display:flex;justify-content:space-around;">
