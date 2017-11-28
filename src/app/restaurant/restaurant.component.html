@@ -1,0 +1,165 @@
+<div fxLayoutAlign="center center" fxLayoutAlign.xs="center center" fxLayoutAlign.sm="center center" fxLayoutAlign.gt-sm="center center"
+  fxFlexAlign="center center" style="padding:0.2em;margin-top:1em">
+
+  <div style="height:15em;width:60%;background-color:white">
+
+    <div fxlayout="row">
+
+      <img height="80%em" width="18%em" style="padding:2em" src="{{ imageUrl1 }}">
+      <img height="80%em" width="18%em" style="padding:2em" src="{{ imageUrl2 }}">
+      <img height="80%em" width="18%em" style="padding:2em" src="{{ imageUrl3 }}">
+
+    </div>
+
+    <div style="float:right;padding:1em;margin-top:-2em">
+      <button mat-raised-button (click)="checked_in(1)" *ngIf="checkedin" hidden color="accent">Check-in</button>
+    </div>
+    <div style="float:right;padding:1em;margin-top:-2em">
+      <button mat-raised-button (click)="Writeareview()" hidden color="accent">Write A Review</button>
+      <div id="flashMessage" class="alert-danger">
+        <flash-messages></flash-messages>
+      </div>
+    </div>
+    <div style="float:Left;padding:1em;margin-top:-1.5em;color:#cb202d;font-size:2em">
+      <b> {{restaurantname}}</b>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="showreview" fxLayout="row" fxLayoutAlign="center center" fxLayoutAlign.xs="center center" fxLayoutAlign.sm="center center"
+  fxLayoutAlign.gt-sm="center center" fxFlexAlign="center center">
+
+  <div style="padding:1em">
+    <mat-form-field class="example-full-width">
+      <mat-select #ratingbox style="padding:0.6em" placeholder="Select">
+        <mat-option value="1">1</mat-option>
+        <mat-option value="1.5">1.5</mat-option>
+        <mat-option value="2">2</mat-option>
+        <mat-option value="2.5">2.5</mat-option>
+        <mat-option value="3">3</mat-option>
+        <mat-option value="3.5">3.5</mat-option>
+        <mat-option value="4">4</mat-option>
+        <mat-option value="4.5">4.5</mat-option>
+        <mat-option value="5">5</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div style="padding:1em">
+    <mat-form-field class="example-full-width">
+      <textarea #reviewbox matInput placeholder="What is your opinion"></textarea>
+    </mat-form-field>
+  </div>
+  <div style="float:right;padding:1em;margin-top:-2em">
+    <button mat-raised-button (click)="submitreview(reviewbox.value,ratingbox.value )" hidden color="accent">Submit Review</button>
+  </div>
+</div>
+
+
+
+<div fxLayoutAlign="center center" fxLayoutAlign.xs="center center" fxLayoutAlign.sm="center center" fxLayoutAlign.gt-sm="center center"
+  fxFlexAlign="center center" Style="padding:0.2em">
+  <div style="background-color: white;width:60%">
+    <mat-tab-group>
+      <mat-tab label="Overview">
+        <div class="overview" fxLayout="row">
+
+          <div fxLayout="column" style="width:43%;padding:4%">
+
+            <div>
+              Phone number:
+              <div style="padding:0.5em;color:green">
+                <b>{{phone}}</b>
+              </div>
+            </div>
+
+
+            <div style="margin-top:1em">
+              Cuisines:
+
+              <div class="otherinfo" style="padding:0.5em;color:#cb202d;font-size:0.8em">
+                {{Cusines}}
+              </div>
+            </div>
+
+
+            <div style="margin-top:1em">
+              Average Cost:
+              <div class="otherinfo" style="padding:0.5em;color:#cb202d;font-size:0.8em">
+                {{AverageCost}}
+              </div>
+            </div>
+
+            <div style="margin-top:1em">
+              Website:
+              <div class="otherinfo" style="padding:0.5em;color:#cb202d;font-size:0.8em">
+                {{Website}}
+              </div>
+
+            </div>
+          </div>
+
+
+          <div fxLayout="column" style="width:43%;padding:4%">
+
+            <div>
+              Opening Hours:
+              <div class="otherinfo" style="padding:0.5em;color:#cb202d;font-size:0.8em">
+                {{Opening}}
+              </div>
+            </div>
+            <div style="margin-top:1em">
+              Address:
+              <div class="otherinfo" style="padding:0.5em;color:#cb202d;font-size:0.8em">
+                {{Address}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </mat-tab>
+
+
+      <mat-tab label="Menu">
+
+        <div fxLayoutAlign="center center" fxLayoutAlign.xs="center center" fxLayoutAlign.sm="center center" fxLayoutAlign.gt-sm="center center"
+          fxFlexAlign="center center">
+          <div>
+
+            <img src="{{menuurl}}">
+          </div>
+        </div>
+      </mat-tab>
+
+      <mat-tab label="Reviews">
+        <div fxLayout="column" style="padding:1em" fxLayoutAlign=" center">
+
+          <div class="totoalcount" style="margin-top:1em;padding:1em">
+            {{totalReviews}} people reviewed this place.
+          </div>
+
+          <mat-card *ngFor="let r of Reviews" style="width:96%">
+            <mat-card-header>
+              <img mat-card-avatar src="/assets/Images/profile-icon.png">
+              <mat-card-title>
+                <b>{{r._source.user.name}}</b>
+              </mat-card-title>
+              <mat-card-subtitle>
+                <b>{{r._source.value}}</b>
+              </mat-card-subtitle>
+            </mat-card-header>
+
+            <mat-card-content>
+              <p>
+                {{r._source.review}}
+              </p>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </mat-tab>
+
+
+
+
+    </mat-tab-group>
+  </div>
+</div>
