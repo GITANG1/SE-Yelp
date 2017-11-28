@@ -63,7 +63,7 @@ export class RegisterComponent implements OnInit {
       if (data.success) {
         this.flashMessage.show('Registration Successful!', { timeout: 3000 });
         // TO-DO: Handle this message display in a better way in next iteration
-        this.router.navigate(['/login']);
+        window.location.href = "http://localhost:4200/login";
       } else {
         this.flashMessage.show('Username Already Exists!', { timeout: 3000 });
       }

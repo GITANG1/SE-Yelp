@@ -42,7 +42,7 @@ describe('Post API for user registration', function () {
                 "password": "abc123"
             })
             .then(function (res) {
-                expect(res).to.have.status(200);
+                expect(res).to.have.status(201);
                 expect(res.body.success).to.equal(true);
             });
         done();
@@ -111,16 +111,7 @@ describe('Post API for user registration', function () {
 
 });
 
-describe('User Profile Access', function () {
-    it('should not authorize User profile access', function (done) {
 
-        request('http://localhost:3000/users/profile', function (error, response, body) {
-            expect(body).to.equal('Unauthorized');
-            done();
-        });
-
-    });
-});
 
 describe('User authentication', function () {
     this.timeout(4000);

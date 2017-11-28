@@ -7,6 +7,7 @@ import 'rxjs/add/operator/startWith';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -24,7 +25,7 @@ export class HomeComponent implements OnInit {
 
   title = 'this is homeComponent';
 
-  cityname = '';
+  cityname = "";
 
   restaurant: FormControl = new FormControl();
 
@@ -42,6 +43,14 @@ export class HomeComponent implements OnInit {
 
   DisplayRests = [];
 
+  constructor(private _http: Http,
+    private router: Router
+  ) { }
+
+  navigate(id) {
+    console.log(id);
+    this.router.navigate(['restaurant/' + id]);
+  }
 
   SearchRestaurants(restaurantname, area) {
     console.log(restaurantname);
@@ -73,13 +82,8 @@ export class HomeComponent implements OnInit {
       });
     });
   }
-  constructor(private _http: Http) {
-
-  }
-
   ngOnInit() {
     function geo_error() {
-      alert("Sorry, no position available.");
     }
 
     var geo_options = {
@@ -132,5 +136,4 @@ export class HomeComponent implements OnInit {
     return this.locations.filter(location =>
       location.toLowerCase().indexOf(val.toLowerCase()) === 0);
   }
-
 }

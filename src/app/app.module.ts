@@ -33,6 +33,7 @@ import { FooterComponent } from './footer/footer.component';
 import { SignupComponent } from './signup/signup.component';
 import { HomeComponent } from './home/home.component';
 
+import { RestaurantComponent } from './restaurant/restaurant.component';
 import 'hammerjs';
 
 import { FlashMessagesModule } from 'angular2-flash-messages/module';
@@ -59,7 +60,8 @@ export const routes: Routes = [
     HomeComponent,
     LoginComponent,
     RegisterComponent,
-    ProfileComponent
+    ProfileComponent,
+    RestaurantComponent
   ],
   imports: [
     BrowserModule,
