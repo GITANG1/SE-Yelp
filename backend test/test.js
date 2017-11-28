@@ -123,13 +123,14 @@ describe('User Profile Access', function () {
 });
 
 describe('User authentication', function () {
-    before(function (done) {        
-                registerUser(function () {
-                    
-                    done();
-        
-                });
-            });
+    this.timeout(4000);
+    before(function (done) {
+        registerUser(function () {
+
+            done();
+
+        });
+    });
 
     it('should not validate user if password is invalid', function () {
         return chai
@@ -148,7 +149,7 @@ describe('User authentication', function () {
     });
 
     it('should validate user if password is valid', function () {
-        
+
         return chai
             .request('http://localhost:3000')
             .post('/users/authenticate')
@@ -160,7 +161,7 @@ describe('User authentication', function () {
                 expect(res).to.have.status(200);
                 expect(res.body.user.username).to.equal("useradmin");
                 expect(res.body.success).to.equal(true);
-                
+
             });
         done();
     });
@@ -182,23 +183,135 @@ describe('User authentication', function () {
     });
 });
 
-function registerUser(done){
-    chai
-    .request('http://localhost:3000')
-    .post('/users/register')
-    .send({
-        "name": "admin admin",
-        "username": "useradmin",
-        "email": "admin@test.com",
-        "password": "abc123"
+describe('User authentication after users details are updated', function () {
+    this.timeout(5000);
+    before(function (done) {
+        registerForUpdateUser(function () {
 
-    })
-    .end(function (error, response, body) {
-        if (error) {
-            throw error;
-        } else {
-            sleep(1000);
-            done();
-        }
+            UpdateUser(function () {
+                done();
+            });
+
+
+        });
     });
+
+    it('should not validate user if password is invalid', function () {
+        return chai
+            .request('http://localhost:3000')
+            .post('/users/authenticate')
+            .send({
+                "username": "adhiraj",
+                "password": "abc123"
+            })
+            .then(function (res) {
+
+                expect(res).to.have.status(200);
+                expect(res.body.success).to.equal(false);
+            });
+        done();
+    });
+
+    it('should validate user if password is valid', function () {
+
+        return chai
+            .request('http://localhost:3000')
+            .post('/users/authenticate')
+            .send({
+                "username": "adhiraj",
+                "password": "abc123n"
+            })
+            .then(function (res) {
+                expect(res).to.have.status(200);
+                expect(res.body.user.username).to.equal("adhiraj");
+                expect(res.body.success).to.equal(true);
+
+            });
+        done();
+    });
+
+
+});
+
+function registerUser(done) {
+    chai
+        .request('http://localhost:3000')
+        .post('/users/register')
+        .send({
+            "name": "admin admin",
+            "username": "useradmin",
+            "email": "admin@test.com",
+            "password": "abc123"
+
+        })
+        .end(function (error, response, body) {
+            if (error) {
+                throw error;
+            } else {
+                sleep(1000);
+                done();
+            }
+        });
+}
+
+function registerForUpdateUser(done) {
+
+    chai
+        .request('http://localhost:3000')
+        .post('/users/register')
+        .send({
+            "name": "adhiraj nakhe",
+            "username": "adhiraj",
+            "email": "adhiraj@test.com",
+            "password": "abc123"
+
+        })
+        .end(function (error, response, body) {
+            if (error) {
+                throw error;
+            } else {
+                sleep(1000);
+                done();
+            }
+        });
+}
+
+function UpdateUser(done) {
+    var userId;
+    chai
+        .request('http://localhost:3000/users')
+        .post('/authenticate')
+        .send({
+            "username": "adhiraj",
+            "password": "abc123"
+
+        })
+        .end(function (error, response, body) {
+            if (error) {
+                throw error;
+            } else {
+
+                userId = response.body.user.id;
+                chai
+                    .request('http://localhost:3000')
+                    .put('/users/update')
+                    .send({
+                        "id": String(userId),
+                        "email": "adhiraj@test.com",
+                        "name": "adhiraj nakhe",
+                        "password": "abc123n"
+
+                    })
+                    .end(function (error, response, body) {
+                        if (error) {
+                            throw error;
+                        } else {
+
+                            sleep(1000);
+                            done();
+                        }
+                    });
+            }
+        });
+
 }

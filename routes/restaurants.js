@@ -63,12 +63,6 @@ searchRouter.route('/')
                             "term": {
                                 "city": city
                             }
-                        },
-                        {
-                            "multi_match": {
-                                "query": searchString,
-                                "fields": ["name^10", "menu"]
-                            }
                         }
                         ],
                         "should": [

@@ -240,7 +240,7 @@ function updateUser(id, script, res) {
             }
             res.status(201)
                 .send("User updated successfully!");
-            return;
+
         });
     });
 }
