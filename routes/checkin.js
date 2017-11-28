@@ -69,7 +69,7 @@ router.route('/:userId')
             "query": {
                 "bool": {
                     "must":
-                        { "match": { "user.id": userId } }
+                    { "match": { "user.id": userId } }
                 }
             }
         };
