@@ -25,7 +25,7 @@ var mapping = {
           "type": "text",
         },
         "city": {
-          "type": "keyword"
+          "type": "text"
         },
         "menu": {
           "type": "text"
