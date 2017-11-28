@@ -9,6 +9,8 @@ var should = require('should');
 
 //for two users first and second, a rating is added for the restaurant pizza hut. First user also enters rating for Metro Diner restaurant
 describe(' Add rating router tests for user and restaurants', function () {
+    this.timeout(7000);
+    
     before(function (done) {
         addRatings(function () {
 

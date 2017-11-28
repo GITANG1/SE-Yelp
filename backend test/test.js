@@ -114,7 +114,7 @@ describe('Post API for user registration', function () {
 
 
 describe('User authentication', function () {
-    this.timeout(4000);
+    this.timeout(7000);
     before(function (done) {
         registerUser(function () {
 
@@ -239,7 +239,7 @@ function registerUser(done) {
             if (error) {
                 throw error;
             } else {
-                sleep(1000);
+                sleep(1200);
                 done();
             }
         });
@@ -261,7 +261,7 @@ function registerForUpdateUser(done) {
             if (error) {
                 throw error;
             } else {
-                sleep(1000);
+                sleep(1200);
                 done();
             }
         });
@@ -298,7 +298,7 @@ function UpdateUser(done) {
                             throw error;
                         } else {
 
-                            sleep(1000);
+                            sleep(1200);
                             done();
                         }
                     });
