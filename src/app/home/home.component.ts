@@ -1,3 +1,8 @@
+/**
+ * File name : home.component.ts
+ * @author Gitang Karnam
+ */
+
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
@@ -9,6 +14,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { Router } from '@angular/router';
 
+/**
+ * Displays the search bar for the user to search restaurants by type and/or location
+ */
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -23,41 +31,42 @@ import { Router } from '@angular/router';
 
 export class HomeComponent implements OnInit {
 
-  title = 'this is homeComponent';
-
-  cityname = "";
-
+  cityname = '';
   restaurant: FormControl = new FormControl();
-
   options = [];
-
   filteredRestaurants: Observable<string[]>;
-
   location: FormControl = new FormControl();
-
   locations = [];
-
   filteredLocations: Observable<string[]>;
-
   data: any;
-
   DisplayRests = [];
 
-  constructor(private _http: Http,
+  /**
+   * Constructor provides Http and Router on object instantiation.
+   * @constructor
+   * @param {Http} http
+   * @param {Router} router
+   */
+  constructor(
+    private _http: Http,
     private router: Router
   ) { }
 
+  /**
+   * Redirects to the restaurant detail page that the user clicked on.
+   * @param {String} id
+   */
   navigate(id) {
-    console.log(id);
     this.router.navigate(['restaurant/' + id]);
   }
 
+  /**
+   * Displays a list of restaurants based on the restaurant name and area that the user enters.
+   * @param {String} restaurantname
+   * @param {String} area
+   */
   SearchRestaurants(restaurantname, area) {
-    console.log(restaurantname);
-    console.log(area);
-    console.log(this.DisplayRests);
-
-    this._http.post('http://localhost:3000/restaurants/search', { "search": restaurantname, "city": area }
+    this._http.post('http://localhost:3000/restaurants/search', { 'search': restaurantname, 'city': area }
     ).subscribe(res => {
       this.data = res.json();
       this.DisplayRests = [];
@@ -67,13 +76,13 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  /**
+   * Displays a list of restaurants based on the restaurant tag and area that the user enters.
+   * @param {String} TagName
+   * @param {String} area
+   */
   SearchByTags(TagName, area) {
-
-    console.log(TagName);
-    console.log(area);
-
-
-    this._http.post('http://localhost:3000/restaurants/searchByTag', { "tag": TagName, "city": area }
+    this._http.post('http://localhost:3000/restaurants/searchByTag', { 'tag': TagName, 'city': area }
     ).subscribe(res => {
       this.data = res.json();
       this.DisplayRests = [];
@@ -82,43 +91,36 @@ export class HomeComponent implements OnInit {
       });
     });
   }
+
+  /**
+   * Uses Google API to get the city name for the given coordinates and sets it on the home page.
+   * @param {object} position
+   * @param {String} area
+   */
   ngOnInit() {
     function geo_error() {
     }
 
-    var geo_options = {
+    const geo_options = {
       enableHighAccuracy: true,
       maximumAge: 30000,
       timeout: 27000
     };
 
-    var wpid = navigator.geolocation.watchPosition((position) => {
-      console.log(position.coords.latitude);
-      console.log(position.coords.longitude);
-      var url = "http://maps.googleapis.com/maps/api/geocode/json?latlng=" + position.coords.latitude + "," + position.coords.longitude + "&sensor=false"
-      console.log(url);
-
+    const wpid = navigator.geolocation.watchPosition((position) => {
+      const url = 'http://maps.googleapis.com/maps/api/geocode/json?latlng=' + position.coords.latitude + ',' + position.coords.longitude + '&sensor=false';
       this._http.get(url).subscribe(res => {
-
         this.data = res.json();
-
-        console.log(this.data.results[0].address_components[2].long_name);
-
-        this.cityname = this.data.results[0].address_components[2].long_name.toLowerCase();;
+        this.cityname = this.data.results[0].address_components[2].long_name.toLowerCase();
       });
-
     }, geo_error, geo_options);
 
     this._http.get('http://localhost:3000/restaurants/list').subscribe(res => {
-
       this.data = res.json();
       this.data.forEach(element => {
         this.options.push(element._source.name);
-
         this.locations.push(element._source.city);
-
       });
-      console.log(this.data);
     });
 
     this.filteredRestaurants = this.restaurant.valueChanges.startWith(null)

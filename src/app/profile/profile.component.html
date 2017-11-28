@@ -1,3 +1,7 @@
+<button id="clickReviewTab" (click)="selectedIndexChange(0)" style="background:transparent; border:none; color:transparent;"></button>
+<button id="clickCheckinTab" (click)="selectedIndexChange(1)" style="background:transparent; border:none; color:transparent;"></button>
+<button id="clickUpdateProfileTab" (click)="selectedIndexChange(2)" style="background:transparent; border:none; color:transparent;"></button>
+
 <div fxLayoutAlign="center center" fxLayoutAlign.xs="center center" fxLayoutAlign.sm="center center" fxLayoutAlign.gt-sm="center center"
   fxFlexAlign="center center" style="margin-top:1em">
   <div style="height:15em;width:60%;background-color:white">
@@ -15,8 +19,8 @@
   fxFlexAlign="center center" style="padding:0.2em;">
 
   <div style="background-color: white;width:60%">
-    <mat-tab-group>
-      <mat-tab label="Reviews ({{reviews}})">
+    <mat-tab-group #profilePageTabs (selectedIndexChange)="selectedIndexChange($event)" [selectedIndex]="selectedIndex">
+      <mat-tab #reviewTab label="Reviews ({{reviews}})">
         <div fxLayout="column" style="padding:1em" fxLayoutAlign=" center">
           <mat-card *ngFor="let d of reviewResults" style="width:98%">
             <mat-card-header>
@@ -36,7 +40,7 @@
         </div>
       </mat-tab>
 
-      <mat-tab label="Check-ins ({{checkins}})">
+      <mat-tab  #checkinTab label="Check-ins ({{checkins}})">
         <div fxLayout="column" style="padding:1em" fxLayoutAlign=" center">
           <mat-card *ngFor="let cr of checkinResults" style="width:98%">
             <mat-card-header>
@@ -52,7 +56,7 @@
         </div>
       </mat-tab>
 
-      <mat-tab label="Update Profile">
+      <mat-tab #updateProfileTab label="Update Profile">
         <div id="flashMessage" class="alert-danger">
           <flash-messages></flash-messages>
         </div>
@@ -60,15 +64,15 @@
         <div fxLayout="column" style="padding:4%">
 
           <mat-form-field>
-            <input matInput #userName placeholder="Name" value="{{user.name}}">
+            <input matInput name="userName" placeholder="Name" value="{{user.name}}">
           </mat-form-field>
 
           <mat-form-field>
-            <input matInput #userEmail placeholder="Email" value="{{user.email}}">
+            <input matInput name="userEmail" placeholder="Email" value="{{user.email}}">
           </mat-form-field>
 
           <mat-form-field>
-            <input matInput #userPassword placeholder="Password" value="{{user.password}}">
+            <input matInput name="userPassword" placeholder="Password" type="password" value="{{user.password}}">
           </mat-form-field>
 
           <div style="display:flex;justify-content:space-around;">
@@ -78,5 +82,4 @@
       </mat-tab>
     </mat-tab-group>
   </div>
-
 </div>

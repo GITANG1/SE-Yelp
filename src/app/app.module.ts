@@ -32,7 +32,6 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { SignupComponent } from './signup/signup.component';
 import { HomeComponent } from './home/home.component';
-
 import { RestaurantComponent } from './restaurant/restaurant.component';
 import 'hammerjs';
 
@@ -51,6 +50,9 @@ export const routes: Routes = [
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] }
 ];
 
+/**
+ * Main module for the app. Contains all the app-wide package imports
+ */
 @NgModule({
   declarations: [
     AppComponent,
