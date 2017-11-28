@@ -11,7 +11,7 @@ const client = new elasticsearch.Client({
 });
 router.put('/update', (req, res, next) => {
     if (!(req.body.id && req.body.name && req.body.email))
-        return res.json({ msg: 'Failed to update user' });
+        return res.status(400).json({ msg: 'Failed to update user' });
 
     console.log(req.body.name);
     var hashedPassword;
@@ -58,7 +58,7 @@ router.post('/register', (req, res, next) => {
             res.json({ success: false, msg: 'Failed to register user' });
         } else {
             console.log('**** IN ADDUSER().success *****');
-            res.json({ success: true, msg: 'User registered' });
+            res.status(201).json({ success: true, msg: 'User registered' });
         }
     });
 });
@@ -110,11 +110,6 @@ router.post('/authenticate', (req, res, next) => {
             }
         });
     });
-});
-
-// Profile
-router.get('/profile', passport.authenticate('jwt', { session: false }), (req, res, next) => {
-    res.json({ user: req.user });
 });
 
 //helper functions
@@ -220,7 +215,7 @@ function updateUser(id, script, res) {
             return;
         }
         if (!user) {
-            res.json({ success: false, msg: 'User not found' });
+            res.status(500).json({ success: false, msg: 'User not found' });
             return;
         }
 
@@ -238,7 +233,7 @@ function updateUser(id, script, res) {
                     .send("Error inserting the profile changes in the database");
                 return;
             }
-            res.status(201)
+            res.status(200)
                 .send("User updated successfully!");
 
         });
