@@ -1,8 +1,14 @@
 var express = require('express');
 var router = express.Router();
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
+/**
+ * Alert the user to use appropriate route
+ *
+ * @section projects
+ * @type get
+ * @url /
+ */
+router.get('/', function (req, res, next) {
   res.send('Please use appropriate route');
 });
 

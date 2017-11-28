@@ -12,7 +12,18 @@ var client = new elasticsearch.Client({
     log: 'trace'
 });
 
-//get ratings corresponding to particular restaurant id
+
+/**
+ * Returns all the ratings of the restaurant with id 'restId'
+ * restId is specified in the URL
+ *
+ * @section rating
+ * 
+ * @type get
+ * 
+ * @url /ratings/:restId
+ * 
+ */
 router.route('/:restId')
     .get(function (req, res) {
         var restId = req.params.restId;
@@ -54,7 +65,19 @@ router.route('/:restId')
 
     });
 
-//get ratings corresponding to a particular user
+
+
+/**
+ * Returns all the ratings entered by the user with id 'userId'
+ * userId is specified in the URL
+ *
+ * @section rating
+ * 
+ * @type get
+ * 
+ * @url /ratings/byUser/:userId
+ * 
+ */
 router.route('/byUser/:userId')
     .get(function (req, res) {
         var userId = req.params.userId;
@@ -96,7 +119,25 @@ router.route('/byUser/:userId')
 
     });
 
-//add rating
+
+/**
+ * Add the rating for the restaurant in the database
+ * 
+ * @section rating
+ * 
+ * @type post
+ * 
+ * @url /ratings
+ * 
+ * @param {JSON} restaurant 
+ * @param {JSON} user
+ * @param {String} restaurant.name
+ * @param {String} restaurant.logoUrl
+ * @param {String} restaurant.id
+ * @param {String} user.id
+ *  @param {String} user.name
+ * @param {Float} value
+ */
 router.route('/')
     .post(function (req, res) {
 
@@ -145,7 +186,6 @@ router.route('/')
         }
     });
 
-//delete rating
 router.route('/:ratingId')
     .delete(function (req, res) {
         var id = req.params.ratingId;

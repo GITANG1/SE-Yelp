@@ -9,6 +9,22 @@ const client = new elasticsearch.Client({
     host: 'localhost:9200',
     log: 'trace'
 });
+
+/**
+ * Updates the user with the name and email provided.
+ * If the password field is empty previous password is retained otherwise the password is updated with the new password
+ *
+ * @section users
+ * @type put
+ * 
+ * @url /users/update
+ * 
+ * @param {string} id 
+ * @param {string} name
+ * @param {string} email
+ * @param {string=} password
+ */
+
 router.put('/update', (req, res, next) => {
     if (!(req.body.id && req.body.name && req.body.email))
         return res.json({ msg: 'Failed to update user' });
@@ -34,6 +50,21 @@ router.put('/update', (req, res, next) => {
     }
 
 });
+
+/**
+ * Registers the user with the provided details
+ *
+ * @section users
+ * @type post
+ * 
+ * @url /users/register
+ * 
+ * @param {string} username 
+ * @param {string} name
+ * @param {string} email
+ * @param {string} password
+ */
+
 router.post('/register', (req, res, next) => {
     console.log(config.DB);
     console.log("register user");
@@ -64,8 +95,19 @@ router.post('/register', (req, res, next) => {
 });
 
 /**
- * Method is exported from model/user.js
-*/
+ * Authenticates the user if correct username and password combination is provided
+ * If username doesnt exists then user not found error message is provided
+ * If password is wrong then wrong found error message is provided
+ *
+ * @section users
+ * @type post
+ * 
+ * @url /users/authenticate
+ * 
+ * @param {string} username 
+ * @param {string} password
+ */
+
 router.post('/authenticate', (req, res, next) => {
     console.log('**** IN Authenticate***');
     if (!(req.body.username && req.body.password))
@@ -112,10 +154,6 @@ router.post('/authenticate', (req, res, next) => {
     });
 });
 
-// Profile
-router.get('/profile', passport.authenticate('jwt', { session: false }), (req, res, next) => {
-    res.json({ user: req.user });
-});
 
 //helper functions
 const bcrypt = require('bcryptjs');
