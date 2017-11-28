@@ -90,8 +90,8 @@ export class ProfileComponent implements OnInit {
       });
 
       this.authService.storeUserData(this.sessionToken, updatedUser);
-      this.router.navigate(['profile']);
     });
+    window.location.reload();
   }
 
   getStars(rating) {
