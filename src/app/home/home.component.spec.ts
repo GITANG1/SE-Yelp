@@ -1,10 +1,11 @@
+
 import { async,
   ComponentFixture,
   TestBed,
   ComponentFixtureAutoDetect, tick } from '@angular/core/testing';
 import { By }              from '@angular/platform-browser';
 import { DebugElement }    from '@angular/core';
-
+import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import {
@@ -28,7 +29,7 @@ BaseRequestOptions,
 ResponseOptions,
 HttpModule 
 } from '@angular/http';
-
+import { RouterTestingModule } from "@angular/router/testing";
 describe('HomeComponent', () => {
 
 let searchspy :       jasmine.Spy;
@@ -62,6 +63,8 @@ TestBed.configureTestingModule({
    MatCardModule,
    MatButtonModule,
    MatSelectModule,
+   RouterModule,
+   RouterTestingModule,
    ReactiveFormsModule
  ],
  providers:[  MockBackend,
@@ -83,16 +86,15 @@ beforeEach(() =>{
    fixture=TestBed.createComponent(HomeComponent);
    comp = fixture.componentInstance;   
    fixture.detectChanges();
-   backend = TestBed.get(MockBackend);
    const input = fixture.debugElement.queryAll(By.css('input'));
-   const  btns = fixture.debugElement.queryAll(By.css('button'));
-   search_html= btns[0].nativeElement;
-   breakfast_html = btns[1].nativeElement;
-   lunch_html = btns[2].nativeElement;  
    restaurant_html = input[0].nativeElement;
    area_htlml = input[1].nativeElement;
 });
 
+it('should create the restaurantcomponent', () => {
+  
+     expect(HomeComponent).toBeTruthy();
+   });
 
 
 it('checks home input box for restaurant name ', () => {

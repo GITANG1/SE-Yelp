@@ -8,6 +8,7 @@ import { Http, Response, Headers } from '@angular/http';
 import { AuthService } from '../services/auth.service';
 import { FlashMessagesService } from 'angular2-flash-messages/module';
 import { AuthConfig } from 'angular2-jwt';
+import { MatTabChangeEvent } from '@angular/material';
 
 /**
  * Displays the restaurant detail page.

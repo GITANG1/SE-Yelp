@@ -13,34 +13,72 @@ import { Http, Response, Headers, HttpModule } from '@angular/http';
 import { RouterTestingModule } from '@angular/router/testing';
 import { FormsModule } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
+import { FlashMessagesModule } from 'angular2-flash-messages/module';
+import { ReactiveFormsModule } from '@angular/forms';
 
+
+import {
+  MatAutocompleteModule,
+  MatToolbarModule,
+  MatFormFieldModule,
+  MatCardModule,
+  MatButtonModule,
+  MatSelectModule,
+  MatTabsModule,
+  } from '@angular/material';
+
+ 
 describe('ProfileComponent', () => {
-  let component: ProfileComponent;
-  let fixture: ComponentFixture<ProfileComponent>;
+  let fixture:          ComponentFixture<ProfileComponent>;
+  let comp:             ProfileComponent;
+  let Updatebtn:       HTMLElement;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ ProfileComponent ],
       imports: [
         BrowserAnimationsModule,
-        HttpModule,
+        HttpModule, 
+        MatAutocompleteModule,
+        MatToolbarModule,
+        MatFormFieldModule,
+        MatCardModule,
+        MatButtonModule,
+        MatSelectModule,
+        MatTabsModule,
+        FormsModule,
+        ReactiveFormsModule,
+        FlashMessagesModule,
         RouterTestingModule
       ],
       providers: [
-        { provide: ComponentFixtureAutoDetect, useValue: true },
         AuthService
       ]
     })
     .compileComponents();
   }));
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(ProfileComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+  beforeEach(() =>{
+    fixture=TestBed.createComponent(ProfileComponent);
+    comp = fixture.componentInstance;   
+   // fixture.detectChanges();
+ 
+ });
+
+
+  it('should create ProfileComponent ', () => {
+  
+    expect(ProfileComponent).toBeTruthy();
   });
 
-  it('should be created', () => {
-    expect(component).toBeTruthy();
-  });
+  // it('checks  Update button', async(() => {
+  //   jasmine.createSpy('updateUserInfo').and.callThrough();
+  //   comp.selectedIndex=2;
+  //   Updatebtn = fixture.debugElement.nativeElement.querySelector('button');
+  //   Updatebtn.click();
+  //   fixture.whenStable().then(()=>{
+  //    expect(comp.updateUserInfo).toHaveBeenCalled() 
+  //   });      
+  //   }));
+
 });

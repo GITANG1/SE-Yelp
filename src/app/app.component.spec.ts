@@ -1,3 +1,4 @@
+
 import { TestBed, async, fakeAsync, tick } from '@angular/core/testing';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -13,7 +14,8 @@ import {
   MatCardModule,
   MatButtonModule,
   MatSelectModule,
-  MatInputModule
+  MatInputModule,
+  MatTabsModule
 } from '@angular/material';
 import { HttpModule } from '@angular/http';
 import { RouterModule, Routes } from '@angular/router';
@@ -35,6 +37,9 @@ import { APP_BASE_HREF } from '@angular/common';
 import { Router } from "@angular/router";
 import { RouterTestingModule } from "@angular/router/testing";
 import { routes } from './app.module';
+import { RestaurantComponent } from './restaurant/restaurant.component';
+
+
 
 
 describe('AppComponent and Router', () => {
@@ -55,6 +60,7 @@ describe('AppComponent and Router', () => {
         LoginComponent,
         RegisterComponent,
         ProfileComponent,
+        RestaurantComponent
       ],
       imports: [
         RouterTestingModule.withRoutes(routes),
@@ -71,6 +77,7 @@ describe('AppComponent and Router', () => {
         MatCardModule,
         MatSelectModule,
         MatButtonModule,
+        MatTabsModule,
         MatInputModule,
         FlashMessagesModule,
         RouterModule
@@ -89,7 +96,7 @@ describe('AppComponent and Router', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
     expect(app).toBeTruthy();
-  }));
+  })); 
 
   it('navigates to "home" redirects you to /home', fakeAsync(() => {
     router.navigateByUrl('');
@@ -107,5 +114,11 @@ describe('AppComponent and Router', () => {
     router.navigate(['register']);
     tick(50);
     expect(location.path()).toBe('/register');
+  }));
+
+  it('navigates to "restaurant" redirects you to /restaurant/3 with a restaurant id', fakeAsync(() => {
+    router.navigate(['restaurant/3']);
+    tick(50);
+    expect(location.path()).toBe('/restaurant/3');
   }));
 });
