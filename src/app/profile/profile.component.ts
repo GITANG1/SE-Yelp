@@ -1,3 +1,7 @@
+/**
+ * File name : profile.component.ts
+ * @author Srishti Hunjan
+ */
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
@@ -10,6 +14,11 @@ import { NgModule } from '@angular/core';
 import { FlashMessagesService } from 'angular2-flash-messages/module';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/startWith';
+import { MatTabChangeEvent } from '@angular/material';
+
+/**
+ * Displays the user profile page to the logged in user
+ */
 
 @Component({
   selector: 'app-profile',
@@ -29,7 +38,16 @@ export class ProfileComponent implements OnInit {
   checkinData: any;
   checkinResults = [];
   sessionToken: any;
+  selectedIndex: number;
 
+  /**
+   * Constructor provides AuthService, Router, HTTP and FlashMessagesService on object instantiation.
+   * @constructor
+   * @param {AuthService} authService
+   * @param {Router} router
+   * @param {Http} _http
+   * @param {FlashMessagesService} flashMessage
+   */
   constructor(
     private authService: AuthService,
     private router: Router,
@@ -37,6 +55,10 @@ export class ProfileComponent implements OnInit {
     private flashMessage: FlashMessagesService,
   ) { }
 
+  /**
+   * On initialization of the page, it retrives all the ratings and checkins inserted by the logged in user
+   * from the database and displays it
+   */
   ngOnInit() {
     const myStorage = window.localStorage;
     const userDetails = myStorage.getItem('user');
@@ -73,8 +95,16 @@ export class ProfileComponent implements OnInit {
         this.checkinResults.push(element);
       });
     });
+
+    this.selectedIndex = 0;
   }
 
+  /**
+   * Updates the user information as per the new details provided by the user
+   * @param {String} name
+   * @param {String} email
+   * @param {String} password
+   */
   updateUserInfo(name, email, password) {
     if (password) {
       password = password.length > 0 ? password : '';
@@ -88,16 +118,28 @@ export class ProfileComponent implements OnInit {
         cssClass: 'alert-danger',
         timeout: 1000
       });
-
       this.authService.storeUserData(this.sessionToken, updatedUser);
+      window.location.reload();
     });
-    window.location.reload();
   }
 
+  /**
+   * Calculates the rating percentage of as per the numerical value of rating given by user
+   * to show as a fraction of a total of 5 stars.
+   * @param {number} rating
+   */
   getStars(rating) {
     const val = parseFloat(rating);
     const size = val / 5 * 100;
     return size + '%';
   }
 
+  /**
+   * Selects the tab as per the index passed to it.
+   * @param {number} val
+   */
+  selectedIndexChange(val) {
+    this.selectedIndex = val;
+    console.log('*** val => ', val);
+  }
 }

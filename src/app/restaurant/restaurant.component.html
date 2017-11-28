@@ -1,3 +1,7 @@
+<button id="clickOverviewTab" (click)="selectedIndexChange(0)" style="background:transparent; border:none; color:transparent;"></button>
+<button id="clickMenuTab" (click)="selectedIndexChange(1)" style="background:transparent; border:none; color:transparent;"></button>
+<button id="clickReviewTab" (click)="selectedIndexChange(2)" style="background:transparent; border:none; color:transparent;"></button>
+
 <div fxLayoutAlign="center center" fxLayoutAlign.xs="center center" fxLayoutAlign.sm="center center" fxLayoutAlign.gt-sm="center center"
   fxFlexAlign="center center" style="padding:0.2em;margin-top:1em">
 
@@ -12,10 +16,10 @@
     </div>
 
     <div style="float:right;padding:1em;margin-top:-2em">
-      <button mat-raised-button (click)="checked_in(1)" *ngIf="checkedin" hidden color="accent">Check-in</button>
+      <button mat-raised-button name="checkinBtn" (click)="checked_in()" *ngIf="checkedin" hidden color="accent">Check-in</button>
     </div>
     <div style="float:right;padding:1em;margin-top:-2em">
-      <button mat-raised-button (click)="Writeareview()" hidden color="accent">Write A Review</button>
+      <button mat-raised-button name="writeReviewBtn" (click)="Writeareview()" hidden color="accent">Write A Review</button>
       <div id="flashMessage" class="alert-danger">
         <flash-messages></flash-messages>
       </div>
@@ -51,16 +55,14 @@
     </mat-form-field>
   </div>
   <div style="float:right;padding:1em;margin-top:-2em">
-    <button mat-raised-button (click)="submitreview(reviewbox.value,ratingbox.value )" hidden color="accent">Submit Review</button>
+    <button mat-raised-button name="submitReviewBtn" (click)="submitreview(reviewbox.value,ratingbox.value )" hidden color="accent">Submit Review</button>
   </div>
 </div>
-
-
 
 <div fxLayoutAlign="center center" fxLayoutAlign.xs="center center" fxLayoutAlign.sm="center center" fxLayoutAlign.gt-sm="center center"
   fxFlexAlign="center center" Style="padding:0.2em">
   <div style="background-color: white;width:60%">
-    <mat-tab-group>
+    <mat-tab-group (selectedIndexChange)="selectedIndexChange($event)" [selectedIndex]="selectedIndex">
       <mat-tab label="Overview">
         <div class="overview" fxLayout="row">
 
@@ -73,7 +75,6 @@
               </div>
             </div>
 
-
             <div style="margin-top:1em">
               Cuisines:
 
@@ -81,7 +82,6 @@
                 {{Cusines}}
               </div>
             </div>
-
 
             <div style="margin-top:1em">
               Average Cost:
@@ -99,9 +99,7 @@
             </div>
           </div>
 
-
           <div fxLayout="column" style="width:43%;padding:4%">
-
             <div>
               Opening Hours:
               <div class="otherinfo" style="padding:0.5em;color:#cb202d;font-size:0.8em">
@@ -118,9 +116,7 @@
         </div>
       </mat-tab>
 
-
       <mat-tab label="Menu">
-
         <div fxLayoutAlign="center center" fxLayoutAlign.xs="center center" fxLayoutAlign.sm="center center" fxLayoutAlign.gt-sm="center center"
           fxFlexAlign="center center">
           <div>
@@ -156,10 +152,6 @@
           </mat-card>
         </div>
       </mat-tab>
-
-
-
-
     </mat-tab-group>
   </div>
 </div>

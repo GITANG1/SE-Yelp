@@ -1,7 +1,6 @@
 <div class="container" fxLayout="row" fxLayoutAlign="center center" fxLayout.sm="column" fxLayout.xs="column" fxLayoutAlign.xs="center center"
   fxLayoutAlign.sm="center center" fxLayoutAlign.gt-sm="center center" fxFlexAlign="center center" style="height:20em;margin-left:-0.02em;margin-top:-0.1em">
 
-
   <input type="text" #restaurantbox="ngForm" style="height:2.5em;width:25em;" name="rest" placeholder="hungry? what do you wanna eat"
     aria-label="Restaurant Name" [formControl]="restaurant" [matAutocomplete]="restau">
   <input type="text" #locationbox="ngForm" [(ngModel)]="cityname" style="height:2.5em;width:15em;" name="area" placeholder="where?"
@@ -22,8 +21,6 @@
   <br>
 </div>
 
-
-
 <div fxLayoutAlign="center center" fxFlexAlign="center center" fxLayout.sm="row" fxLayout.xs="column">
   <div fxLayout="row" fxLayout.sm="row" fxLayout.xs="column" style="background-color:white">
 
@@ -35,7 +32,6 @@
         </p>
       </mat-grid-tile>
     </button>
-
 
     <button name="lunch" (click)="SearchByTags('lunch',locationbox.value)" mat-button>
       <mat-grid-tile fxLayout="column" fxLayoutAlign="center center" style="padding:1.1em">
@@ -76,7 +72,6 @@
       </mat-grid-tile>
     </button>
 
-
     <button id="TakeOut" (click)="SearchByTags('take out',locationbox.value)" mat-button>
       <mat-grid-tile fxLayout="column" fxLayoutAlign="center center" style="padding:1.1em">
         <img height="55em" width="55em" src="/assets/Images/TakeOut.png">
@@ -85,7 +80,6 @@
         </p>
       </mat-grid-tile>
     </button>
-
 
   </div>
 </div>
@@ -98,7 +92,7 @@
         <img height="115em" width="115em" src="http://localhost:3000/{{d._source.logoUrl}}">
       </mat-grid-tile>
       <mat-grid-tile>
-        <button (click)="navigate(d._id)" style="color:#cb202d" mat-button>
+        <button name="restaurantBtn" #restaurantId (click)="navigate(d._id)" style="color:#cb202d" mat-button>
           <b>{{d._source.name}}</b>
         </button>
         <p>{{d._source.city}}

@@ -1,3 +1,7 @@
+/**
+ * File name : register.component.ts
+ * @author Srishti Hunjan
+ */
 import { Component, OnInit } from '@angular/core';
 import { ValidateService } from '../services/validate.service';
 import { AuthService } from '../services/auth.service';
@@ -7,7 +11,9 @@ import { MatToolbarModule, MatFormFieldModule, MatCardModule, MatInputModule } f
 import { FormControl, Validators } from '@angular/forms';
 import { NgModule } from '@angular/core';
 
-
+/**
+ * Displays the user registration page to the user
+ */
 @NgModule({
   imports: [
     MatToolbarModule, MatFormFieldModule, MatCardModule, MatInputModule,
@@ -27,6 +33,14 @@ export class RegisterComponent implements OnInit {
   email: String;
   password: String;
 
+  /**
+   * Constructor provides ValidateService, FlashMessagesService, AuthService and Router on object instantiation.
+   * @constructor
+   * @param {ValidateService} validateService
+   * @param {FlashMessagesService} flashMessage
+   * @param {AuthService} authService
+   * @param {Router} router
+   */
   constructor(
     private validateService: ValidateService,
     private flashMessage: FlashMessagesService,
@@ -34,9 +48,11 @@ export class RegisterComponent implements OnInit {
     private router: Router
   ) { }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
+  /**
+   * Inserts a user with valid data into the database
+   */
   onRegisterSubmit() {
     const user = {
       name: this.name,
@@ -45,7 +61,7 @@ export class RegisterComponent implements OnInit {
       password: this.password
     };
 
-    // Required Fields
+    // Check for mandatory Fields
     if (!this.validateService.validateRegister(user)) {
       document.getElementById('flashMessage').classList.remove('hide');
       this.flashMessage.show('Please fill in all fields', { timeout: 3000 });
@@ -58,12 +74,11 @@ export class RegisterComponent implements OnInit {
       return false;
     }
 
-    // Register user
+    // Register user with valid data
     this.authService.registerUser(user).subscribe(data => {
       if (data.success) {
         this.flashMessage.show('Registration Successful!', { timeout: 3000 });
-        // TO-DO: Handle this message display in a better way in next iteration
-        window.location.href = "http://localhost:4200/login";
+        window.location.href = '/login';
       } else {
         this.flashMessage.show('Username Already Exists!', { timeout: 3000 });
       }
