@@ -30,12 +30,26 @@ var client = new elasticsearch.Client({
 
 const config = require('../config/database');
 
+/**
+ * Alert the user to use appropriate route
+ *
+ * @section restaurants
+ * @type get
+ * @url /restaurants
+ */
 restaurantRouter.route('/')
     .get(function (req, res) {
         res.status(200)
             .send('Invalid Route\n The valid routes are: \n1.Restaurant/List\n2.Restaurant/Search\n3.Restaurant/restID/:restID');
     });
 
+/**
+* Returns all the restaurants
+*
+* @section restaurants
+* @type get
+* @url /restaurants/list
+*/
 listRouter.route('/')
     .get(function (req, res) {
         console.log("User requested LISTING of all restaurants for suggestions purpose");
@@ -48,6 +62,21 @@ listRouter.route('/')
         search(listQuery, {}, res);
     });
 
+/**
+ * Returns the list of restaurants located in the city provided by user.
+ * If search box for restaurants is empty, all the restaurants of the city are returned sorted in descending order rating-wise
+ * If there is search parameter for restaurants then all the restaurants are returned in descending order match strength.
+ * search parameter matching with restaurant name is strongest match followed by the match in menu of restaurant.
+ * 
+ * @section restaurants
+ * 
+ * @type post
+ * 
+ * @url /restaurants/search
+ * 
+ * @param {String} city
+ *  @param {String=} search
+ */
 searchRouter.route('/')
     .post(function (req, res) {
 
@@ -111,6 +140,21 @@ searchRouter.route('/')
         }
     });
 
+/**
+ * Returns the list of restaurants located within 25km of the user location.
+ * If search box for restaurants is empty, all the restaurants of the city are returned sorted in descending order rating-wise
+ * If there is search parameter for restaurants then all the restaurants are returned in descending order match strength.
+ * search parameter matching with restaurant name is strongest match followed by the match in menu of restaurant.
+ * 
+ * @section restaurants
+ * 
+ * @type post
+ * 
+ * @url /restaurants/searchByLocation
+ * 
+ * @param {GeoLocation} location
+ *  @param {String=} search
+ */
 searchByLocationRouter.route('/')
     .post(function (req, res) {
 
@@ -195,6 +239,14 @@ searchByLocationRouter.route('/')
 
     });
 
+/**
+ * Returns the restaurant with id 'restId'
+ * restId is provided in URL.
+ *
+ * @section restaurants
+ * @type get
+ * @url /restaurants/restId/:restId
+ */
 restIDRouter.route('/:restId')
     .get(function (req, res) {
         var query = {
@@ -207,6 +259,19 @@ restIDRouter.route('/:restId')
         search(query, {}, res);
     });
 
+/**
+ * Returns the list of restaurants located in the city and containing tag as specified by user.
+ * The results are sorted in descending order of rating
+ * 
+ * @section restaurants
+ * 
+ * @type post
+ * 
+ * @url /restaurants/searchByLocation
+ * 
+ * @param {String} tag
+ * @param {String} city
+ */
 searchByTagRouter.route('/')
     .post(function (req, res) {
         console.log("User requested searching by tag");

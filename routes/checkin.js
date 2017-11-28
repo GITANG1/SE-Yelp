@@ -12,7 +12,17 @@ var client = new elasticsearch.Client({
     log: 'trace'
 });
 
-
+/**
+ * Returns all checkins of the user with id  'userId' at the restaurant with id 'restId'. 
+ * userId and restId are specified in the URL. 
+ *
+ * @section checkin
+ * 
+ * @type get
+ * 
+ * @url /checkin/:restId/:userId
+ * 
+ */
 router.route('/:restId/:userId')
     .get(function (req, res) {
 
@@ -60,6 +70,18 @@ router.route('/:restId/:userId')
 
     });
 
+/**
+ * Returns all checkins of the user with id 'userId'
+ * userId is specified in the URL
+ *
+ * @section checkin
+ * 
+ * @type get
+ * 
+ * @url /checkin/:userId
+ * 
+ */
+
 router.route('/:userId')
     .get(function (req, res) {
 
@@ -104,6 +126,23 @@ router.route('/:userId')
         });
 
     });
+
+/**
+ * Inserts the checkin of user at a restaurant into database
+ *
+ * @section checkin
+ * 
+ * @type post
+ * 
+ * @url /checkin/
+ * 
+ * @param {JSON} restaurant 
+ * @param {JSON} user
+ * @param {String} restaurant.name
+ * @param {String} restaurant.logoUrl
+ * @param {String} restaurant.id
+ * @param {String} user.id
+ */
 
 router.route('/')
     .post(function (req, res) {
